@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-09"
+lastupdated: "2017-08-29"
 
 ---
 
@@ -32,29 +32,32 @@ algorithm(s) used in a refresh operation, ensuring your ability
 to fine-tune your predictive analytics without needing to rewrite
 your applications.
 
-Note the following important information regarding the Machine
-Learning service when used with models created in SPSS Modeler:
 
+
+## Supported machine learning frameworks and features
+
+### Supported frameworks:
+*  SPSS Modeler 17.1
+*  SPSS Modeler 18.0
+
+### Restrictions:
 *  When a scoring branch is prepared for use in real-time
    scoring, input data coming in on the score request must
    replace the source node designed into the scoring branch and
    the resulting predictive analytic output must flow back into
    the response flow (effectively replacing the terminal node in
    the scoring branch design).
-
 *  As the scoring branch is prepared for real-time execution in
    Bluemix, it cannot require a connection to an external
    service. For example, an IBM Analytical Decision Management
    scoring branch design cannot contain references to rules or
    models stored in an IBM SPSS Collaboration and Deployment
    Services repository.
-
 *  The execution of a scoring branch for real-time scoring in
    Bluemix cannot require an external service. For example, you
    cannot deploy and score against model algorithms that require
    an IBM SPSS Analytic Server and Apache Hadoop data store in
    real-time.
-
 *  Machine Learning supports Modeler embedded Python scripting.
    There are a few restrictions due to the method used for
    processing streams before they run in Machine Learning.
@@ -73,10 +76,13 @@ For more details about current support for IBM SPSS Analytic
 Server-trained predictive models, see the Analytic Server section
 of IBM Knowledge Center.
 
+
+
+## Steps to bind the service with Bluemix application
 Complete the following steps to create your Bluemix application and bind it to the Machine Learning service.
 
-1. Download Node.js sample application code from [github repository](https://github.com/pmservice/customer-satisfaction-prediction). 
-   
+1. Download Node.js sample application code from [github repository](https://github.com/pmservice/customer-satisfaction-prediction).
+
 2. Use the cf create-service command to create a service
    instance:
 

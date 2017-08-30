@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-09"
+lastupdated: "2017-08-29"
 
 ---
 {:new_window: target="_blank"}
@@ -541,29 +541,29 @@ Token should be bearer token and should start with `Bearer` prefix
 {: #os_invalid_input}
 
 The following message displays when you try to score online: **Input JSON file is missing or invalid**.
-{: osSymptoms}
+{: tsSymptoms}
 
 This message displays when the scoring input payload doesn't match the expected input type that is required for scoring the model. Specifically, the following reasons may apply:
 
 - The input payload is empty.
 - The input payload schema is not valid.
 - The input datatypes does not match the expected datatypes.
-{: osCauses}
+{: tsCauses}
 
 Correct the input payload. Make sure that the payload has correct syntax, a valid schema, and proper data types. After you make corrections, try to score online again. For syntax issues, verify the JSON file by using the `jsonlint` command.
-{: osResolve}
+{: tsResolve}
 
 ## Authorization token has expired: 401
 {: #os_expired_authorization_token}
 
 The following message displays when you try to score online: **Authorization failed**.
-{: osSymptoms}
+{: tsSymptoms}
 
 This message displays when the token that is used for scoring has expired.
-{: osCauses}
+{: tsCauses}
 
 Re-generate the token for this Watson Machine Learning instance and then retry. If you still see this issue contact IBM Support.
-{: osResolve}
+{: tsResolve}
 
 ## Unknown deployment identification:404
 {: #os_unkown_depid}
@@ -571,10 +571,10 @@ Re-generate the token for this Watson Machine Learning instance and then retry. 
 The following message displays when you try to score online **Unknown deployment identification**. {: osSymptoms}
 
 This message displays when the deployment ID that is used for scoring does not exists.
-{: osCauses}
+{: tsCauses}
 
 Make sure you are providing the correct deployment ID. If not, deploy the model with the deployment ID and then try scoring it again.
-{: osResolve}
+{: tsResolve}
 
 ## Internal server error:500
 {: #os_internal_error}
@@ -582,8 +582,8 @@ Make sure you are providing the correct deployment ID. If not, deploy the model 
 The following message displays when you try to score online: **Internal server error**  {: osSymptoms}
 
 This message displays if the downstream data flow on which the online scoring depends fails.
-{: osCauses}
+{: tsCauses}
 
 After waiting for a period of time, try to score online again. If it fails again then contact IBM Support.
-{: osResolve}
+{: tsResolve}
               

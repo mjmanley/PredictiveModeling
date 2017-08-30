@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-09"
+lastupdated: "2017-08-29"
 
 ---
 {:new_window: target="_blank"}
@@ -687,6 +687,14 @@ the insertMode attribute:
 
 **Refresh** – existing rows from the table are deleted before
    inserting new rows
+   
+Bulk loading can be used to improve insert performance. 
+Support for bulk-loading can be enabled using bulkLoading attribute:
+
+**Off** - bulk loading is disabled
+
+**ODBC** - bulk loading via ODBC driver
+
 
 ```
 "exports": [
@@ -698,6 +706,7 @@ the insertMode attribute:
           },
           "node": "ExportScores",
           "attributes": [],
+          "bulkLoading": "Off"
      }
 ],
 ```

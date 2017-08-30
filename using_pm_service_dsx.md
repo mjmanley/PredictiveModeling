@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-09"
+lastupdated: "2017-08-29"
 
 ---
 
@@ -21,13 +21,19 @@ Learning service.
 
 ## Supported machine learning frameworks and features
 
-*  Supported frameworks:
-  *  Spark 2.0 MLlib
-  *  Python 3 with scikit-learn 0.17
-*  Classification and Regression pipeline models are currently supported.
-*  For scikit-learn models predictions without probabilities are returned at this stage.
-*  Batch and stream deployment for Python scikit-learn models is not supported at this stage.
-*  Batch and stream support for Spark models is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
+### Supported frameworks:
+*  Spark 2.0 MLlib
+*  Python 3.5 with scikit-learn 0.17
+
+### Restrictions:
+  *  Unsupervised models are not supported.
+  *  Models containing references to custom transformers, user defined functions and classes are not supported.
+  * Scikit-learn models can contain references only to packages (and package version) supported by Anaconda 4.2.x for Python 3.5 runtime. List of supported packages can be found [here](https://docs.continuum.io/anaconda/packages/old-pkg-lists/4.2.0/py35).
+  * The "schema" endpoint returned during scikit-learn model deployment request is not supported at this stage.
+  * Scikit-learn models that require Pandas Dataframe as input type for predict() API are not supported.
+  * Scikit-learn model scoring response does not return probability at this stage.
+  *  Batch and stream support for Spark models is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
+  * Continuous Learning System for Spark models is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 
 
