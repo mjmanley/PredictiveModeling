@@ -18,12 +18,10 @@ Machine Learning
             pm_service_api_spark_building.md
             pm_service_api_spark_batch.md
             pm_service_api_spark_streaming.md
-            pm_service_api_spark_learning_system.md
         pm_service_ui_spark.md
             pm_service_ui_spark_online.md
             pm_service_ui_spark_batch.md
             pm_service_ui_spark_streaming.md
-            pm_service_ui_spark_learning_system.md
 
     {: .topicgroup}
     SPSS Models
