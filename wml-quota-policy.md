@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-08-29"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Quota Policy
+# Quota policy
 
 The IBM Watson Machine Learning Engine enforces quotas on a per-instance basis to ensure appropriate resource allocation and usage. These policies vary according to account profiles, historical service usage, and availability of resources. The quota policy describes limits that are not defined by the pricing plan and **are subject to change without notice**. 
 

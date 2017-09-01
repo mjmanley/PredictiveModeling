@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 {:new_window: target="_blank"}
@@ -35,8 +35,8 @@ Use Data Science Experience to create custom models. After signing up, sign in a
 1. Create an organization and a space. The first time you sign in, you'll be asked for it, 
    so click **Continue** and accept the default values.
 
-2. After the organization is created, go to **My Projects** and click
-   **create project**.
+2. After the organization is created, go to **Projects** and click
+   **New project**.
 
 3. Specify a name and description for your project and click
    **Create**. The project name you specified will also be used as

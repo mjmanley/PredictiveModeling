@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 
@@ -31,51 +31,6 @@ the scoring branch. The Data Analyst can even change the model
 algorithm(s) used in a refresh operation, ensuring your ability
 to fine-tune your predictive analytics without needing to rewrite
 your applications.
-
-
-
-## Supported machine learning frameworks and features
-
-### Supported frameworks:
-*  SPSS Modeler 17.1
-*  SPSS Modeler 18.0
-
-### Restrictions:
-*  When a scoring branch is prepared for use in real-time
-   scoring, input data coming in on the score request must
-   replace the source node designed into the scoring branch and
-   the resulting predictive analytic output must flow back into
-   the response flow (effectively replacing the terminal node in
-   the scoring branch design).
-*  As the scoring branch is prepared for real-time execution in
-   Bluemix, it cannot require a connection to an external
-   service. For example, an IBM Analytical Decision Management
-   scoring branch design cannot contain references to rules or
-   models stored in an IBM SPSS Collaboration and Deployment
-   Services repository.
-*  The execution of a scoring branch for real-time scoring in
-   Bluemix cannot require an external service. For example, you
-   cannot deploy and score against model algorithms that require
-   an IBM SPSS Analytic Server and Apache Hadoop data store in
-   real-time.
-*  Machine Learning supports Modeler embedded Python scripting.
-   There are a few restrictions due to the method used for
-   processing streams before they run in Machine Learning.
-   Typically, if a user chooses to control the execution of the
-   stream, they will reference the terminal node of the branch.
-   For Machine Learning, when we process the stream, we identify
-   the nodes from JSON that will be overridden, and then do the
-   replacement before the stream runs. This causes the stream to
-   fail in the script because the referenced input and export
-   nodes no longer exist. The solution is use the ID of another
-   node to uniquely identify the branch during execution. This
-   ensures that the stream executes as defined in the embedded
-   Python script.
-
-For more details about current support for IBM SPSS Analytic
-Server-trained predictive models, see the Analytic Server section
-of IBM Knowledge Center.
-
 
 
 ## Steps to bind the service with Bluemix application

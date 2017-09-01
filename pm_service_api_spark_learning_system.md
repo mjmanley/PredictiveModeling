@@ -16,30 +16,26 @@ lastupdated: "2017-06-23"
 
 Continuous learning system provides automated monitoring of model performance, retraining and redeployment to ensure right predictions quality.
 
+
 **Scenario name**: Best drug for heart treatment selection.
 
 **Scenario description**: A biomedical company that produces heart drugs
 wants to deploy a model that select the best drug for heart treatment. When new evidence emerges on drug effectiveness model update should be considered. A data scientist prepared a predictive model and
 shares it with you (the developer). Your task is to deploy the model, set learning configuration and execute learning iteration to evaluate, retrain and redeploy the model.
 
-**Note: ** You can also play with sample python  [notebook](https://apsportal.ibm.com/analytics/notebooks/a97cde0b-5bb8-436a-ae82-83e96adc45e0/view?access_token=6baf4c722e452836f7b505205bc96d9a24b9333ee9b5c39453f6d7751987f798) that creates sample model, configures learning system and finally runs learning iteration.
+**Note**: You can also play with sample python  [notebook](https://apsportal.ibm.com/analytics/notebooks/a97cde0b-5bb8-436a-ae82-83e96adc45e0/view?access_token=6baf4c722e452836f7b505205bc96d9a24b9333ee9b5c39453f6d7751987f798) that creates sample model, configures learning system and finally runs learning iteration.
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
-   Dashboard.
+1. Go to the **Samples** tab of the IBM® Watson™ Machine Learning Dashboard.
 
-2. In the Sample Models section, find the Heart Drug Selection
-   tile and click the Add model button (+).
+2. In the **Sample Models** section, find the Heart Drug Selection tile and click the **Add model** icon (+).
 
-Now you'll see the sample Heart Drug Selection model in the
-list of available models on the Models tab.
+Now you'll see the sample Heart Drug Selection model in the list of available models on the Models tab.
 
 ## Generating the access token
 
-Generate an access token using the user and password available
-from the Service Credentials tab of the IBM Watson Machine
-Learning service instance.
+Generate an access token using the user and password available from the Service Credentials tab of the IBM Watson Machine Learning service instance.
 
 Request example:
 
@@ -55,8 +51,7 @@ Output example:
 ```
 {: codeblock}
 
-Use the following terminal command to assign your token value to
-the environment variable token:
+Use the following terminal command to assign your token value to the environment variable token:
 
 ```
 token="<token_value>"
@@ -67,8 +62,8 @@ token="<token_value>"
 
 Use the following API call to get your instance details, such as:
 
-* published models ```url```
-* deployments ```url```
+* published models `url`
+* deployments `url`
 * usage information
 
 Request example:
@@ -137,7 +132,7 @@ Output example:
 {: codeblock}
 
 
-Having **published_models** ```url``` use the following API call to get model's details:
+Having **published_models** `url` use the following API call to get model's details:
 
 Request example:
 
@@ -319,11 +314,7 @@ In this subsection you will learn how to configure continuous learning system fo
 To prepare Authorization header that combines Watson Machine Learning token and Spark instance credentials provide the following details:
 
 *  The access token created in the previous step
-*  Spark service credentials, which can be found on the Service
-   Credentials tab of the Bluemix Spark service dashboard. Before
-   making the deployment request, Spark credentials must be
-   encoded as base64. They are passed in the header of request
-   in X-Spark-Service-Instance field.
+*  Spark service credentials, which can be found on the Service Credentials tab of the Bluemix Spark service dashboard. Before making the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
 
    Depending on the operating system that you are using, you must issue one of the following terminal commands to perform base64 encoding and assign it to the environment variable.
 
@@ -343,6 +334,7 @@ To prepare Authorization header that combines Watson Machine Learning token and 
 
 
 ### Prepare feedback dataset
+
 Learning System requires connection to training data (data used in model training) as well as feedback data (data that will be used to evaluate trained model). Use below instruction to prepare  **DRUG_FEEDBACK_DATA** table in **Db2 Warehouse on Cloud**.
 
 - Create a [Db2 Warehouse on Cloud Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
@@ -352,8 +344,8 @@ Learning System requires connection to training data (data used in model trainin
   + Select the **Load Data** and **Desktop** load type.
   + **Drag and drop** previously downloaded file and press **Next**.
   + Select **Schema** to import data and click **New Table**.
-  + Write name for **new table** than click **Next** to finish data import.
-  + Use `;` as **field separator**.
+  + In the **new table** field type a name and click **Next**.
+  + For the **field separator** use a semicolon (;).
   + Click **Next** to create table with uploaded data.
 
 **Note**: You can add new feedback records to feedback database using this [REST API endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback)
@@ -370,9 +362,9 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 
 Define values of the following fields to finalize payload:
 
-* min_feedback_data_size - this is minimal number of records in feedback dataset to start continuous learning system iteration
-* auto_retrain [never, always, conditionally] - this parameter specifies when retraining process should be triggered. [conditionally] will trigger retraining process when model quality is below specified threshold.
-* auto_redeploy [never, always, conditionally] - this parameter specifies when retrained model should be deployed. [conditionally] will trigger model redeployment when newly trained model quality is better than currently deployed one.
+* `min_feedback_data_size` - this is minimal number of records in feedback dataset to start continuous learning system iteration
+* `auto_retrain` [never, always, conditionally] - this parameter specifies when retraining process should be triggered. [conditionally] will trigger retraining process when model quality is below specified threshold.
+* `auto_redeploy` [never, always, conditionally] - this parameter specifies when retrained model should be deployed. [conditionally] will trigger model redeployment when newly trained model quality is better than currently deployed one.
 
 
 Request example:
@@ -464,10 +456,9 @@ Output example:
    "auto_redeploy":"conditionally"
 }
 ```
-
 {: codeblock}
 
-**Note**: In this example we use default values for auto_retrain, auto_redeploy. More information about can be found here: [REST API documentation](http://watson-ml-api.mybluemix.net/#!/Published32Models/put_v3_wml_instances_instance_id_published_models_published_model_id_learning_configuration) for `learning_configuration` parameter.
+**Note**: In this example we use default values for the `auto_retrain` and `auto_redeploy` parameters. More information about these parameters can be found here in the [REST API documentation](http://watson-ml-api.mybluemix.net/#!/Published32Models/put_v3_wml_instances_instance_id_published_models_published_model_id_learning_configuration) for the `learning_configuration` parameter.
 
 ## Run continuous learning system iteration
 
@@ -485,10 +476,9 @@ Output example:
 ```
 The request has been fulfilled and resulted in a new resource being created.
 ```
-
 {: codeblock}
 
-In order to check the status of the iteration;
+To check the status of the iteration, issue the following request:
 
 Request example:
 
@@ -534,10 +524,9 @@ Output example:
    ]
 }
 ```
-
 {: codeblock}
 
-You can also get the list of evaluation metrics and values
+You can also get the list of evaluation metrics and values by issuing the following request:
 
 Request example:
 
@@ -567,5 +556,4 @@ Output example:
   ]
 }
 ```
-
 {: codeblock}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 
@@ -15,7 +15,7 @@ lastupdated: "2017-08-29"
 # Service API
 
 
-The Machine Learning service is a set of [REST APIs](https://watson-ml-api.mybluemix.net/) called from
+The Machine Learning service is a set of REST APIs called from
 any programming language, permitting integration of Data Science
 Experience developed analytics in your applications. Bind your
 Bluemix applications to the Machine Learning service instance and
@@ -32,17 +32,14 @@ through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 *  Retrieve the metadata for a given predictive model
 *  Deploy models and manage deployed models
     *  Online deployment (scoring)
-    *  Batch deployment (supporting IBM Object Storage and DashDB)
+    *  Batch deployment (supporting Db2 Warehouse on Cloud)
     *  Streaming deployment (supporting IBM MessageHub)
 *  Retrieve the metadata for a given deployment
 *  Generate predictive analytics by making score requests against
    deployed models
 
-You can easily explore the Machine Learning service capability
-via the available [Swagger representation of the REST API](https://watson-ml-api.mybluemix.net/).
-
-See the following sections for REST API examples of:
+See the following sections for examples of REST API use:
 
 *  [Online deployment and scoring](pm_service_api_spark_online.html)
-*  [Batch deployment with Object Storage](pm_service_api_spark_batch.html)
+*  [Batch deployment with Db2 Warehouse on Cloud](pm_service_api_spark_batch.html)
 *  [Streaming deployment with MessageHub](pm_service_api_spark_streaming.html)

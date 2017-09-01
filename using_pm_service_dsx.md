@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 
@@ -17,34 +17,14 @@ lastupdated: "2017-08-29"
 Note the following important information regarding the Machine
 Learning service.
 
-
-
-## Supported machine learning frameworks and features
-
-### Supported frameworks:
-*  Spark 2.0 MLlib
-*  Python 3.5 with scikit-learn 0.17
-
-### Restrictions:
-  *  Unsupervised models are not supported.
-  *  Models containing references to custom transformers, user defined functions and classes are not supported.
-  * Scikit-learn models can contain references only to packages (and package version) supported by Anaconda 4.2.x for Python 3.5 runtime. List of supported packages can be found [here](https://docs.continuum.io/anaconda/packages/old-pkg-lists/4.2.0/py35).
-  * The "schema" endpoint returned during scikit-learn model deployment request is not supported at this stage.
-  * Scikit-learn models that require Pandas Dataframe as input type for predict() API are not supported.
-  * Scikit-learn model scoring response does not return probability at this stage.
-  *  Batch and stream support for Spark models is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
-  * Continuous Learning System for Spark models is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
-
-
-
 ## Steps to bind the service with Bluemix application
 
-You can download Node.js sample code to try the Machine
+You can download Node.js [sample code](https://github.com/pmservice/product-line-prediction/blob/master/README.md) to try the Machine
 Learning service. Complete the following steps to create your Bluemix application and bind the Machine Learning service. These examples use Node.js because it is a popular runtime. Others can be used such as iOS, Ruby, Perl, or Java.
 
 Note that you can also perform steps 1-3 using the Bluemix Graphical Interface instead of the Cloud Foundry tool (cf).
 
-1. Use the cf create-service command to create a service instance:
+1. Use the `cf create-service` command to create a service instance:
 
    ```
    cf create-service pm-20 Free {local naming}
@@ -61,7 +41,7 @@ Note that you can also perform steps 1-3 using the Bluemix Graphical Interface i
    This command creates one Machine Learning service instance
    with the Free plan named `my_wml_free` in your Bluemix space.
 
-2. Use the cf create-service-key command to create service
+2. Use the `cf create-service-key` command to create service
    credentials:
 
    ```
@@ -94,13 +74,13 @@ Note that you can also perform steps 1-3 using the Bluemix Graphical Interface i
    {: codeblock}
 
    This command binds the Machine Learning service instance
-   my_wml_free to the Bluemix application my_app1.
+   `my_wml_free` to the Bluemix application `my_app1`.
 
 
 
 ## Machine Learning credentials
 
-After you bind the Machine Learning service instance to your Bluemix application, the Machine Learning credentials are added to the VCAP_SERVICES environment variable:
+After you bind the Machine Learning service instance to your Bluemix application, the Machine Learning credentials are added to the `VCAP_SERVICES` environment variable:
 
 ```
     {
@@ -123,19 +103,19 @@ After you bind the Machine Learning service instance to your Bluemix application
 ```
 {: codeblock}
 
-   The VCAP_SERVICES environment variable includes the following
+   The `VCAP_SERVICES` environment variable includes the following
    information:
 
-   * ``plan`` - the Machine Learning plan that is used in the service provisioning.
-   * ``url`` - the address of the Machine Learning service instance.
-   * ``access_key`` - for SPSS Modeler streams only.
-   * ``instance_id`` - Machine Learning instance unique identifier.
-   * ``username``, ``password`` - basic authorization needed to generate an access token to pass in all requests to this service instance. For example, you can generate an access token using a curl like this:
+   * `plan` - the Machine Learning plan that is used in the service provisioning.
+   * `url` - the address of the Machine Learning service instance.
+   * `access_key` - for SPSS Modeler streams only.
+   * `instance_id` - Machine Learning instance unique identifier.
+   * `username`, `password` - basic authorization needed to generate an access token to pass in all requests to this service instance. For example, you can generate an access token using a curl like this:
 
 Request example:
 
 ```
-       curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
+       curl --basic --user {username}:{password} https://ibm-watson-ml.mybluemix.net/v3/identity/token
 
        Output example:
 
@@ -144,7 +124,7 @@ Request example:
 {: codeblock}
 
    The following Node.js code is an example of how to obtain the
-   username and password from the VCAP_SERVICES environment
+   username and password from the `VCAP_SERVICES` environment
    variable:
 
 ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-08-29"
+lastupdated: "2017-09-01"
 
 ---
 
@@ -13,7 +13,6 @@ lastupdated: "2017-08-29"
 {:pre: .pre}
 
 # Deploying online models
-
 
 **Scenario name**: Product line prediction.
 
@@ -30,7 +29,7 @@ score requests against the deployed model.
    Dashboard.
 
 2. In the Sample Models section, find the Product Line Prediction
-   tile and click the Add model button (+).
+   tile and click the Add model icon (+).
 
 Now you'll see the sample Product Line Prediction model in the
 list of available models on the Models tab.
