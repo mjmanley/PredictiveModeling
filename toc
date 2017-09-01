@@ -44,7 +44,6 @@ Machine Learning
     [Scala Repository documentation](https://watson-ml-staging-libs.mybluemix.net/repository-scala/)
     [Python Repository Module documentation](https://watson-ml-staging-libs.mybluemix.net/repository-python/)
     pm_app_runtime.md
-    ml-deployment-documentation.md
     ml_troubleshooting.md
 
     {: .topicgroup}
