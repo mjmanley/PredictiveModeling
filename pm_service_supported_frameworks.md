@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-01"
+lastupdated: "2017-09-08"
 
 ---
 
@@ -14,7 +14,8 @@ lastupdated: "2017-09-01"
 
 # Supported machine learning frameworks
 
-Note the following important information regarding the Machine Learning service.
+IBM Watson Machine Learning service supports the following frameworks for model development and validation as a part of model life cycle management.
+
 
 ## Spark MLlib
 There is support for Spark MLlib for the Watson Machine Learning Online, Batch (beta), Stream (beta) Deployment and Scoring service. Only specific versions and runtime environments are supported.
@@ -54,11 +55,38 @@ There are some restrictions, which may include some or all of the following limi
 
 * Classification and regression models are only supported.
 * Models can contain references only to those packages (and package version) supported by Anaconda 4.2.x for Python 3.5 runtime.
-* The schema endpoint returned during deployment request is not implemented.
-* Probability of prediction is not returned at this stage.
-* Models that require Pandas Dataframe as input type for `predict()` API are not supported.
+* The "schema" endpoint returned during deployment request is not implemented.
+* Probability of prediction is not returned as a response of scoring request at this stage.
+* Models that require Pandas Dataframe as input type for "predict()" API are not supported.
 * Models that contain references to custom transformers, user defined functions and classes are not supported.
 
+## XGBoost <span class='tag--beta'>Beta</span>
+There is support for XGBoost for the Watson Machine Learning Online Deployment and Scoring service. Only specific versions and runtime environments are supported.
+
+### Supported Versions
+
+- XGBoost 0.6
+- Anaconda 4.2.x for Python 3.5 Runtime
+- Scikit-Learn 0.17
+
+### Python Runtime
+
+The Python runtime for models that needs to be deployed using WML Online Deployment and Scoring service is Python 3.5.
+
+In some cases, where models were created in Python 2.7 runtime, deployment may fail due to incompatibilities between Python2.7 and Python3.5.
+
+### Supported Python Packages
+
+A list of Python packages supported by WML Online Deployment and Scoring service can be found [here](https://docs.continuum.io/anaconda/packages/old-pkg-lists/4.2.0/py35).
+
+### Restrictions
+
+There are some restrictions, which may include some or all of the following limitations:
+* XGBoost support is currently available for models created using XGBoost's Scikit-Learn wrappers i.e xgboost.sklearn.XGBClassifier and xgboost.sklearn.XGBRegressor.
+* Models can contain references only to those packages (and package version) supported by Anaconda 4.2.x for Python 3.5 runtime.
+* The "schema" endpoint returned during deployment request is not implemented.
+* Probability of prediction is not returned as a response of scoring request at this stage.
+* Models containing references to custom transformers, user defined functions and classes are not supported.
 
 ## SPSS Modeler
 

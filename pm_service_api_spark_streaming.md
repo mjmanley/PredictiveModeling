@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-01"
+lastupdated: "2017-09-08"
 
 ---
 
@@ -78,7 +78,7 @@ Use the following API call to get your instance details, such as:
 Request example:
 
 ```
-curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
 ```
 {: codeblock}
 
@@ -119,7 +119,7 @@ Having **published_models** `url` use the following API call to get model's deta
 Request example:
 
 ```
-curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
 ```
 {: codeblock}
 
@@ -256,7 +256,7 @@ Request example:
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: $token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
    "name":"Sentiment Prediction ",
@@ -416,7 +416,7 @@ Request example:
 ```
 curl -i \
 -X GET \
--H "Authorization: $token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
@@ -524,7 +524,7 @@ Request example:
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: $token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -556,7 +556,7 @@ Request example:
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: $token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -587,7 +587,7 @@ Request example:
 ```
 curl -i \
 -X DELETE \
--H "Authorization: $token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}

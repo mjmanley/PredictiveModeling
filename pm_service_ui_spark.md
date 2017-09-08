@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-01"
+lastupdated: "2017-09-08"
 
 ---
 
@@ -31,11 +31,14 @@ through the Watson Machine Learning Dashboard:
 *  Get deployment details
 *  Delete a deployment
 *  Delete model
+*  Configure continuous learning system
+*  Monitor model performance
 
 **Note**: Working with multiple dashboard instances opened in separate tabs of the same browser is not supported.
 
 See the following sections for Dashboard examples of:
 
 *  [Online deployment](pm_service_ui_spark_online.html)
-*  [Batch deployment with Object Storage](pm_service_ui_spark_batch.html)
-*  [Streaming deployment with MessageHub](pm_service_ui_spark_streaming.html)
+*  [Batch deployment with Object Storage (beta)](pm_service_ui_spark_batch.html)
+*  [Streaming deployment with MessageHub (beta)](pm_service_ui_spark_streaming.html)
+*  [Continuous learning system (beta)](pm_service_ui_spark_learning_system.html)

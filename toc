@@ -19,10 +19,12 @@ Machine Learning
             pm_service_api_spark_building.md
             pm_service_api_spark_batch.md
             pm_service_api_spark_streaming.md
+            pm_service_api_spark_learning_system.md
         pm_service_ui_spark.md
             pm_service_ui_spark_online.md
             pm_service_ui_spark_batch.md
             pm_service_ui_spark_streaming.md
+            pm_service_ui_spark_learning_system.md
 
     {: .topicgroup}
     SPSS Models
@@ -44,7 +46,6 @@ Machine Learning
     [Scala Repository documentation](https://watson-ml-staging-libs.mybluemix.net/repository-scala/)
     [Python Repository Module documentation](https://watson-ml-staging-libs.mybluemix.net/repository-python/)
     pm_app_runtime.md
-    ml_troubleshooting.md
 
     {: .topicgroup}
     Sample applications
@@ -60,6 +61,9 @@ Machine Learning
         [From Spark MLlib model to online scoring with Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
         [From scikit-learn to online scoring with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
         [From SPSS stream to batch scoring with Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37)
+        [From Spark MLlib model to learning system with python](https://apsportal.ibm.com/analytics/notebooks/a97cde0b-5bb8-436a-ae82-83e96adc45e0/view?access_token=6baf4c722e452836f7b505205bc96d9a24b9333ee9b5c39453f6d7751987f798)
+
+    ml_troubleshooting.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
