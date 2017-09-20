@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# API del servizio Machine Learning per i modelli IBM SPSS Modeler
+# API del servizio
 
 
 Il servizio Machine Learning consiste in un insieme di API REST richiamate

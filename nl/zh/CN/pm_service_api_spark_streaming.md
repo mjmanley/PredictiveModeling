@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,11 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# 部署流式模型
+# 部署流式模型 <span class='tag--beta'>Beta</span>
 
 
-**注**：此功能目前在 Beta 中提供，且仅可用于使用 Spark MLlib。
+**注**：此功能目前在 Beta 中提供，且仅可用于使用 Spark MLlib。如果您想要参与，请将您自己加入等待列表！
+有关更多信息，请参阅：[https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist)。
 
 **场景名称**：观点分析。
 
@@ -39,7 +40,7 @@ lastupdated: "2017-06-23"
 请求示例：
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -50,12 +51,153 @@ curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/ide
 ```
 {: codeblock}
 
-使用以下终端命令将令牌值分配给环境变量 access_token：
+使用以下终端命令将令牌值分配给环境变量令牌：
 
 ```
-access_token="<token_value>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## 处理已发布的模型
+使用以下 API 调用来获取实例详细信息，例如：
+* published models `url`
+* deployments `url`
+* usage information
+
+请求示例：
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+输出示例：
+
+```
+{
+   "metadata":{ 
+"guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+具有 **published_models** `url` 时，请使用以下 API 调用来获取模型的详细信息：
+
+请求示例：
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+输出示例：
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{ 
+"guid":"f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "created_at":"2017-07-11T10:51:10.900Z",
+            "modified_at":"2017-07-11T10:51:11.012Z"
+         },
+   "entity":{
+      "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+         },
+            "name":"Sentiment Prediction",
+            "description":"Predicts comment sentiment about particular topic for marketing company.",
+            "label_col":"sentiment",
+            "training_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+        "metadata":{ 
+},
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"string",
+                     "name":"label",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/versions/0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "guid":"0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "created_at":"2017-07-11T10:51:11.012Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+        "metadata":{ 
+},
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+请记下在下一步中创建批量部署所需的 **deployments** `url`。
+
 
 ## 使用 IBM Message Hub 创建流式部署
 
@@ -72,24 +214,18 @@ access_token="<token_value>"
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
-{: codeblock}
+   {: codeblock}
 
    在 Microsoft Windows 或 Linux 操作系统上，必须使用 `--wrap=0` 参数搭配 `base64` 命令来执行 base64 解码：
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  IBM Message Hub 主题详细信息，将用作模型输入（推文），以及模型输出的存储（预测结果）。
 
-*  要创建部署，请使用以下端点：
-   
-   ```
-   /v2/published_models/{published_model_id}/deployments
-   ```
-   
-   创建联机部署所需的端点在“WML 仪表板”->“模型详细信息”->“URL”上提供。另请注意，您可以从 IBM Watson Machine Learning 仪表板查找 published_model_id 值，方法是单击“模型”->“查看详细信息”并复制标识字段中的值，且您可以从 Watson Machine Learning 实例的 VCAP 凭证获取“instance_id”。
+*  要创建部署，请使用上一部分中的 **deployments** `url`。
 
 请求示例：
 
@@ -97,7 +233,7 @@ access_token="<token_value>"
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
    "name":"Sentiment Prediction ",
@@ -243,88 +379,12 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 {: codeblock}
 
 **注**：您还可以使用“仪表板”来创建流式部署。
-必须提供以下三个输入：
 
 
-*  要使用的模型的输入源详细信息。输入源必须已经上传并可供获取数据 (IBM Message Hub)。
-
-*  结果将写入其中的输出源的详细信息。输出源必须已经创建，并在模型处理来自输入源的数据时可随时接收结果。
-
-*  Spark 服务凭证
-
-表单示例：
-
-输入：
-
-```
-{
-   "connection":{
-"kafka_brokers_sasl":[
-"kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "source":{
-      "topic":"sinput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-输出：
-
-```
-{
-   "connection":{
-"kafka_brokers_sasl":[
-"kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "target":{
-      "topic":"soutput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Spark 服务凭证：
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",  
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",  
-      "cluster_master_url": "https://spark.bluemix.net",  
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",  
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",  
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## 获取部署详细信息
 
-可以使用作为部署结果返回的“位置”字段来检查通过 GET 请求进行流式部署的详细信息。请参阅以下信息。
+可以使用作为部署结果返回的 **metadata** `url` 通过 GET 请求来检查流式部署的详细信息。请参阅以下信息。
 
 请求示例：
 
@@ -438,7 +498,7 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -470,7 +530,7 @@ X-Global-Transaction-ID: 2590068775
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -501,7 +561,7 @@ X-Global-Transaction-ID: 4242073343
 ```
 curl -i \
 -X DELETE \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}

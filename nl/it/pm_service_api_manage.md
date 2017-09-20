@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -25,10 +25,6 @@ lastupdated: "2017-06-23"
 
 ## Distribuzione o aggiornamento di un modello predittivo
 
-PUT http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
 Utilizza questa API per caricare un file che contiene il ramo di calcolo del punteggio sviluppato
         da IBM SPSS Modeler che desideri distribuire.
 Viene reso disponibile per il calcolo del punteggio dei
@@ -38,6 +34,13 @@ fare riferimento al modello distribuito nelle successive chiamate di servizio. S
 un modello per un ID contesto, esso viene sostituito da questa chiamata PUT come
 un modo per aggiornare l'analisi predittiva utilizzata dalle tue
 applicazioni.
+
+```
+PUT http://{PA Bluemix load balancer
+URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
+application}
+```
+{: codeblock}
 
 Esempio di
 richiesta:
@@ -82,11 +85,14 @@ Risposta quando la distribuzione non riesce:
 
 ## Richiamo di un elenco di tutti i modelli attualmente distribuiti
 
+Richiama un riepilogo di tutti i modelli attualmente distribuiti su questa istanza del servizio.
+
+```
 GET http://{PA Bluemix load balancer
 URL}/pm/v1/model?accesskey={access_key for this bound
 application}
-
-Richiama un riepilogo di tutti i modelli attualmente distribuiti su questa istanza del servizio.
+```
+{: codeblock}
 
 Esempio di
 richiesta:

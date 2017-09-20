@@ -2,19 +2,9 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-21"
+lastupdated: "2017-09-07"
 
 ---
-<!-- Copyright info and last updated date at top of file: REQUIRED
-    The copyright and lastupdated info is YAML content that must occur at the top of the MD file, before attributes are listed.
-    It must be --- surrounded by 3 dashes ---
-    The value "years" can contain just one year or a two years separated by a comma. (years: 2014, 2016)
-    The value "lastupdated" must be followed by a machine date in quotes in the following format: "YYYY-MM-DD"
-    The value for "years" must be indented 2 spaces under "copyright", followed by "lastupdated" which should start on its own non-indented line.
-
--->
-
-<!-- Common attributes used in the template are defined as follows: -->
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
@@ -56,13 +46,17 @@ Per un esempio di adozione di lavoro batch, fai riferimento al
 seguente blocco appunti: [From SPSS stream to batch scoring with
 Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37).
 
+**Nota**: i dati visualizzati nel dashboard sono correlati solo alle previsioni in tempo reale, inclusi i dati della funzione di caricamento. 
+
 ## Eliminazione lavori
 
-Puoi eliminare i lavori, che elimina il lavoro se è al momento in esecuzione. Richiama DELETE nell'ID lavoro (e puoi eliminarne più
-di uno alla volta):
+Puoi eliminare i lavori, che elimina il lavoro se è al momento in esecuzione. Utilizza il comando `DELETE` con `job ID`. Puoi annullare più di un lavoro alla volta passando più ID.
 
+```
 DELETE https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job ID
 1, job ID 2,...}?accesskey=xxxxxxxxxx
+```
+{: codeblock}
 
 Il valore restituito indica quanti lavori a cui fa riferimento l'ID nella richiesta sono stati eliminati. Se
 questo numero non corrisponde all'elenco trasmesso nella richiesta, devi controllare lo stato
@@ -70,10 +64,13 @@ dei singoli lavori.
 
 ## Controllo dello stato di un lavoro
 
-Puoi utilizzare GET per ottenere lo stato del tuo ID lavoro in qualsiasi momento:
+Puoi ottenere lo stato del tuo `job ID` in qualsiasi momento utilizzando il comando `GET`:
 
+```
 GET https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job
 ID}/status?accesskey=xxxxxxxxxx
+```
+{: codeblock}
 
 Il JSON restituito indica jobstatus e, se il lavoro è terminato con esito
 positivo, un dataUrl che puoi utilizzare per ottenere tutto il contenuto del file
@@ -81,10 +78,13 @@ generato.
 
 ## Reinvia un lavoro
 
-Richiama PUT per <job ID>. Non deve essere in uno stato di esecuzione:
+Per inviare nuovamente un lavoro, utilizza il comando `PUT` con `job ID`. Non deve essere in stato di esecuzione.
 
+```
 PUT https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job
 ID}?accesskey=xxxxxxxxxx
+```
+{: codeblock}
 
 con content_type "application/json" che include il JSON della definizione del lavoro
 nuovo o aggiornato nel corpo della richiesta.
@@ -94,11 +94,13 @@ restituzioni che indica cosa è accaduto. Devi trasmettere il JSON della definiz
 
 ## Invia un lavoro in un file del flusso Modeler caricato
 
-Richiama PUT per la tua definizione del lavoro da inserire in una coda di
-esecuzione:
+Per inserire un lavoro nella coda di esecuzione, utilizza il comando `PUT`:
 
+```
 PUT https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job
 ID}?accesskey=xxxxxxxxxx
+```
+{: codeblock}
 
 Con content_type "application/json" che include il JSON della definizione del lavoro
 nel corpo della richiesta.
@@ -115,29 +117,28 @@ definizione del lavoro](#job-definition-json).
 
 ## Carica un file del flusso da utilizzare nei tuoi lavori
 
-Nota: il dashboard Machine Learning è solo per il calcolo in tempo
-reale. Non puoi utilizzarlo per eseguire i lavori (calcolo batch).
+**Nota**: il dashboard Machine Learning serve solo per il calcolo del punteggio
+in tempo reale. Non puoi utilizzarlo per eseguire i lavori (calcolo batch).
 
-Richiama PUT per rendere un file del flusso Modeler accessibile ai lavori:
+Per rendere un file del flusso Modeler accessibile ai lavori, utilizza il comando `PUT`:
 
+```
 PUT https://{PA Bluemix load balancer URL}/pm/v1/file/{file
 ID}?accesskey=xxxxxxxxxx
+```
+{: codeblock}
 
 con content_type "multipart/form-data" che passa il file nella
 richiesta.
 
-Dovrai fare riferimento al nome univoco utilizzato (ID file nella chiamata PUT) in una chiamata
-DELETE all'API del file così come al riferimento del modello
-nelle tue definizioni del lavoro. Nota: lo spazio dei nomi dei file utilizzati
-nei tuoi lavori è completamente sotto il tuo controllo - in questo modo il comando PUT di un
-file con lo stesso <ID file> sostituisce implicitamente la copia
+Dovrai fare riferimento al nome univoco utilizzato (`file ID` in una chiamata `PUT`)
+in una chiamata `DELETE` all'API del file così come al riferimento del modello
+nelle tue definizioni del lavoro. Nota che lo spazio dei nomi dei file
+utilizzato nei tuoi lavori è completamente sotto il tuo controllo. Il comando `PUT` di un file
+sotto lo stesso `file ID` sostituisce implicitamente la copia
 corrente.
 
-Puoi utilizzare GET per ottenere un elenco di tutti i file caricati per i tuoi lavori
-omettendo l'<ID file> o richiamare uno specifico file con GET e il
-relativo ID. Puoi anche utilizzare DELETE per eliminare un file caricato (ciò, ovviamente, causerà degli errori
-in ogni esecuzione del lavoro in attesa che fa riferimento
-al file).
+Per generare un elenco di tutti i file caricati per i tuoi lavori, utilizza un comando `GET` omettendo però il parametro `file ID`. Per richiamare uno specifico file, utilizza un comando `GET` con il parametro `file ID`. Puoi anche eliminare un file caricato immettendo un comando `DELETE`. Ciò provoca errori in qualsiasi esecuzione di lavori in sospeso che fa riferimento al file.
 
 Esempio di
 richiesta:
@@ -163,7 +164,7 @@ Risposta quando la distribuzione riesce:
         {
            "flag":true,
            "message":"informazioni dettagliate"
-         }
+         }      
 ```
 {: codeblock}
 
@@ -182,57 +183,57 @@ Risposta quando la distribuzione non riesce:
 
 ## Tipi di lavoro
 
-Formazione: questo tipo di lavoro indica che tutti i nodi del terminale "builder del modello"
+**Formazione**: questo tipo di lavoro indica che tutti i nodi del terminale "builder del modello"
 devono essere eseguiti nel flusso Modeler. Dopo che il lavoro è stato completato correttamente, verrà creato un flusso Modeler aggiornato
 con i nuovi nugget del modello eseguito nei risultati del lavoro che possono essere richiamati. Se il file del flusso Modeler
 dispone di collegamenti dai nodi di build del modello ai nugget del modello eseguito nei rami di valutazione e calcolo,
 sarà eseguito un aggiornamento di questi nodi.
 
-Valutazione: questo tipo di lavoro attiva l'esecuzione di tutti i nodi del terminale "builder del
+**Valutazione**: questo tipo di lavoro attiva l'esecuzione di tutti i nodi del terminale "builder del
 documento" (principalmente dalle schede Grafici e Output nel
-client Modeler) che generano contenuti del file di report statico che possono essere
-trasmessi al chiamante. Il ramo di calcolo non è considerato come parte di questo tipo di lavoro.
+client Modeler) che generano contenuti del file di report statico che
+possono essere trasmessi al chiamante. Il ramo di calcolo non è considerato come parte di questo tipo di lavoro.
 
-Aggiornamento automatico: una versione del tipo di lavoro TRAINING dove,
+**Aggiornamento automatico**: una versione del tipo di lavoro `TRAINING` dove,
 al completamento con esito positivo del lavoro, il file del flusso Modeler originale
 nell'elenco di file batch sarà aggiornato. La valutazione e la decisione esplicita riguardante un evento di aggiornamento dei flussi Modeler
 distribuiti per il calcolo in tempo reale si suppone non siano coperti dall'aggiornamento automatico in questo momento.
 
-Punteggio batch: l'esecuzione del nodo del terminale in cui hai applicato l'opzione
-Utilizza come ramo di calcolo, che indica che questo è il ramo di calcolo
+**Punteggio batch**: esecuzione del nodo del terminale a cui hai applicato l'opzione
+Utilizza come ramo di calcolo, che indica che questo è il ramo di calcolo del punteggio
 in questa progettazione del flusso Modeler. La definizione del lavoro deve specificare
 i dettagli dell'esportazione così come i dettagli dell'origine.
 
-Esegui flusso: l'esecuzione è simile al fare clic sul pulsante di "esecuzione" verde
-in Modeler con l'opzione Esegui questo script selezionata nella scheda
+**Esegui flusso**: l'esecuzione è simile al fare clic sul pulsante di "esecuzione" verde in
+Modeler con l'opzione Esegui questo script selezionata nella scheda
 Esecuzione delle proprietà del flusso. L'utilizzo copre i bisogni dell'esecuzione con script
 della formazione del modello o di altri tipi di lavoro. Tutto il controllo dinamico dello script deve essere gestito dai parametri del flusso,
 con i valori del parametro trasmessi nella definizione del lavoro.
 
 ## Stato del lavoro
 
-In sospeso: la definizione del lavoro è stata inviata ma non è stata ancora
-richiesta da un server del lavoro per l'esecuzione.
+**In sospeso**: la definizione del lavoro è stata inviata ma non è stata
+ancora richiesta da un server del lavoro per l'esecuzione.
 
-In esecuzione: la definizione del lavoro è stata richiesta da un server del lavoro ed
+**In esecuzione**: la definizione del lavoro è stata richiesta da un server del lavoro ed
 è in esecuzione.
 
-In annullamento: il lavoro è in fase di annullamento.
+**In annullamento**: il lavoro è in fase di annullamento.
 
-Annullato: il lavoro è stato annullato.
+**Annullato**: il lavoro è stato annullato.
 
-Non riuscito: il lavoro non è riuscito. I dettagli sulla causa dell'errore vengono
+**Non riuscito**: il lavoro non è riuscito. I dettagli sulla causa dell'errore vengono
 restituiti con GET nello stato del lavoro.
 
-Riuscito: il lavoro è stato eseguito correttamente. Qualsiasi risultato comunicato per
+**Riuscito**: il lavoro è riuscito. Qualsiasi risultato comunicato per
 questo evento viene restituito nel JSON di GET nello stato del lavoro.
 
 ## Dettagli API lavoro
 
-POST /v1/jobs/{id}
+`POST /v1/jobs/{id}`
 
 Descrizione: invia una definizione del lavoro per l'esecuzione. Si verificherà un errore se
-<job ID> già esiste.
+`job ID` già esiste.
 
 Tipi di contenuto:
 
@@ -252,7 +253,7 @@ bind:
 ```
 {: codeblock}
 
-ID lavoro specificato dall'utente. Deve essere univoco per un'istanza del servizio Machine
+`job ID` specificato dall'utente. Deve essere univoco per un'istanza del servizio Machine
 Learning:
 
 ```
@@ -290,7 +291,7 @@ Altro errore. Restituito JSON dell'eccezione
 ```
 {: codeblock}
 
-PUT /v1/jobs/{id}
+`PUT /v1/jobs/{id}`
 
 Descrizione: crea o aggiorna un lavoro. Se un lavoro con questo ID non esiste,
 lo crea; altrimenti, lo aggiorna (che, di fatto, lo reinvia per l'esecuzione).
@@ -313,7 +314,7 @@ bind:
 ```
 {: codeblock}
 
-ID lavoro specificato dall'utente:
+`job ID` specificato dall'utente:
 
 ```
 @PathParam("id")
@@ -350,7 +351,7 @@ Altro errore. Restituito JSON dell'eccezione.
 ```
 {: codeblock}
 
-GET /v1/jobs
+`GET /v1/jobs`
 
 Descrizione: restituisce un elenco di tutti i lavori definiti su questa istanza del servizio Machine
 Learning.
@@ -388,7 +389,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-GET /v1/jobs/{id}
+`GET /v1/jobs/{id}`
 
 Descrizione: richiede la restituzione di una specifica definizione del lavoro.
 
@@ -409,7 +410,7 @@ bind:
 ```
 {: codeblock}
 
-ID lavoro inviato:
+`job ID` inviato:
 
 ```
 @PathParam("id")
@@ -439,7 +440,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-GET /v1/jobs/{id}/status
+`GET /v1/jobs/{id}/status`
 
 Descrizione: richiama lo stato di uno specifico lavoro.
 
@@ -460,7 +461,7 @@ bind:
 ```
 {: codeblock}
 
-ID lavoro inviato:
+`job ID` inviato:
 
 ```
 @PathParam("id")
@@ -490,7 +491,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-DELETE /v1/jobs/{ids}
+`DELETE /v1/jobs/{ids}`
 
 Descrizione: elimina uno o più lavori. Eliminerà il lavoro se è al momento in esecuzione.
 
@@ -511,8 +512,7 @@ bind:
 ```
 {: codeblock}
 
-Elenco ID lavoro o ID lavoro inviato con i valori ID suddivisi da
-“,”
+`job ID` inviato o elenco di `job ID` con i valori ID suddivisi da una virgola (,)
 
 ```
 @PathParam("id" or “id,id,id”)
@@ -541,27 +541,29 @@ Il JSON della definizione del lavoro contiene le seguenti sezioni generali:
 
 Riferimento al modello predittivo e tipo di lavoro
 
-Tipi di azione:
+**Nota**: i dati visualizzati nel dashboard sono correlati solo alle previsioni in tempo reale, inclusi i dati della funzione di caricamento. 
 
-*  TRAINING – esegue il nodo di builder del modello mediante la formazione o
-   l'aggiornamento dei nugget del modello. Il flusso Modeler aggiornato viene richiamato nei risultati del lavoro.
+### Tipi di azione
 
-*  EVALUATION – esegue i nodi di analisi e builder del documento
-   valutando il modello con formazione.
+**TRAINING** – esegue la formazione del nodo di builder del modello o aggiorna i nugget
+del modello. Il flusso Modeler aggiornato viene richiamato nei risultati del lavoro.
 
-*  AUTO_REFRESH – esegue TRAINING e aggiorna i contenuti del file
+**EVALUATION** – esegue il builder del documento e analizza i nodi valutando
+l'ultimo modello eseguito.
+
+**AUTO_REFRESH** – esegue TRAINING e aggiorna i contenuti del file
    nello spazio di caricamento del file batch.
 
-*  BATCH_SCORE – esegue il ramo di calcolo ed esporta i
-   dati risultanti come indicato dalla definizione del lavoro.
+**BATCH_SCORE** – esegue il ramo di calcolo e esporta i dati risultanti come
+diretti da una definizione del lavoro.
 
-*  RUN_STREAM – esegue il flusso Modeler come indicato nelle
-   proprietà del flusso; più spesso utilizzato quando è richiesta l'esecuzione
-   con script.
+**RUN_STREAM** – esegue il flusso Modeler come indicato nelle proprietà del flusso;
+molto spesso utilizzato quando è richiesta l'esecuzione con script.
 
 Modello: l'ID come specificato nell'azione di caricamento del file per il
 riferimento del lavoro batch. Per ulteriori informazioni, vedi Caricamento di un file del flusso
-da utilizzare nei tuoi lavori. Nota che viene utilizzato /pm/v1/file.
+da utilizzare nei tuoi lavori. Nota che viene utilizzato
+`/pm/v1/file`.
 
 ```
 "action": "TRAINING",
@@ -572,13 +574,13 @@ da utilizzare nei tuoi lavori. Nota che viene utilizzato /pm/v1/file.
 ```
 {: codeblock}
 
-Nota che l'id deve essere lo stesso ID del file utilizzato
-nell'API PUT. Il nome non è obbligatorio, ma per la formazione e l'aggiornamento automatico del modello
+Nota che l'ID deve essere uguale al `file ID` utilizzato
+nell'API `PUT`. Il nome non è obbligatorio, ma per la formazione e l'aggiornamento automatico del modello
 il risultato del lavoro verrà salvato utilizzando il nome definito
 qui. Se il nome non viene definito, il servizio Machine Learning
 genererà il risultato in base alle regole di denominazione predefinite.
 
-Impostazioni lavoro
+### Impostazioni lavoro
 
 Tutte le impostazioni richiedono di eseguire questo lavoro.
 
@@ -592,9 +594,9 @@ Tutte le impostazioni richiedono di eseguire questo lavoro.
 ```
 {: codeblock}
 
-Definizioni di connettività del database
+### Definizioni di connettività del database
 
-Tipo di database: DB2, DashDB, Informix, Oracle, Sybase, SQLServer, MySQL.
+Tipo di database: ApacheHive, DashDB, DB2, Greenplum, Impala, Informix, MySQL, Oracle, PostgreSQL, ProgressOpenEdge, Salesforce,  SQLServer, Sybase, SybaseIQ, Teradata.
 
 La connettività come specificata nell'istanza del servizio del DB, molti tipi di DB richiedono la trasmissione di
 configurazioni specifiche nelle
@@ -624,7 +626,7 @@ configurazioni specifiche nelle
 ```
 {: codeblock}
 
-Impostazioni nodo di origine
+### Impostazioni nodo di origine
 
 La connettività del DB di riferimento e la tabella utilizzata per originare un ramo fornito nel flusso Modeler
 come identificato dal nome del nodo di origine.
@@ -652,7 +654,7 @@ identifica il nodo di origine iniziale nel flusso Modeler da sostituire
 con un nodo di origine del DB creato con questi parametri
 forniti.
 
-Impostazioni del nodo di esportazione
+### Impostazioni del nodo di esportazione
 
 La connettività del DB di riferimento e la tabella utilizzata per conservare i dati per un ramo fornito nel flusso Modeler
 come identificato dal nome del nodo del terminale.
@@ -660,16 +662,22 @@ come identificato dal nome del nodo del terminale.
 Il controllo del metodo utilizzato durante la conservazione dei dati viene comunicato tramite l'attributo
 insertMode:
 
-*  Append – la tabella deve esistere ed essere compatibile per l'inserimento
+**Append** – la tabella deve esistere ed essere compatibile per l'inserimento
 
-*  Create – la tabella viene creata (se esiste già, viene restituito un
-   errore)
+**Create** – la tabella è stata creata (è stato restituito un errore se già esiste)
 
-*  Drop – se la tabella di riferimento esiste già, viene eliminata e
-   ricreata
+**Drop** – se la tabella di riferimento già esiste, viene eliminata e ricreata
 
-*  Refresh – le righe esistenti della tabella vengono eliminate prima di inserire
-   nuove righe
+**Refresh** – le righe esistenti della tabella vengono eliminate prima di inserire nuove
+righe
+   
+Il caricamento generico può essere utilizzato per migliorare le prestazioni di inserimento.
+È possibile abilitare il supporto per il caricamento generico utilizzando l'attributo bulkLoading:
+
+**Off** - il caricamento generico è disabilitato
+
+**ODBC** - caricamento generico tramite il driver ODBC
+
 
 ```
 "exports": [
@@ -681,6 +689,7 @@ insertMode:
           },
           "node": "ExportScores",
           "attributes": [],
+          "bulkLoading": "Off"
      }
 ],
 ```
@@ -692,10 +701,10 @@ del nodo di origine, node identifica il nodo di output originale
 nel flusso Modeler da sostituire con un nodo di esportazione del DB creato
 con questi parametri forniti.
 
-Nota: le impostazioni del nodo di esportazione e di origine
+**Nota**: le impostazioni del nodo di esportazione e di origine
 sono importanti per la corretta esecuzione del lavoro.
 
-Sovrascritture del valore del parametro
+### Sovrascritture del valore del parametro
 
 Per sovrascrivere i valori predefiniti per i parametri al livello del flusso prima dell'esecuzione di un lavoro, puoi specificare
 la coppia nome/valore da utilizzare nella definizione del lavoro.
@@ -721,15 +730,14 @@ compressi in un file .zip. Solo i nodi di builder del documento in grado di
 supportare il reportFormat indicato vengono eseguiti e hanno i rispettivi
 contenuti restituiti dopo un'esecuzione corretta del lavoro.
 
-I formati supportati sono HTML, JPG, PNG, RTF, SAV, TAB e
-XML.
+Sono supportati i seguenti formati: HTML, JPG, PNG, RTF, SAV, TAB e XML.
 
 ```
 "reportFormat": "HTML"
 ```
 {: codeblock}
 
-Esempio JSON completo
+### Esempio JSON completo
 
 ```
 { 
@@ -780,15 +788,15 @@ Esempio JSON completo
 Le seguenti sezioni forniscono i dettagli dell'API di gestione del file
 Modeler SPSS del lavoro batch.
 
-PUT /v1/file/{id}
+`PUT /v1/file/{id}`
 
 Descrizione: carica un file del flusso Modeler SPSS da utilizzare nei lavori
 batch.
 
-Nota: se c'è già un file memorizzato nell'ID specificato,
+**Nota**: se c'è già un file memorizzato nell'ID specificato,
 sarà sovrascritto.
 
-Tipi di contenuto:
+### Tipi di contenuto
 
 ```
 @Consumes({ "multipart/form-data"  })
@@ -796,7 +804,7 @@ Tipi di contenuto:
 ```
 {: codeblock}
 
-Parametri:
+### Parametri
 
 La chiave di accesso restituita come credenziale nel provisioning o nel
 bind:
@@ -806,14 +814,14 @@ bind:
 ```
 {: codeblock}
 
-ID file specificato dall'utente. Deve essere univoco nel repository dell'istanza del servizio:
+`file ID` specificato dall'utente. Deve essere univoco nel repository dell'istanza del servizio:
 
 ```
 @PathParam("id") 
 ```
 {: codeblock}
 
-Risposte:
+### Risposte
 
 Esito positivo. Restituisce l'URL che può essere utilizzato per scaricare il file dal repository dell'istanza del servizio:
 
@@ -829,7 +837,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-DELETE /v1/file/{id}
+`DELETE /v1/file/{id}`
 
 Descrizione: elimina il file memorizzato nell'ID specificato dal
 repository dell'istanza del servizio.
@@ -881,7 +889,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-GET /v1/file/
+`GET /v1/file/`
 
 Descrizione: restituisce un elenco di ID di tutti i file gestiti
 nel repository dell'istanza del servizio per l'elaborazione del lavoro batch.
@@ -905,7 +913,7 @@ bind:
 
 Risposte:
 
-Esito positivo. Restituisce un array JSON di valori ID file:
+Esito positivo. Restituisce un array JSON di valori `file ID`:
 
 ```
 @ApiResponse(code = 200)
@@ -919,7 +927,7 @@ Altro errore. Restituito JSON dell'eccezione:
 ```
 {: codeblock}
 
-GET /v1/file/{id}
+`GET /v1/file/{id}`
 
 Descrizione: richiama il file del flusso Modeler SPSS memorizzato da
 utilizzare nell'elaborazione del lavoro batch nell'ID specificato.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -32,7 +32,7 @@ tieni presente che è necessario IBM SPSS Modeler o Data Science Experience per
 la creazione e l'utilizzo di modelli e pipeline. SPSS
 Modeler e Data Science Experience (che utilizza Apache Spark)
 offrono entrambi diversi metodi di modellazione derivanti dal machine
-learning, dall'intelligenza artificiale e dalle statistiche. 
+learning, dall'intelligenza artificiale e dalle statistiche.
 
 Per i dettagli su SPSS Modeler e sugli algoritmi di modellazione che fornisce, consulta [IBM
 Knowledge Center]().

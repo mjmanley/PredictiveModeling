@@ -7,6 +7,7 @@ Machine Learning
 
     {: .navgroup id="learn"}
     index.md
+    pm_service_supported_frameworks.md
 
     {: .topicgroup}
     Spark- und Python-Modelle
@@ -15,18 +16,24 @@ Machine Learning
             pm_service_api_spark_swagger.md
             pm_custom_models.md
             pm_service_api_spark_online.md
+            pm_service_api_spark_building.md
             pm_service_api_spark_batch.md
             pm_service_api_spark_streaming.md
-            pm_service_api_spark_building.md
+            pm_service_api_spark_learning_system.md
+        pm_service_ui_spark.md
+            pm_service_ui_spark_online.md
+            pm_service_ui_spark_batch.md
+            pm_service_ui_spark_streaming.md
+            pm_service_ui_spark_learning_system.md
 
     {: .topicgroup}
-    SPSS-Modellierung
+    SPSS-Modelle
         using_pm_service.md
         pm_service_api_spss.md
             pm_service_api_spss_online.md
             pm_service_api_manage.md
             pm_service_api_develop.md
-            pm_service_api_batch
+            pm_service_api_batch.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -35,16 +42,10 @@ Machine Learning
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    [Machine Learning-API](http://watson-ml-api.mybluemix.net/)
-
-    {: .topicgroup}
-    Laufzeitumgebungen
-        [SDK for Node.js](../../runtimes/nodejs/index.html)
-        [Liberty for Java](../../runtimes/liberty/index.html)
-        [Go](../../runtimes/go/index.html)
-        [PHP](../../runtimes/php/index.html)
-        [Python](../../runtimes/python/index.html)
-        [Ruby](../../runtimes/ruby/index.html)
+    [Machine Learning REST-API](http://watson-ml-api.mybluemix.net/)
+    [Scala Repository - Dokumentation](https://watson-ml-staging-libs.mybluemix.net/repository-scala/)
+    [Python Repository Module - Dokumentation](https://watson-ml-staging-libs.mybluemix.net/repository-python/)
+    pm_app_runtime.md
 
     {: .topicgroup}
     Beispielanwendungen
@@ -56,12 +57,17 @@ Machine Learning
 
     {: .topicgroup}
     Beispielnotizbücher
-        [Vom Spark ML-Modell zum Online-Scoring mit Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
-        [Vom Spark ML-Modell zum Online-Scoring mit Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
-        [Vom SPSS-Datenstrom zum Stapelscoring mit Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37)
+        [Vom Spark-MLlib-Modell zum Online-Scoring mit Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
+        [Vom Spark-MLlib-Modell zum Online-Scoring mit Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
+        [Von scikit-learn zum Online-Scoring mit Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+        [Vom SPSS-Datenstrom zum Stapel-Scoring mit Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37)
+        [Vom Spark-MLlib-Modell zum Ausbildungssystem mit Python](https://apsportal.ibm.com/analytics/notebooks/a97cde0b-5bb8-436a-ae82-83e96adc45e0/view?access_token=6baf4c722e452836f7b505205bc96d9a24b9333ee9b5c39453f6d7751987f798)
+
+    ml_troubleshooting.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
-    [Aktuelle Unterstützung für IBM SPSS Analytic Server-trainierte Vorhersagemodelle](https://www.ibm.com/support/knowledgecenter/SSWLVY_3.0.1/analytic_server_user-guide_ddita/analytic_server/ae_modeler_integration_supported_nodes.html/)
+    [Aktuelle Unterstützung für IBM SPSS Modeler-Knoten](https://www.ibm.com/support/knowledgecenter/SSWLVY_3.0.1/analytic_server_user-guide_ddita/analytic_server/ae_modeler_integration_supported_nodes.html/)
     [IBM Watson Machine Learning](https://datasciencex.typeform.com/to/h8gqld)
+    wml_quota_policy.md
     {: .navgroup-end}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,20 +15,24 @@ lastupdated: "2017-06-23"
 # Desenvolvendo aplicativos que alavancam modelos SPSS implementados
 
 
-*  Pontuação com um modelo preditivo implementado
+*  [Pontuação com um modelo preditivo implementado](#scoring-with-a-deployed-predictive-model)
 
-*  Recuperando metadados para um modelo preditivo implementado
+*  [Recuperando metadados para um modelo preditivo implementado](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  Recuperando o resumo Web Application Description Language (WADL) deste serviço
+*  [Recuperando o resumo Web Application Description Language (WADL)
+deste serviço](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-PONTUANDO COM UM MODELO PREDITIVO IMPLEMENTADO
+## Pontuação com um modelo preditivo implementado
 
+Utilize a chamada de API a seguir para postar os dados de entrada para uso pelo modelo implementado para
+gerar e retornar a analítica preditiva nos resultados da pontuação.
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-Use esta chamada API para postar os dados de entrada a serem usados pelo modelo implementado
-para gerar e retornar as análises preditivas nos resultados da pontuação.
+```
+{: codeblock}
 
 Exemplo de solicitação:
 
@@ -76,14 +80,17 @@ Resposta quando a solicitação de escore falhar:
 ```
 {: codeblock}
 
-RECUPERANDO METADADOS PARA UM MODELO PREDITIVO IMPLEMENTADO
-
-GET http://{service
-instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
-this bound application}&metadatatype=score
+## Recuperando metadados para um modelo preditivo implementado
 
 Use essa chamada API para recuperar os metadados para a ramificação de pontuação
 de um fluxo IBM SPSS Modeler implementado. Não forneça um corpo de solicitação com esse método.
+
+```
+GET http://{service
+instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
+this bound application}&metadatatype=score
+```
+{: codeblock}
 
 Exemplo de solicitação:
 
@@ -145,12 +152,14 @@ Resposta quando uma solicitação de escore falhar:
 ```
 {: codeblock}
 
-RECUPERANDO O RESUMO DA WEB APPLICATION DESCRIPTION LANGUAGE (WADL)
-DESTE SERVIÇO
+## Recuperando resumo da linguagem de descrição de aplicativo da web (WADL) deste serviço
 
+Utilize a chamada da API a seguir para recuperar o WADL para este serviço.
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-Use essa chamada API para recuperar o WADL para esse serviço.
+```
+{: codeblock}
 
 Exemplo de solicitação:
 

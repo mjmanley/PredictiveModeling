@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -70,7 +70,7 @@ disponível em
 espaço do Bluemix, acesse a guia Amostras e, na seção
 Aplicativos de amostra, selecione o aplicativo Product Line
 Prediction e implemente-o clicando no botão (+).
-Autentique-se no formulário DeployToBluemix, se solicitado.
+   Autentique-se no formulário DeployToBluemix, se solicitado.
 
    Agora, você deverá ver o aplicativo de amostra no
 Painel do Bluemix na seção Todos os apps.
@@ -81,11 +81,11 @@ instâncias, memória, etc.
 
 11. Agora, é possível ligar seu aplicativo à instância do
 Machine Learning. Na guia Conexões, clique em Conectar existente.
-Após o
+    Após o
 reestabelecimento, seu aplicativo está conectado à instância de serviço.
 
 12. Execute o aplicativo usando o endereço da rota.
 
 13. No aplicativo, selecione sua implementação de Previsão de
 Linha de Produto. Agora você está pronto para jogar com
-registros de amostra e com os resultados de previsão.
+registros de amostra e com os resultados de predição.

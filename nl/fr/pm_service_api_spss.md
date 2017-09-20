@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# API du service Machine Learning pour les modèles IBM SPSS Modeler
+# API de service
 
 
 Le service Machine Learning est un ensemble d'API REST appelées à partir de n'importe quel langage de programmation et permettant l'intégration d''analyses issues de IBM SPSS Modeler dans vos applications. Liez vos applications Bluemix à l'instance de service Machine Learning et générez les analyses prédictives dont vos applications ont besoin pour offrir aux utilisateurs une meilleure valeur ajoutée. Vous pouvez gérer vos modèles SPSS à partir du tableau de bord d'administration et utiliser ce dernier pour mettre à jour ou actualiser vos modèles sans qu'il soit nécessaire d'arrêter ou de redéployer vos applications.

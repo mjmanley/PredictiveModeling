@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# IBM SPSS Modeler モデルを用いた Machine Learning サービスの使用
+# サービスの使用
 
 SPSS Modeler の「モデル作成」パレットにあるモデリング手法を使用して、データから新しい情報を引き出したり、予測モデルを作成したりすることができます。各手法によって、強みや適した問題の種類が異なります。
 {: .shortdesc}
@@ -23,56 +23,58 @@ SPSS Modeler の概要と提供されるモデリング・アルゴリズムに�
 データ・アナリストは、ユーザーがアプリケーションを書き換えることなく予測分析を微調整できる機能を確保しながら、最新表示操作で使用されるモデル・アルゴリズムまでも変更することができます。
 
 
-SPSS Modeler で作成されたモデルと共に使用する場合、Machine Learning サービスに関する以下の重要な情報に注意してください。
 
-*  スコアリング枝をリアルタイム・スコアリングで使用するために準備する場合、スコア要求で取得される入力データによって、スコアリング枝に入るように設計されたソース・ノードが置き換えられる必要があります。また、その結果の予測分析出力は、応答フローに戻る必要があります (事実上、スコアリング枝設計の端末ノードが置き換えられます)。
+## サービスを Bluemix アプリケーションとバインドする手順
+Bluemix アプリケーションを作成し、それを Machine Learning サービスにバインドするには、以下の手順を実行します。
 
-*  Bluemix でのリアルタイム実行のためにスコアリング枝を準備するときには、外部サービスへの接続を要求できません。例えば、IBM Analytical Decision Management スコアリング枝設計には、IBM SPSS Collaboration and Deployment Services リポジトリーに保管されたルールやモデルへの参照を含めることはできません。
-
-*  スコアリング枝を Bluemix でリアルタイム・スコアリングのために実行する場合、外部サービスを要求できません。例えば、リアルタイムで IBM SPSS
-Analytic Server および Apache Hadoop データ・ストアを必要とするモデル・アルゴリズムのデプロイとスコアリングを行うことはできません。
-
-*  Machine Learning では、Modeler の組み込みの Python スクリプトがサポートされます。ストリームを Machine Learning での実行前に処理するために使用する方法が原因で、いくつかの制限があります。通常、ユーザーがストリームの実行を制御することを選択した場合、枝の端末ノードが参照されます。Machine Learning では、ストリームの処理時に、オーバーライドされる JSON のノードを識別してから、ストリームの実行前に置換を行います。これによって、参照される入力ノードとエクスポート・ノードが存在しなくなるためにストリームはスクリプトで失敗します。解決方法は、別のノードの ID を使用して、実行中に枝を一意的に識別することです。これで、組み込みの Python スクリプトで定義されたようにストリームが実行されるようになります。
-
-IBM SPSS Analytic Server の学習された予測モデルの現行サポートに関する詳細については、IBM Knowledge Center の『Analytic Server』セクションを参照してください。
-
-1. Node.js サンプル・コードをダウンロードして、Machine Learning サービスを試行することができます。以下のステップを実行して、Bluemix アプリケーションを作成し、Machine Learning サービスをバインドします。これらの例では、一般的なランタイムである Node.js を使用しています。
-iOS、Ruby、Perl、あるいは Java など他のものも使用できます。
+1. [GitHub リポジトリー](https://github.com/pmservice/customer-satisfaction-prediction)から Node.js サンプル・アプリケーション・コードをダウンロードします。
 
 2. cf create-service コマンドを使用して、サービス・インスタンスを作成します。
 
    ```
    cf create-service pm-20 Free {local naming}
    ```
+   {: codeblock}
 
    例:
 
    ```
    cf create-service pm-20 Free my_pm_free
    ```
+   {: codeblock}
 
    このコマンドは、Bluemix スペースに my_pm_free という名前で、Free プランを使用する 1 つの Machine Learning サービス・インスタンスを作成します。
 
 3. `cf create-service-key` コマンドを使用して、サービス資格情報を作成します。
 
-   ```cf create-service-key "{service instance name}" {vcap key name}```
+   ```
+cf create-service-key "{service instance name}" {vcap key name}```
+   {: codeblock}
 
    例:
 
-   ```cf create-service-key "IBM Watson Machine Learning - my instance" Credentials-1```
+   ```
+cf create-service-key "IBM Watson Machine Learning - my instance" Credentials-1```
+   {: codeblock}
 
    このコマンドにより、Machine Learning サービス資格情報が作成されます。
 
 4. cf bind-service コマンドを使用して、サービス・インスタンス my_pm_free をお使いのアプリケーションにバインドします。
 
-   ```cf bind-service AppName my_pm_service```
+   ```
+cf bind-service AppName my_pm_service```
+   {: codeblock}
 
    例:
 
-   ```cf bind-service my_app1 my_pm_free```
+   ```
+cf bind-service my_app1 my_pm_free```
+   {: codeblock}
 
-   このコマンドは、Machine Learning サービス・インスタンス
+      このコマンドは、Machine Learning サービス・インスタンス
    `my_pm_free` を Bluemix アプリケーション my_app1 にバインドします。
+
+
 
 5. Machine Learning の資格情報:
 
@@ -89,14 +91,15 @@ iOS、Ruby、Perl、あるいは Java など他のものも使用できます。
                 "access_key": "XXXXXXXXXXXXX"
             }
         }       
-    } 
+    }
 ```
+{: codeblock}
 
    `VCAP_SERVICES` 環境変数には以下の情報が含まれます。
 
 
    <dl>
-   
+
    <dt>plan</dt>
    <dd>サービス・プロビジョニングで使用される Machine Learning プラン。</dd>
 
@@ -107,12 +110,13 @@ iOS、Ruby、Perl、あるいは Java など他のものも使用できます。
    <dd>このサービス・インスタンスへのすべての要求に渡される照会パラメーター accessKey。</dd>
 
    </dl>
-            
+
 例:             
 
 ```
 Get https://ibm-watson-ml.mybluemix.net/pm/v1/model/sales_model2?accesskey=XXXXXXXXXXXXX
 ```
+{: codeblock}
 
    以下は、`VCAP_SERVICES` 環境変数から accessKey を取得する方法を示す Node.js サンプル・コードです。
 
@@ -123,3 +127,4 @@ Get https://ibm-watson-ml.mybluemix.net/pm/v1/model/sales_model2?accesskey=XXXXX
         var accessKey = credentials.access_key;
     }
 ```
+{: codeblock}

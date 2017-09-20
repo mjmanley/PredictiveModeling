@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,32 +15,21 @@ lastupdated: "2017-06-23"
 # Modelos persistentes
 
 
-*  [Persistência
-de modelo
-e controle de versão](#model-persistence-and-version-control)
+*  [Persistência de modelo e controle de versão](#model-persistence-and-version-control)
 
-   *  [Gerando
-o token de acesso](#generating-the-access-token)
+   *  [Gerando o token de acesso](#generating-the-access-token)
 
-   *  [Criando
-metadados de pipeline](#creating-pipeline-metadata)
+   *  [Criando metadados de pipeline](#creating-pipeline-metadata)
 
-   *  [Criando
-versão de pipeline](#creating-pipeline-version)
+   *  [Criando versão de pipeline](#creating-pipeline-version)
 
-   *  [Fazendo
-upload de conteúdo de pipeline](#uploading-pipeline-content)
+   *  [Fazendo upload de conteúdo de pipeline](#uploading-pipeline-content)
 
-   *  [Criando
-metadados de
-modelo de pipeline](#creating-pipeline-model-metadata)
+   *  [Criando metadados de modelo de pipeline](#creating-pipeline-model-metadata)
 
-   *  [Criando versão
-de modelo de pipeline](#creating-pipeline-model-version)
+   *  [Criando versão de modelo de pipeline](#creating-pipeline-model-version)
 
-   *  [Fazendo
-upload de conteúdo de modelo de
-pipeline](#uploading-pipeline-model-content)
+   *  [Fazendo upload de conteúdo de modelo de pipeline](#uploading-pipeline-model-content)
 
 Os cientistas de dados se esforçam continuamente para
 melhorar seus modelos como parte de sua pesquisa e desenvolvimento. Eles podem incluir novos recursos em modelos existentes e
@@ -72,7 +61,7 @@ Learning.
 Exemplo de solicitação:
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 

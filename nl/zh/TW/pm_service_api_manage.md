@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -25,11 +25,12 @@ lastupdated: "2017-06-23"
 
 ## 部署或重新整理預測模型
 
-PUT http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
 使用這個 API 呼叫來上傳檔案，該檔案包含您想要部署的 IBM SPSS Modeler 開發的評分分支。它可用於應用程式中評分資料。每一個模型檔會有一個 context ID 作為方便的別名，用來參照後續的服務呼叫中已部署的模型。如果某個 context ID 的模型存在，它會被這個 PUT 呼叫取代，這個方法重新整理您應用程式中使用的預測分析。
+
+```
+PUT http://{PA Bluemix load balancer URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound application}
+```
+{: codeblock}
 
 要求範例：
 
@@ -73,11 +74,12 @@ application}
 
 ## 擷取所有目前已部署的模型清單
 
-GET http://{PA Bluemix load balancer
-URL}/pm/v1/model?accesskey={access_key for this bound
-application}
-
 擷取目前已部署在此服務實例上的所有模型之摘要。
+
+```
+GET http://{PA Bluemix load balancer URL}/pm/v1/model?accesskey={access_key for this bound application}
+```
+{: codeblock}
 
 要求範例：
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -55,12 +55,12 @@ sollten Sie die folgenden Notizbücher lesen:
 
 Generieren Sie mithilfe des Benutzers und des Kennworts, die auf der Registerkarte
 Serviceberechtigungsnachweise der IBM® Watson™ Machine Learning-Serviceinstanz
-angegeben sind, ein Zugriffstoken (access token). 
+angegeben sind, ein Zugriffstoken (access token).
 
 Anforderungsbeispiel:
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -72,7 +72,7 @@ Ausgabebeispiel:
 {: codeblock}
 
 Verwenden Sie den folgenden Terminalbefehl, um Ihren Tokenwert der
-Umgebungsvariablen access_token zuzuweisen: 
+Umgebungsvariablen access_token zuzuweisen:
 
 ```
 access_token="<tokenwert>"
@@ -89,7 +89,7 @@ Abschnitten.
 
 Zum Erstellen von Metadaten für Ihre Pipeline beschreiben Sie die
 grundlegenden Eigenschaften Ihrer Pipeline in einer
-curl-Anforderung, wie im folgenden Beispiel gezeigt: 
+curl-Anforderung, wie im folgenden Beispiel gezeigt:
 
 ```
 curl -i \
@@ -131,7 +131,7 @@ Beispielantwort:
 
 Zum Erstellen einer Version für Ihre Pipeline
 geben Sie parentVersionHref für Ihre Pipeline in einer
-curl-Anforderung an, wie im folgenden Beispiel gezeigt: 
+curl-Anforderung an, wie im folgenden Beispiel gezeigt:
 
 ```
 curl -i \

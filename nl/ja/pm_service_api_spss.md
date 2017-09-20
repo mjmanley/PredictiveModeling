@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# IBM SPSS Modeler モデル用の Machine Learning サービス API
+# サービス API
 
 
 Machine Learning サービスは、任意のプログラミング言語から呼び出すことができる一連の REST API で構成され、IBM SPSS Modeler で作成された分析をアプリケーションに統合できるようにします。Bluemix アプリケーションを Machine Learning サービス・インスタンスにバインドして、アプリケーションがより高い価値をユーザーに提供するために必要な予測分析を生成します。お使いの SPSS モデルは管理ダッシュボードで管理し、そのダッシュボードを使用して、アプリケーションの停止も再デプロイもすることなくモデルの更新や最新表示をしてください。

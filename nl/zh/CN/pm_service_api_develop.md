@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,19 +15,22 @@ lastupdated: "2017-06-23"
 # 开发利用已部署 SPSS 模型的应用程序
 
 
-*  使用已部署的预测模型评分
+*  [使用已部署的预测模型评分](#scoring-with-a-deployed-predictive-model)
 
-*  检索已部署预测模型的元数据
+*  [检索已部署预测模型的元数据](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  检索此服务的 Web 应用程序描述语言 (WADL) 摘要
+*  [检索此服务的 Web 应用程序描述语言 (WADL) 摘要](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-使用已部署的预测模型评分
+## 使用已部署的预测模型评分
 
+使用以下 API 调用可发布输入数据，供已部署的模型用于在评分结果中生成并返回预测性分析。
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-使用此 API 调用可发布输入数据，供已部署的模型用于在评分结果中生成并返回预测性分析。
+```
+{: codeblock}
 
 请求示例：
 
@@ -75,13 +78,16 @@ application}
 ```
 {: codeblock}
 
-检索已部署预测模型的元数据
+## 检索已部署预测模型的元数据
 
+使用此 API 调用可检索已部署 IBM SPSS Modeler 流的评分分支的元数据。不要为此方法提供请求主体。
+
+```
 GET http://{service
 instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
 this bound application}&metadatatype=score
-
-使用此 API 调用可检索已部署 IBM SPSS Modeler 流的评分分支的元数据。不要为此方法提供请求主体。
+```
+{: codeblock}
 
 请求示例：
 
@@ -143,11 +149,14 @@ this bound application}&metadatatype=score
 ```
 {: codeblock}
 
-检索此服务的 Web 应用程序描述语言 (WADL) 摘要
+## 检索此服务的 Web 应用程序描述语言 (WADL) 摘要
 
+使用以下 API 调用可检索此服务的 WADL。
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-使用此 API 调用可检索此服务的 WADL。
+```
+{: codeblock}
 
 请求示例：
 

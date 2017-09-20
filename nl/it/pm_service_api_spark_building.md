@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -51,10 +51,10 @@ l'API REST o le librerie del client. Per i
    prodotti nell'elenco Distribuzioni.
 
 7. Dal menu Azione, seleziona Visualizza dettagli per la tua distribuzione.
-   L'Endpoint di punteggio presentato nel riquadro dei dettagli sarà utilizzato per
+   L'Endpoint di calcolo del punteggio presentato nel riquadro dei dettagli sarà utilizzato per
    eseguire le richieste di calcolo di punteggio.
 
-8. Per eseguire le richieste di calcolo di punteggio attraverso l'API REST, sono necessari un endpoint di punteggio e un token
+8. Per eseguire le richieste di calcolo di punteggio attraverso l'API REST, sono necessari un endpoint di calcolo del punteggio e un token
 di autorizzazione. Per ulteriori informazioni, vedi
    Distribuzione di modelli online.
 

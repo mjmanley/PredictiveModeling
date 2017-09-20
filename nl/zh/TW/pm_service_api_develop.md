@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,19 +15,23 @@ lastupdated: "2017-06-23"
 # 開發應用程式來運用已部署的 SPSS 模型
 
 
-*  使用已部署的預測模型進行評分
+*  [使用已部署的預測模型進行評分](#scoring-with-a-deployed-predictive-model)
 
-*  針對已部署的預測模型擷取 meta 資料
+*  [針對已部署的預測模型擷取 meta 資料](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  擷取此服務的 Web Application Description Language (WADL) 摘要
+*  [擷取此服務的 Web Application Description Language (WADL)
+摘要](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-使用已部署的預測模型進行評分
+## 使用已部署的預測模型進行評分
 
+使用下列 API 呼叫來公佈輸入資料，供已部署的模型用以產生預測分析並傳回至評分結果中。
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-使用這個 API 呼叫來公佈輸入資料，供已部署的模型用以產生預測分析並傳回至評分結果中。
+```
+{: codeblock}
 
 要求範例：
 
@@ -75,13 +79,16 @@ application}
 ```
 {: codeblock}
 
-針對已部署的預測模型擷取 meta 資料
+## 針對已部署的預測模型擷取 meta 資料
 
+使用這個 API 呼叫來擷取已部署的 IBM SPSS Modeler 串流的評分分支的 meta 資料。請勿在此方法中提供要求內文。
+
+```
 GET http://{service
 instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
 this bound application}&metadatatype=score
-
-使用這個 API 呼叫來擷取已部署的 IBM SPSS Modeler 串流的評分分支的 meta 資料。請勿在此方法中提供要求內文。
+```
+{: codeblock}
 
 要求範例：
 
@@ -137,17 +144,20 @@ this bound application}&metadatatype=score
     Status code: 200
     body:
         {
-           "flag":false, 
+           "flag":false,
            "message":"reason"
         }
 ```
 {: codeblock}
 
-擷取此服務的 WEB APPLICATION DESCRIPTION LANGUAGE (WADL) 摘要
+## 擷取此服務的 Web 應用程式說明語言 (WADL) 摘要
 
+使用下列 API 呼叫來擷取此服務的 WADL。
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-使用這個 API 呼叫來擷取此服務的 WADL。
+```
+{: codeblock}
 
 要求範例：
 
@@ -194,7 +204,7 @@ OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
     Status code: 200
     body:
         {
-           "flag":false, 
+           "flag":false,
            "message":"reason"
         } 
 ```

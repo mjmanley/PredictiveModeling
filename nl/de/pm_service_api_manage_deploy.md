@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -24,7 +24,7 @@ Sie wird für das Scoring von Daten in Ihren Anwendungen zur Verfügung gestellt
 wird eine Kontext-ID als Alias zugeordnet, der zum Referenzieren des implementierten Modells
 in nachfolgenden Serviceaufrufen verwendet wird. Wenn für eine Kontext-ID ein Modell vorhanden ist,
 wird sie durch diesen PUT-Aufruf ersetzt, um die momentan von Ihren Anwendungen benutzte Vorhersageanalyse
-zu aktualisieren. 
+zu aktualisieren.
 
 Anforderungsbeispiel:
 

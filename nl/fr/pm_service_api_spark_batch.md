@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,9 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Déploiement de modèles de traitement par lots
+# Déploiement de modèles de traitement par lots <span class='tag--beta'>bêta</span>
 
-
-**Remarque **: cette fonctionnalité est actuellement en version bêta et n'est disponible que pour son utilisation avec Spark MLlib. 
+**Remarque **: cette fonctionnalité est actuellement en version bêta et n'est disponible que pour son utilisation avec Spark MLlib. Si vous désirez participer, inscrivez-vous sur la liste d'attente. Pour plus d'informations,  voir : [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 **Nom du scénario **: Pronostic de satisfaction des clients.
 
@@ -31,12 +30,12 @@ Vous pouvez observer à présent l'exemple de modèle Pronostic de satisfaction 
 
 ## Génération du jeton d'accès
 
-Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning. 
+Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning.
 
 Exemple de requête :
 
 ```
-curl --basic --user nom_utilisateur:mot_de_passe https://ibm-watson-ml.mybluemix.net/v3/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -47,13 +46,447 @@ Exemple de sortie :
 ```
 {: codeblock}
 
-Utilisez la commande de terminal suivante pour affecter la valeur de votre jeton à la variable d'environnement
-access_token:
+Utilisez la commande de terminal suivante pour affecter votre valeur de jeton au jeton de la variable d'environnement :
 
 ```
-access_token="<valeur_jeton>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## Utilisation de modèles publiés
+Utilisez l'appel API suivant pour obtenir les détails de votre instance, par exemple :
+* `url` des modèles publiés
+* `url` des déploiements
+* informations sur l'utilisation
+
+Exemple de requête :
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+Exemple de sortie :
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+Avec l'`url` **published_models**, utilisez l'appel API suivant pour obtenir les détails du modèle :
+
+Exemple de requête :
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+Exemple de sortie :
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"dc46315a-c30e-46a3-8e30-33518e6f7976",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/dc46315a-c30e-46a3-8e30-33518e6f7976",
+            "created_at":"2017-03-21T13:49:38.711Z",
+            "modified_at":"2017-03-21T13:49:38.802Z"
+         },
+   "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+            },
+            "name":"Customer Satisfaction Prediction",
+            "description":"Predicts Telco customer churn.",
+            "label_col":"Churn",
+            "training_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"customerID",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"gender",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"SeniorCitizen",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Partner",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Dependents",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"tenure",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PhoneService",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"MultipleLines",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"InternetService",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"OnlineSecurity",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"OnlineBackup",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"DeviceProtection",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"TechSupport",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"StreamingTV",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"StreamingMovies",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Contract",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PaperlessBilling",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PaymentMethod",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"double",
+                     "name":"MonthlyCharges",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"TotalCharges",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Churn",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/dc46315a-c30e-46a3-8e30-33518e6f7976/versions/658b5b8b-6958-471d-a8b1-c6ac079e2522",
+               "guid":"658b5b8b-6958-471d-a8b1-c6ac079e2522",
+               "created_at":"2017-03-21T13:49:38.802Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/dc46315a-c30e-46a3-8e30-33518e6f7976/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"customerID",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"gender",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"SeniorCitizen",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Partner",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Dependents",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"tenure",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PhoneService",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"MultipleLines",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"InternetService",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"OnlineSecurity",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"OnlineBackup",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"DeviceProtection",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"TechSupport",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"StreamingTV",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"StreamingMovies",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"Contract",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PaperlessBilling",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PaymentMethod",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"double",
+                     "name":"MonthlyCharges",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"TotalCharges",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+
+Notez l'`url` **deployments** requise pour créer un déploiement par lots à l'étape suivante.
+
 
 ## Création d'un déploiement par lots à l'aide d'Object Storage
 
@@ -71,37 +504,32 @@ Instance-Service-X-Spark.
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
-{: codeblock}
+   {: codeblock}
 
    Sur système d'exploitation Microsoft Windows ou Linux, vous devez utiliser le paramètre `--wrap=0` avec la commande `base64` pour effectuer un décodage en base64 :
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  Informations d'Object Storage, qui seront utilisées comme entrées (données client auxquelles attribuer un score) pour le modèle et
 stockage de la sortie du modèle (results.csv, en l'occurrence, qui est créé automatiquement).
 
-*  Pour créer un déploiement, utilisez le noeud final suivant : 
+*  Pour créer un déploiement, utilisez l'`url` **deployments** de la section précédente.
 
-   ```
-   /v3/wml_instances/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments
-   ```
-   
-   Le noeud final requis pour créer un déploiement en ligne est disponible sur votre tableau de bord WML -> Détails du modèle > URL. Notez également que vous pouvez identifier la valeur de ID_modèle_publié depuis le tableau de bord d'IBM Watson Machine Learning en cliquant sur Modèle -> Afficher les détails et copier la valeur figurant dans la zone ID et identifier votre "ID_instance" dans les données d'identification VCAP de l'instance Watson Machine Learning.
 
 Exemple de requête :
 
 ```
 curl -v -XPOST \
     -H "Content-Type:application/json" \
-    -H "Authorization:Bearer $access_token" \
+    -H "Authorization:Bearer $token" \
     -H "X-Spark-Service-Instance: $spark_credentials" \
     -d '{
-      "name":"Pronostic de satisfaction des clients",
+      "name":"Customer Satisfaction Prediction",
       "type": "batch",
-      "description": "Déploiement par lots",
+      "description": "Batch Deployment",
        "input":{
           "source":{
              "container":"batchjob",
@@ -153,22 +581,22 @@ Exemple de sortie :
    },
    "entity":{
       "runtime_environment":"spark-2.0",
-      "name":"Pronostic de satisfaction des clients",
+      "name":"Customer Satisfaction Prediction",
       "instance_href":"https://ibm-watson-ml.mybluemix.net/v2/batch/deployments/8e7ffee3-700c-4bbf-acfa-ccc0ad299dd7",
-      "description":"Déploiement par lots",
+      "description":"Batch Deployment",
       "published_model":{
          "author": {
             "name":"IBM",
             "email":""
          },
-         "name":"Pronostic de satisfaction des clients",
+         "name":"Customer Satisfaction Prediction",
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/b5bd2368-cc4b-4cf1-aec0-49ed8daeb018/published_models/315231e8-e021-40dc-a250-6e4f9d1c11d7",
          "guid":"315231e8-e021-40dc-a250-6e4f9d1c11d7",
-         "description":"Pronostique une attrition de la clientèle de Telco.",
+         "description":"Predicts Telco customer churn.",
          "created_at":"2017-06-28T11:39:26.642Z"
       },
       "model_type":"sparkml-model-2.0",
-      "status":"En cours d'initialisation",
+      "status":"INITIALIZING",
       "output":{
          "target":{
             "fileformat":"csv",
@@ -179,7 +607,7 @@ Exemple de sortie :
             "type":"bluemixobjectstorage"
          },
           "connection":{
-             "projectid":"cabb5f0c377d4ed080f917dc29605aad",
+            "projectid":"cabb5f0c377d4ed080f917dc29605aad",
             "userid":"1d5815d49ea4479ab6f29cc1733db774",
             "region":"dallas",
             "authurl":"https://identity.open.softlayer.com",
@@ -213,7 +641,7 @@ Exemple de sortie :
             "type":"bluemixobjectstorage"
          },
           "connection":{
-             "projectid":"cabb5f0c377d4ed080f917dc29605aad",
+            "projectid":"cabb5f0c377d4ed080f917dc29605aad",
             "userid":"1d5815d49ea4479ab6f29cc1733db774",
             "region":"dallas",
             "authurl":"https://identity.open.softlayer.com",
@@ -225,78 +653,17 @@ Exemple de sortie :
 ```
 {: codeblock}
 
-**Remarque **: vous pouvez également utiliser le tableau de bord pour créer un déploiement par lots. Vous devez soumettre les trois entrées suivantes :
+**Remarque **: vous pouvez également utiliser le tableau de bord pour créer un déploiement par lots.
 
-Exemple de formulaire :
-
-Input:
-
-```
-{
-   "source":{
-      "fileformat":"csv",
-      "firstlineheader":"true",
-      "container":"batchjob",
-      "inferschema":"1",
-      "filename":"TelcoCustomerData.csv",
-      "type":"bluemixobjectstorage"
-   },
-          "connection":{
-             "projectid":"252341ed707d4558b5b2da245e785cd7",
-      "userid":"b2d83cf6056e040ddb91ca00a2686c7d3",
-      "region":"dallas",
-      "authurl":"https://identity.open.softlayer.com",
-      "password":"eJ_y9R^OE{j?8Ub!!"
-   }
-}
-```
-{: codeblock}
-
-Sortie :
-
-```
-{
-   "target":{
-      "fileformat":"csv",
-      "firstlineheader":"true",
-      "container":"batchjob",
-      "inferschema":"1",
-      "filename":"result.csv",
-      "type":"bluemixobjectstorage"
-   },
-          "connection":{
-             "projectid":"252341ed707d4558b5b2da245e785cd7",
-      "userid":"b2d83cf6056e040ddb91ca00a2686c7d3",
-      "region":"dallas",
-      "authurl":"https://identity.open.softlayer.com",
-      "password":"eJ_y9R^OE{j?8Ub!!"
-   }
-}
-```
-{: codeblock}
-
-Données d'identification pour le service Spark :
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",
-      "cluster_master_url": "https://spark.bluemix.net",
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## Obtention des détails du déploiement
 
-Vous pouvez examiner le statut, le lien href du noeud final et les paramètres associés au modèle de déploiement.
+Vous pouvez vérifier le statut et les paramètres relatifs au modèle de déploiement à l'aide de l'`url` **metadata** (voir exemple de sortie ci-dessus).
 
 Exemple de requête :
 
 ```
-curl -v -XGET -H "Content-Type:application/json" -H "Authorization:Bearer $access_token" https://ibm-watson-ml.mybluemix.net/v3/instances_wml/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments/{ID_déploiement}
+curl -v -XGET -H "Content-Type:application/json" -H "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -312,18 +679,18 @@ Exemple de sortie :
    },
    "entity":{
       "runtime_environment":"spark-2.0",
-      "name":"Pronostic de satisfaction des clients",
+      "name":"Customer Satisfaction Prediction",
       "instance_href":"https://ibm-watson-ml.mybluemix.net/v2/batch/deployments/8e7ffee3-700c-4bbf-acfa-ccc0ad299dd7",
-      "description":"Déploiement par lots",
+      "description":"Batch Deployment",
       "published_model":{
          "author": {
             "name":"IBM",
             "email":""
          },
-         "name":"Pronostic de satisfaction des clients",
+         "name":"Customer Satisfaction Prediction",
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/b5bd2368-cc4b-4cf1-aec0-49ed8daeb018/published_models/315231e8-e021-40dc-a250-6e4f9d1c11d7",
          "guid":"315231e8-e021-40dc-a250-6e4f9d1c11d7",
-         "description":"Pronostique une attrition de la clientèle de Telco.",
+         "description":"Predicts Telco customer churn.",
          "created_at":"2017-06-28T11:39:26.642Z"
       },
       "model_type":"sparkml-model-2.0",
@@ -338,7 +705,7 @@ Exemple de sortie :
             "type":"bluemixobjectstorage"
          },
           "connection":{
-             "projectid":"cabb5f0c377d4ed080f917dc29605aad",
+            "projectid":"cabb5f0c377d4ed080f917dc29605aad",
             "userid":"1d5815d49ea4479ab6f29cc1733db774",
             "region":"dallas",
             "authurl":"https://identity.open.softlayer.com",
@@ -372,7 +739,7 @@ Exemple de sortie :
             "type":"bluemixobjectstorage"
          },
           "connection":{
-             "projectid":"cabb5f0c377d4ed080f917dc29605aad",
+            "projectid":"cabb5f0c377d4ed080f917dc29605aad",
             "userid":"1d5815d49ea4479ab6f29cc1733db774",
             "region":"dallas",
             "authurl":"https://identity.open.softlayer.com",
@@ -384,8 +751,7 @@ Exemple de sortie :
 ```
 {: codeblock}
 
-Le résultat du pronostic est enregistré dans un fichier .csv dans IBM Object Storage.
-Un exemple de lignes figure ci-dessous.
+Le résultat du pronostic est enregistré dans un fichier .csv dans IBM Object Storage. Un exemple de lignes figure ci-dessous.
 
 Aperçu du fichier d'entrée :
 
@@ -422,8 +788,7 @@ Exemple de requête :
 
 ```
 curl -v -XDELETE -H "Content-Type:application/json" -H
-"Authorization:Bearer $access_token" https://ibm-watson-
-ml.mybluemix.net/v3/instances_wml/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments/{ID_déploiement}
+"Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 

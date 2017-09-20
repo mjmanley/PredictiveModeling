@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -25,10 +25,6 @@ lastupdated: "2017-06-23"
 
 ## Implementando ou atualizando um modelo preditivo
 
-PUT http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
 Use esta chamada API para fazer upload de um arquivo que contenha a ramificação de pontuação
 desenvolvida pelo IBM SPSS Modeler que você gostaria de implementar.
 Isso é disponibilizado para dados de armazenamento em seus aplicativos. Cada
@@ -37,6 +33,13 @@ fazer referência ao modelo implementado em chamadas de serviço subsequentes. S
 um modelo para um ID de contexto, ele será substituído por essa chamada PUT como
 um meio de atualizar as análises preditivas em uso por seus
 aplicativos.
+
+```
+PUT http://{PA Bluemix load balancer
+URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
+application}
+```
+{: codeblock}
 
 Exemplo de solicitação:
 
@@ -80,11 +83,14 @@ Resposta quando a implementação falhar:
 
 ## Recuperando uma lista de todos os modelos atualmente implementados
 
+Recupere um resumo de todos os modelos que estão atualmente implementados nessa instância de serviço.
+
+```
 GET http://{PA Bluemix load balancer
 URL}/pm/v1/model?accesskey={access_key for this bound
 application}
-
-Recupere um resumo de todos os modelos que estão atualmente implementados nessa instância de serviço.
+```
+{: codeblock}
 
 Exemplo de solicitação:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,10 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Déploiement de modèles de données en flux
+# Déploiement des modèles de données en flux <span class='tag--beta'>bêta</span>
 
 
-**Remarque **: cette fonctionnalité est actuellement en version bêta et n'est disponible que pour son utilisation avec Spark MLlib. 
+**Remarque **: cette fonctionnalité est actuellement en version bêta et n'est disponible que pour son utilisation avec Spark MLlib. Si vous désirez participer, inscrivez-vous sur la liste d'attente. Pour plus d'informations,  voir : [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 **Nom du scénario **: analyse d'opinions.
 
@@ -33,12 +33,12 @@ Vous pouvez observer à présent le modèle Pronostics des opinions dans la list
 
 ## Génération d'un jeton d'accès
 
-Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning. 
+Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning.
 
 Exemple de requête :
 
 ```
-curl --basic --user nom_utilisateur:mot_de_passe https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -49,13 +49,158 @@ Exemple de sortie :
 ```
 {: codeblock}
 
-Utilisez la commande de terminal suivante pour affecter la valeur de votre jeton à la variable d'environnement
-access_token:
+Utilisez la commande de terminal suivante pour affecter votre valeur de jeton au jeton de la variable d'environnement :
 
 ```
-access_token="<valeur_jeton>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## Utilisation de modèles publiés
+Utilisez l'appel API suivant pour obtenir les détails de votre instance, par exemple :
+* `url` des modèles publiés
+* `url` des déploiements
+* informations sur l'utilisation
+
+Exemple de requête :
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+Exemple de sortie :
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+Avec l'`url` **published_models**, utilisez l'appel API suivant pour obtenir les détails du modèle :
+
+Exemple de requête :
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+Exemple de sortie :
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "created_at":"2017-07-11T10:51:10.900Z",
+            "modified_at":"2017-07-11T10:51:11.012Z"
+         },
+   "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+            },
+            "name":"Sentiment Prediction",
+            "description":"Predicts comment sentiment about particular topic for marketing company.",
+            "label_col":"sentiment",
+            "training_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"label",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/versions/0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "guid":"0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "created_at":"2017-07-11T10:51:11.012Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+Notez l'`url` **deployments** requise pour créer un déploiement par lots à l'étape suivante.
+
 
 ## Création d'un déploiement en flux à l'aide d'IBM Message Hub
 
@@ -73,24 +218,18 @@ Instance-Service-X-Spark.
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
-{: codeblock}
+   {: codeblock}
 
    Sur système d'exploitation Microsoft Windows ou Linux, vous devez utiliser le paramètre `--wrap=0` avec la commande `base64` pour effectuer un décodage en base64 :
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  Informations de la rubrique IBM Message, lesquelles seront utilisées comme entrées (tweets) pour le modèle et stockage pour la sortie du modèle (résultats du pronostic).
 
-*  Pour créer un déploiement, utilisez le noeud final suivant :
-   
-   ```
-   /v2/modèles_publiés/{ID_modèle_publié}/deployments
-   ```
-   
-   Le noeud final requis pour créer un déploiement en ligne est disponible sur votre tableau de bord WML -> Détails du modèle > URL. Notez également que vous pouvez identifier la valeur de ID_modèle_publié depuis le tableau de bord d'IBM Watson Machine Learning en cliquant sur Modèle -> Afficher les détails et copier la valeur figurant dans la zone ID et identifier votre "ID_instance" dans les données d'identification VCAP de l'instance Watson Machine Learning.
+*  Pour créer un déploiement, utilisez l'`url` **deployments** de la section précédente.
 
 Exemple de requête :
 
@@ -98,12 +237,12 @@ Exemple de requête :
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
-   "name":"Pronostic des opinions",
+   "name":"Sentiment Prediction ",
    "type":"stream",
-   "description": "Déploiement en flux",
+   "description": "Streaming Deployment",
    "input":{
       "connection":{
          "kafka_brokers_sasl":[
@@ -163,22 +302,22 @@ Exemple de sortie :
    },
    "entity":{
       "runtime_environment":"spark-2.0",
-      "name":"Pronostic des opinions",
+      "name":"Sentiment Prediction ",
       "instance_href":"https://ibm-watson-ml.mybluemix.net/v2/streaming/deployments/553f0ed7-b3fc-4659-ae45-c42c66cb5e04",
-      "description":"Déploiement en flux",
+      "description":"Streaming Deployment",
       "published_model":{
          "author": {
             "name":"IBM",
             "email":""
          },
-         "name":"Pronostic des opinions",
+         "name":"Sentiment Prediction",
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/b5bd2368-cc4b-4cf1-aec0-49ed8daeb018/published_models/ceed18b3-ada2-42db-bf00-429f4e2c7601",
          "guid":"ceed18b3-ada2-42db-bf00-429f4e2c7601",
-         "description":"Pronostic des opinions sur un sujet spécifique pour une entreprise de marketing.",
+         "description":"Predicts comment sentiment about particular topic for marketing company.",
          "created_at":"2017-06-28T11:57:47.636Z"
       },
       "model_type":"sparkml-model-2.0",
-      "status":"En cours d'initialisation",
+      "status":"INITIALIZING",
       "output":{
          "connection":{
             "kafka_brokers_sasl":[
@@ -243,88 +382,13 @@ Exemple de sortie :
 ```
 {: codeblock}
 
-**Remarque **: vous pouvez également utiliser le tableau de bord pour créer un déploiement en flux. Vous devez soumettre les trois entrées suivantes :
+**Remarque **: vous pouvez également utiliser le tableau de bord pour créer un déploiement en flux.
 
-*  Informations sur la source d'entrée à utiliser par le modèle. Cette source d'entrée doit déjà avoir été téléchargée et être prête pour son
-ingestion (IBM Message Hub).
-
-*  Informations sur la source en sortie, dans laquelle les résultats seront consignés. Cette source en sortie doit déjà avoir été créée et être prête à recevoir les résultats au fur et à mesure que le modèle traite les données provenant de la source en entrée.
-
-*  Données d'identification du service Spark.
-
-Exemple de formulaire :
-
-Input:
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "source":{
-      "topic":"sinput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Sortie :
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "target":{
-      "topic":"soutput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Données d'identification pour le service Spark :
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",
-      "cluster_master_url": "https://spark.bluemix.net",
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## Obtention des détails du déploiement
 
-Vous pouvez examiner les informations de votre déploiement en flux via une requête GET en utilisant la zone Location (emplacement) renvoyée en résultat de votre déploiement. Examinez les
+Vous pouvez examiner les détails de votre déploiement en flux via une requête GET à l'aide de l'`url` **metadata** renvoyée comme résultat de
+votre déploiement. Examinez les
 informations suivantes.
 
 Exemple de requête :
@@ -333,7 +397,7 @@ Exemple de requête :
 curl -i \
 -X GET \
 -H "Authorization: Bearer $token" \
-https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{ID_instance}/published_models/{ID_modèle_publié}/deployments/{ID_déploiement}
+https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -349,22 +413,22 @@ Exemple de sortie :
    },
    "entity":{
       "runtime_environment":"spark-2.0",
-      "name":"Pronostic des opinions",
+      "name":"Sentiment Prediction ",
       "instance_href":"https://ibm-watson-ml.mybluemix.net/v2/streaming/deployments/553f0ed7-b3fc-4659-ae45-c42c66cb5e04",
-      "description":"Déploiement en flux",
+      "description":"Streaming Deployment",
       "published_model":{
          "author": {
             "name":"IBM",
             "email":""
          },
-         "name":"Pronostic des opinions",
+         "name":"Sentiment Prediction",
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/b5bd2368-cc4b-4cf1-aec0-49ed8daeb018/published_models/ceed18b3-ada2-42db-bf00-429f4e2c7601",
          "guid":"ceed18b3-ada2-42db-bf00-429f4e2c7601",
-         "description":"Pronostic des opinions sur un sujet spécifique pour une entreprise de marketing.",
+         "description":"Predicts comment sentiment about particular topic for marketing company.",
          "created_at":"2017-06-28T11:57:47.636Z"
       },
       "model_type":"sparkml-model-2.0",
-      "status":"En cours d'exécution",
+      "status":"RUNNING",
       "output":{
          "connection":{
             "kafka_brokers_sasl":[
@@ -439,9 +503,9 @@ Exemple de requête :
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
-https://ibm-watson-ml.mybluemix.net/v3/instances_wml/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments/{ID_déploiement}
+https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -463,7 +527,7 @@ X-Global-Transaction-ID: 2590068775
 
 ## Lancement du déploiement en flux
 
-Vous pouvez lancer facilement un déploiement en flux en procédant comme suit .
+Vous pouvez lancer facilement un déploiement en flux en procédant comme suit.
 
 Exemple de requête :
 
@@ -471,9 +535,9 @@ Exemple de requête :
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
-https://ibm-watson-ml.mybluemix.net/v3/instances_wml/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments/{ID_déploiement}
+https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -502,8 +566,8 @@ Exemple de requête :
 ```
 curl -i \
 -X DELETE \
--H "Authorization: Bearer $access_token" \
-https://ibm-watson-ml.mybluemix.net/v3/instances_wml/{ID_instance}/modèles_publiés/{ID_modèle_publié}/deployments/{ID_déploiement}
+-H "Authorization: Bearer $token" \
+https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -25,13 +25,15 @@ lastupdated: "2017-06-23"
 
 ## 予測モデルのデプロイまたは最新表示
 
-PUT http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
 この API 呼び出しを使用して、デプロイ対象の IBM SPSS Modeler の開発済みスコアリング枝が含まれるファイルをアップロードします。
 これは、お使いのアプリケーションでデータをスコアリングするために使用可能です。
 各モデル・ファイルには、以降のサービス呼び出しでデプロイ済みモデルを参照するために使用する便利な別名として context ID が与えられます。特定の context ID にモデルが存在する場合、既存のモデルは、アプリケーションで使用中の予測分析を最新表示する手段として、この PUT 呼び出しによって置き換えられます。
+
+```
+PUT http://{PA Bluemix load balancer
+URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
+application}```
+{: codeblock}
 
 要求の例:
 
@@ -75,11 +77,13 @@ application}
 
 ## 現在デプロイされている全モデルのリストの取得
 
+このサービス・インスタンスに現在デプロイされているすべてのモデルのサマリーを取得します。
+
+```
 GET http://{PA Bluemix load balancer
 URL}/pm/v1/model?accesskey={access_key for this bound
-application}
-
-このサービス・インスタンスに現在デプロイされているすべてのモデルのサマリーを取得します。
+application}```
+{: codeblock}
 
 要求の例:
 

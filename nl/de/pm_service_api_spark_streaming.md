@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,11 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Streamingmodelle bereitstellen
+# Streamingmodelle bereitstellen <span class='tag--beta'>Beta</span>
 
 
-**Hinweis:** Diese Funktion ist aktuell nur als Betaversion vorhanden und steht nur für die Verwendung mit Spark MLlib zur Verfügung.
+**Hinweis:** Diese Funktion ist aktuell nur als Betaversion vorhanden und steht nur für die Verwendung mit Spark MLlib zur Verfügung. Wenn Sie daran teilnehmen möchten, fügen Sie sich selbst zur Warteliste hinzu! Weitere
+Informationen finden Sie unter [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 **Szenarioname:** Stimmungsanalyse.
 
@@ -27,28 +28,28 @@ Vorhersagemodell vor und teilt es mit Ihnen (dem Entwickler). Ihre Aufgabe ist e
 Vorhersageanalyse zu generieren, indem Sie Scoring-Anforderungen für
 das implementierte Modell erstellen.
 
-Weitere Informationen finden Sie in diesem Dokument. 
+Weitere Informationen finden Sie in diesem Dokument.
 
 ## Beispielmodell verwenden
 
-1. Wechseln Sie zur Registerkarte Beispiele des IBM® Watson™ Machine Learning-Dashboards. 
+1. Wechseln Sie zur Registerkarte Beispiele des IBM® Watson™ Machine Learning-Dashboards.
 
 2. Suchen Sie im Abschnitt Beispielmodelle die Kachel für die Stimmungsvorhersage
-und klicken Sie auf die Schaltfläche Modell hinzufügen (+). 
+und klicken Sie auf die Schaltfläche Modell hinzufügen (+).
 
 Jetzt sehen Sie das Beispielmodell zur Stimmungsvorhersage in der
-Liste mit verfügbaren Modellen auf der Registerkarte Modelle. 
+Liste mit verfügbaren Modellen auf der Registerkarte Modelle.
 
 ## Zugriffstoken generieren
 
 Generieren Sie mithilfe des Benutzers und des Kennworts, die auf der Registerkarte
 Serviceberechtigungsnachweise der IBM Watson Machine Learning-Serviceinstanz
-angegeben sind, ein Zugriffstoken (access token). 
+angegeben sind, ein Zugriffstoken (access token).
 
 Anforderungsbeispiel:
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -59,13 +60,159 @@ Ausgabebeispiel:
 ```
 {: codeblock}
 
-Verwenden Sie den folgenden Terminalbefehl, um Ihren Tokenwert der
-Umgebungsvariablen access_token zuzuweisen: 
+Verwenden Sie den folgenden Terminalbefehl, um Ihren Tokenwert dem
+Umgebungsvariablentoken zuzuweisen: 
 
 ```
-access_token="<tokenwert>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## Mit veröffentlichten Modellen arbeiten
+Verwenden Sie den folgenden API-Aufruf, um Ihre Instanzdetails abzurufen. Zum Beispiel: 
+* Veröffentlichte Modelle `URL`
+* Bereitstellungen `URL`
+* Nutzungsinformationen
+
+Anforderungsbeispiel:
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+Ausgabebeispiel:
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+Verwenden Sie bei der URL von veröffentlichten Modellen (**published_models** `url`) den folgenden API-Aufruf, um Modelldetails abzurufen: 
+
+Anforderungsbeispiel:
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+Ausgabebeispiel:
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "created_at":"2017-07-11T10:51:10.900Z",
+            "modified_at":"2017-07-11T10:51:11.012Z"
+         },
+   "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+            },
+            "name":"Sentiment Prediction",
+            "description":"Predicts comment sentiment about particular topic for marketing company.",
+            "label_col":"sentiment",
+            "training_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"label",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/versions/0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "guid":"0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "created_at":"2017-07-11T10:51:11.012Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+Bitte beachten Sie die `URL` der **Bereitstellung**, die für das Erstellen einer Stapelbereitstellung im nächsten Schritt erforderlich ist. 
+
 
 ## Streamingbereitstellung mit IBM Message Hub erstellen
 
@@ -80,40 +227,31 @@ Details angeben:
 Serviceberechtigungsnachweise des Bluemix Spark-Servicedashboards finden. Bevor die
 Bereitstellungsanforderung gestellt werden kann, müssen Spark-Berechtigungsnachweise
 als Base64 decodiert und im Header einer 'curl'-Anforderung als
-X-Spark-Service-Instance übergeben werden. 
+X-Spark-Serviceinstanz übergeben werden.
 
-   Setzen Sie abhängig vom verwendeten Betriebssystem einen der folgenden folgenden Terminalbefehle ab, um die Base64-Decodierung auszuführen, und weisen Sie ihn der Umgebungsvariablen zu. 
+   Setzen Sie abhängig vom verwendeten Betriebssystem einen der folgenden folgenden Terminalbefehle ab, um die Base64-Decodierung auszuführen, und weisen Sie ihn der Umgebungsvariablen zu.
 
    Verwenden Sie unter dem Betriebssystem macOS den folgenden Befehl:
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
-{: codeblock}
+   {: codeblock}
 
    Verwenden Sie unter den Betriebssystemen Microsoft Windows und Linux den Parameter `--wrap=0` im Befehl `base64`, um die
-Base64-Decodierung auszuführen: 
+Base64-Decodierung auszuführen:
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  Details zu IBM Message Hub-Themen, die als Eingabe (Tweets) für
 das Modell verwendet werden, und der Speicherort für die
 Modellausgabe
 (Vorhersageergebnisse).
 
-*  Um eine Bereitstellung zu erstellen, verwenden Sie den folgenden Endpunkt:
-   
-   ```
-   /v2/published_models/{published_model_id}/deployments
-   ```
-   
-   Der Endpunkt, der zur Erstellung einer Onlinebereitstellung erforderlich ist, steht unter WML-Dashboard -> Modelldetails -> URL
-zur Verfügung. Beachten Sie außerdem, dass Sie zum Finden des Werts published_model_id im IBM Watson Machine Learning Dashboard auf
-Modell -> Details anzeigen klicken und dann den Wert in das Feld ID kopieren müssen. Daraufhin erhalten Sie Ihre "instance_id" über die
-VCAP-Berechtigungsnachweise Ihrer Watson Machine Learning-Instanz. 
+*  Um eine Bereitstellung zu erstellen, verwenden Sie **Bereitstellungen** `URL` aus dem vorherigen Abschnitt.
 
 Anforderungsbeispiel:
 
@@ -121,7 +259,7 @@ Anforderungsbeispiel:
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
    "name":"Sentiment Prediction ",
@@ -267,94 +405,13 @@ Ausgabebeispiel:
 {: codeblock}
 
 **Hinweis:** Sie können auch das Dashboard verwenden, um eine
-Streamingbereitstellung zu erstellen. Sie müssen die folgenden drei
-Eingaben bereitstellen:
+Streamingbereitstellung zu erstellen.
 
-*  Eingabequellendetails für das zu verwendende Modell. Ihre
-Eingabequelle muss bereits hochgeladen und für die Aufnahme bereit
-sein (z. B. IBM Message Hub).
-
-*  Details zur Ausgabequelle, in die die Ergebnisse geschrieben
-werden. Ihre Ausgabequelle muss bereits erstellt sein und für
-den Empfang von Ergebnissen bereit sein, da das Modell Daten aus der
-Eingabequelle verarbeitet.
-
-*  Spark-Serviceberechtigungsnachweise.
-
-Formularbeispiel:
-
-Eingabe:
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "source":{
-      "topic":"sinput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Ausgabe:
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "target":{
-      "topic":"soutput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Spark-Serviceberechtigungsnachweise:
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",  
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",  
-      "cluster_master_url": "https://spark.bluemix.net",  
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",  
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",  
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## Bereitstellungsdetails abrufen
 
 Sie können die Details Ihrer Streamingbereitstellung mit einer GET-Anforderung
-prüfen, indem Sie das Feld Location nutzen, das als Ergebnis Ihrer
+prüfen, indem Sie **Metadaten** `URL` nutzen, das als Ergebnis Ihrer
 Bereitstellung zurückgegeben wird. Informationen dazu folgen hier.
 
 Anforderungsbeispiel:
@@ -471,7 +528,7 @@ Anforderungsbeispiel:
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -504,7 +561,7 @@ Anforderungsbeispiel:
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -536,7 +593,7 @@ Anforderungsbeispiel:
 ```
 curl -i \
 -X DELETE \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}

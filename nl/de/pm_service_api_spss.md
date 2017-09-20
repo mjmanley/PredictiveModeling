@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Machine Learning-Service-API für IBM SPSS Modeler-Modelle
+# Service-API
 
 
 Der Machine Learning-Service besteht aus einer Gruppe von REST-APIs, die über
@@ -22,7 +22,7 @@ und generieren Sie die Vorhersageanalyse, die Ihre Anwendungen benötigen, um Ih
 höhere Wertschöpfung zu ermöglichen. Verwalten Sie Ihre SPSS-Modelle im Administrationsdashboard und verwenden Sie das Dashboard, um Ihre Modelle zu aktualisieren, ohne Ihre Anwendungen stoppen oder erneut implementieren zu müssen.
 
 Verwalten Sie die SPSS Modeler-Dateien, die für eine Instanz des
-Machine Learning-Service implementiert werden: 
+Machine Learning-Service implementiert werden:
 
 *  Implementieren Sie ein neues Vorhersagemodell.
 

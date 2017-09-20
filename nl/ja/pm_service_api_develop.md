@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,20 +15,21 @@ lastupdated: "2017-06-23"
 # デプロイされた SPSS モデルを利用するアプリケーションの開発
 
 
-*  デプロイされた予測モデルによるスコアリング
+*  [デプロイされた予測モデルによるスコアリング](#scoring-with-a-deployed-predictive-model)
 
-*  デプロイされた予測モデル用メタデータの取得
+*  [デプロイされた予測モデル用メタデータの取得](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  このサービスの Web アプリケーション記述言語 (WADL) サマリーの取得
+*  [このサービスの Web アプリケーション記述言語 (WADL) サマリーの取得](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-デプロイされた予測モデルによるスコアリング
+## デプロイされた予測モデルによるスコアリング
 
+予測分析を生成しスコアリング結果に戻すために、デプロイされたモデルが使用する入力データを、次の API 呼び出しを使用して送ります。
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
-application}
-
-予測分析を生成しスコアリング結果に戻すために、デプロイされたモデルが使用する入力データを、この API 呼び出しを使用して送ります。
-
+application}```
+{: codeblock}
 
 要求の例:
 
@@ -76,14 +77,17 @@ application}
 ```
 {: codeblock}
 
-デプロイされた予測モデル用メタデータの取得
-
-GET http://{service
-instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
-this bound application}&metadatatype=score
+## デプロイされた予測モデル用メタデータの取得
 
 この API 呼び出しを使用して、デプロイされた IBM SPSS Modeler ストリームのスコアリング枝のメタデータを取得します。
 この方式では要求本文を指定しないでください。
+
+```
+GET http://{service
+instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
+this bound application}&metadatatype=score
+```
+{: codeblock}
 
 要求の例:
 
@@ -145,11 +149,13 @@ this bound application}&metadatatype=score
 ```
 {: codeblock}
 
-このサービスの Web アプリケーション記述言語 (WADL) サマリーの取得
+## このサービスの Web アプリケーション記述言語 (WADL) サマリーの取得
 
-OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
+このサービスの WADL を取得するには、次の API 呼び出しを使用します。
 
-この API 呼び出しを使用して、このサービスの WADL を取得します。
+```
+OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl```
+{: codeblock}
 
 要求の例:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -13,7 +13,6 @@ lastupdated: "2017-06-23"
 {:pre: .pre}
 
 # Distribuzione di modelli online
-
 
 **Nome scenario**: Previsione linea di prodotti.
 
@@ -29,15 +28,15 @@ di generare le previsioni dell'interesse del cliente effettuando richieste di pu
    Learning.
 
 2. Nella sezione Modelli di esempio, cerca il tile Previsione linea di prodotti
-   e fai clic sul pulsante Aggiungi modello (+).
+   e fai clic sull'icona Aggiungi modello (+).
 
 Adesso vedrai il modello di esempio Previsione linea di prodotti nell'elenco
 di modelli disponibili sulla scheda Modelli.
 
 ## Generazione del token di accesso
 
-Genera un token di accesso utilizzando l'utente e la password disponibili
-nella scheda Credenziali del servizio dell'istanza del servizio IBM Watson Machine
+Genera un token di accesso utilizzando l'`user` e `password` disponibili
+nella scheda **Credenziali del servizio** dell'istanza del servizio IBM Watson Machine
 Learning.
 
 Esempio di
@@ -55,20 +54,159 @@ Esempio di output:
 ```
 {: codeblock}
 
-## Creazione della distribuzione online
+Utilizza il seguente comando di terminale per assegnare il tuo valore token alla
+variabile di ambiente token:
 
-Utilizza la seguente chiamata API per creare una distribuzione online del tuo modello predittivo. Viene reso disponibile per il calcolo del punteggio dei
-        dati nelle tue applicazioni. L'endpoint richiesto per creare un distribuzione online è disponibile in Dashboard WML -> Dettagli modello -> URL. Nota che puoi trovare il valore "published_model_id"
-nella pagina Dettagli modello del Dashboard IBM Watson Machine Learning
-nel campo Id e che puoi ottenere il tuo "instance_id" dalle credenziali VCAP della tua istanza di Watson Machine Learning.
+```
+token="<token_value>"
+```
+{: codeblock}
+
+## Utilizzo di modelli pubblicati
+Utilizza la seguente chiamata API per richiamare i dettagli della tua istanza, ad esempio:
+* `url` dei modelli pubblicati
+* `url` delle distribuzioni
+* informazioni di utilizzo
 
 Esempio di
 richiesta:
 
 ```
-curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: token" -d '{"name": "Product Line Prediction", "description": "Product Line Prediction Deployment", "type": "online"}' 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments'
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
 ```
 {: codeblock}
+
+Esempio di output:
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+Avendo l'`url` dei **modelli_pubblicati**, utilizza la seguente chiamata API per richiamare i dettagli del modello:
+
+Esempio di
+richiesta:
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+Esempio di output:
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"7715dfcc-3005-4bc2-8bee-58ebdc9a43f3",
+            "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{publishepublished_model_id}",
+            "created_at":"2017-07-10T12:45:56.623Z",
+            "modified_at":"2017-07-10T12:45:56.710Z"
+         },
+   "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+            },
+            "name":"Product Line Prediction",
+            "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
+            "label_col":"PRODUCT_LINE",
+            "training_data_schema":{ },
+            "latest_version":{ },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{publipublished_model_id}/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"GENDER",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"AGE",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"MARITAL_STATUS",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"PROFESSION",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+
+Nota che l'`url` delle **distribuzioni** è necessario per creare la distribuzione online nel passo successivo.
+
+
+## Creazione della distribuzione online
+
+Utilizza la seguente chiamata API per creare una distribuzione online del tuo modello predittivo.
+
+Esempio di
+richiesta:
+
+```
+curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" -d '{"name": "Product Line Prediction", "description": "Product Line Prediction Deployment", "type": "online"}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments
+```
+{: codeblock}
+
 
 Esempio di output:
 
@@ -76,7 +214,7 @@ Esempio di output:
 {  
    "metadata":{  
       "guid":"b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}",
       "created_at":"2017-06-27T13:47:49.534Z",
       "modified_at":"2017-06-27T13:47:58.347Z"
    },
@@ -84,7 +222,7 @@ Esempio di output:
       "runtime_environment":"spark-2.0",
       "name":"Product Line Prediction TMNL",
       "instance_href":"/v2/scoring/online/jobs/b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a/online",
+      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online",
       "description":"Product Line Prediction Deployment",
       "published_model":{  
          "author":{  
@@ -92,7 +230,7 @@ Esempio di output:
             "email":""
          },
          "name":"Product Line Prediction",
-         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}",
          "guid":"1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
          "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
          "created_at":"2017-06-27T11:54:24.170Z"
@@ -112,14 +250,14 @@ Esempio di output:
 
 ## Recupero dei dettagli di distribuzione
 
-Puoi controllare lo stato, l'indirizzo dell'endpoint di punteggio (scoringHref)
+Puoi controllare lo stato, l'indirizzo dell'endpoint di calcolo del punteggio (`scoring_url`)
 e i parametri correlati al modello distribuito.
 
 Esempio di
 richiesta:
 
 ```
-curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: $token" 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}'
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -129,7 +267,7 @@ Esempio di output:
 {  
    "metadata":{  
       "guid":"b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/1{published_model_id}/deployments/{deployment_id}",
       "created_at":"2017-06-27T13:47:49.534Z",
       "modified_at":"2017-06-27T13:47:58.347Z"
    },
@@ -137,7 +275,7 @@ Esempio di output:
       "runtime_environment":"spark-2.0",
       "name":"Product Line Prediction TMNL",
       "instance_href":"/v2/scoring/online/jobs/b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a/online",
+      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online",
       "description":"Product Line Prediction Deployment",
       "published_model":{  
          "author":{  
@@ -145,7 +283,7 @@ Esempio di output:
             "email":""
          },
          "name":"Product Line Prediction",
-         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}",
          "guid":"1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
          "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
          "created_at":"2017-06-27T11:54:24.170Z"
@@ -165,7 +303,7 @@ Esempio di output:
 
 ## Esecuzione di richieste di punteggio
 
-Dal momento che il tuo endpoint di punteggio è stato creato (scoringHref), puoi
+Dal momento che il tuo endpoint di calcolo del punteggio è stato creato (`scoring_url`), puoi
 ora generare le previsioni effettuando richieste di punteggio. In questo scenario, i record dei clienti vengono passati al
 modello predittivo e viene restituita una previsione sui prodotti sportivi.
 
@@ -191,7 +329,7 @@ Esempio di
 richiesta:
 
 ```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: token' -d '{"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}' 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}//published_models/{published_model_id}/deployments/{deployment_id}/online'
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $token" -d '{"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online
 ```
 {: codeblock}
 
@@ -212,7 +350,7 @@ Esempio di output:
       "prediction",
       "predictedLabel"
    ],
-   "records":[
+   "values":[
       [
          "M",
          23,
@@ -283,3 +421,13 @@ Esempio di output:
 Possiamo vedere, ad esempio, che un dirigente di 55 anni è
 interessato a Mountaineering Equipment, mentre uno studente di 23 anni
 è interessato a Personal Accessories.
+
+**Nota**: per i modelli scikit-learn e XGBoost, nel payload di calcolo del punteggio è richiesto solo il campo `values`.
+
+Esempio di
+richiesta:
+
+```
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $token" -d '{"values": [[0.0,1.0],[4.0,15.0]]}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online
+```
+{: codeblock}

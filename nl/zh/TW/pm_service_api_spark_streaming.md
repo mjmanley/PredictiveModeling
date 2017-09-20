@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,11 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# 部署串流模型
+# 部署串流模型<span class='tag--beta'>測試版</span>
 
 
-**附註**：此功能目前為測試版，只提供搭配 Spark MLlib 使用。
+**附註**：此功能目前為測試版，只提供搭配 Spark MLlib 使用。如果您有興趣參與，請將自己新增到等待清單！
+如需相關資訊，請參閱：[https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist)。
 
 **情境名稱**：觀感分析。
 
@@ -38,7 +39,7 @@ lastupdated: "2017-06-23"
 要求範例：
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -49,12 +50,159 @@ curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/ide
 ```
 {: codeblock}
 
-請使用下列終端機指令來指派記號值給 access_token 環境變數：
+請使用下列終端機指令來指派記號值給 token 環境變數：
+
 
 ```
-access_token="<token_value>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## 使用已發佈的模型
+使用下列 API 呼叫來取得您的實例詳細資料，例如：
+* 已發佈模型 `url`
+* 部署 `url`
+* 用量資訊
+
+要求範例：
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+輸出範例：
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+讓 **published_models** `url` 使用下列 API 呼叫取得模型的詳細資料：
+
+要求範例：
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+輸出範例：
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "created_at":"2017-07-11T10:51:10.900Z",
+            "modified_at":"2017-07-11T10:51:11.012Z"
+         },
+         "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+               "email":""
+            },
+            "name":"Sentiment Prediction",
+            "description":"Predicts comment sentiment about particular topic for marketing company.",
+            "label_col":"sentiment",
+            "training_data_schema":{
+               "type":"struct",
+               "fields":[
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"label",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/versions/0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "guid":"0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "created_at":"2017-07-11T10:51:11.012Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/deployments"
+            },
+            "input_data_schema":{
+               "type":"struct",
+               "fields":[
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+請記下**部署** `url`，這在下一步建立批次部署時會需要。
+
 
 ## 使用 IBM Message Hub 來建立串流部署
 
@@ -71,24 +219,18 @@ access_token="<token_value>"
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
-{: codeblock}
+   {: codeblock}
 
    在 Microsoft Windows 或 Linux 作業系統上，您必須使用 `--wrap=0` 參數與 `base64` 指令來執行 base64 解碼：
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  IBM Message Hub 主題詳細資料，將會用來做為模型的的輸入（推文），以及模型輸出（預測結果）儲存空間。
 
-*  若要建立部署，請使用下列端點：
-   
-   ```
-   /v2/published_models/{published_model_id}/deployments
-   ```
-   
-   建立線上部署所需的端點提供於您的「WML 儀表板」->「模型詳細資料」-> URL。另外也請注意，您可以從 IBM Watson Machine Learning 儀表板找到 published_model_id 值，按一下「模型」->「檢視詳細資料」，然後複製 ID 欄位中的值，您就可以從 Watson Machine Learning 實例的 VCAP 認證取得 "instance_id"。
+*  若要建立部署，請使用前一節的**部署** `url`。
 
 要求範例：
 
@@ -96,7 +238,7 @@ access_token="<token_value>"
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
    "name":"Sentiment Prediction ",
@@ -241,87 +383,12 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 ```
 {: codeblock}
 
-**附註**：您也可以使用該儀表板來建立串流部署。您必須提供下列三項輸入：
+**附註**：您也可以使用該儀表板來建立串流部署。
 
-*  輸入來源詳細資料，以供模型使用。您的輸入來源必須已上傳，並且準備好進行汲取 (IBM Message Hub)。
-
-*  輸出來源詳細資料，結果將會在這裡寫入。您的輸出來源必須已建立，並準備好在模型處理輸入來源的資料時，接收結果。
-
-*  Spark 服務認證。
-
-表單範例：
-
-輸入：
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "source":{
-      "topic":"sinput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-輸出：
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "target":{
-      "topic":"soutput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Spark 服務認證：
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",  
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",  
-      "cluster_master_url": "https://spark.bluemix.net",  
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",  
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",  
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## 取得部署詳細資料
 
-您可以使用部署結果傳回的位置欄位，透過 GET 要求來檢查串流部署。請參閱下列資訊。
+您可以使用部署結果傳回的 **meta 資料** `url`，透過 GET 要求來檢查串流部署。請參閱下列資訊。
 
 要求範例：
 
@@ -435,7 +502,7 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -467,7 +534,7 @@ X-Global-Transaction-ID: 2590068775
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -498,7 +565,7 @@ X-Global-Transaction-ID: 4242073343
 ```
 curl -i \
 -X DELETE \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}

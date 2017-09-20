@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -25,16 +25,19 @@ lastupdated: "2017-06-23"
 
 ## Vorhersagemodell implementieren oder aktualisieren
 
-PUT http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
 Verwenden Sie diesen API-Aufruf, um eine Datei hochzuladen, die die von IBM SPSS Modeler entwickelte Scoring-Verzweigung enthält, die implementiert werden soll.
 Sie wird für das Scoring von Daten in Ihren Anwendungen zur Verfügung gestellt. Jeder Modelldatei
 wird eine Kontext-ID als Alias zugeordnet, der zum Referenzieren des implementierten Modells
 in nachfolgenden Serviceaufrufen verwendet wird. Wenn für eine Kontext-ID ein Modell vorhanden ist,
 wird sie durch diesen PUT-Aufruf ersetzt, um die momentan von Ihren Anwendungen benutzte Vorhersageanalyse
-zu aktualisieren. 
+zu aktualisieren.
+
+```
+PUT http://{PA Bluemix load balancer
+URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
+application}
+```
+{: codeblock}
 
 Anforderungsbeispiel:
 
@@ -78,11 +81,14 @@ Antwort bei fehlgeschlagener Implementierung:
 
 ## Liste aller momentan implementierten Modelle abrufen
 
+Rufen Sie eine Zusammenfassung aller Modelle ab, die momentan in dieser Serviceinstanz implementiert sind.
+
+```
 GET http://{PA Bluemix load balancer
 URL}/pm/v1/model?accesskey={access_key for this bound
 application}
-
-Rufen Sie eine Zusammenfassung aller Modelle ab, die momentan in dieser Serviceinstanz implementiert sind.
+```
+{: codeblock}
 
 Anforderungsbeispiel:
 

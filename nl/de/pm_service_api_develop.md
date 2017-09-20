@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,19 +15,22 @@ lastupdated: "2017-06-23"
 # Anwendungen zur Nutzung implementierter SPSS-Modelle entwickeln
 
 
-*  Scoring mit implementiertem Vorhersagemodell durchführen
+*  [Scoring mit implementiertem Vorhersagemodell durchführen](#scoring-with-a-deployed-predictive-model)
 
-*  Metadaten für implementiertes Vorhersagemodell abrufen
+*  [Metadaten für implementiertes Vorhersagemodell abrufen](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  WADL-Zusammenfassung (Web Application Description Language) dieses Service abrufen
+*  [WADL-Zusammenfassung (Web Application Description Language) dieses Service abrufen](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-SCORING MIT IMPLEMENTIERTEM VORHERSAGEMODELL DURCHFÜHREN
+## Scoring mit implementiertem Vorhersagemodell durchführen
 
+Verwenden Sie den folgenden API-Aufruf, um die Eingabedaten zu veröffentlichen, die vom implementierten Modell zum Generieren und Zurückgeben der Vorhersageanalyse in den Scoring-Ergebnissen verwendet werden sollen. 
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-Verwenden Sie diesen API-Aufruf, um die Eingabedaten zu veröffentlichen, die vom implementierten Modell zum Generieren und Zurückgeben der Vorhersageanalyse in den Scoring-Ergebnissen verwendet werden sollen.
+```
+{: codeblock}
 
 Anforderungsbeispiel:
 
@@ -47,7 +50,7 @@ Anforderungsbeispiel:
 ```
 {: codeblock}
 
-Beispiel für erfolgreiche Antwort auf vorherige Anforderung: 
+Beispiel für erfolgreiche Antwort auf vorherige Anforderung:
 
 ```
     Content-Type: application/json;charset=UTF-8
@@ -75,13 +78,16 @@ Antwort für fehlgeschlagene Scoring-Anforderung:
 ```
 {: codeblock}
 
-METADATEN FÜR IMPLEMENTIERTES VORHERSAGEMODELL ABRUFEN
+## Metadaten für implementiertes Vorhersagemodell abrufen
 
+Verwenden Sie diesen API-Aufruf zum Abrufen von Metadaten für die Scoring-Verzweigung eines implementierten IBM SPSS Modeler-Datenstroms. Geben Sie bei dieser Methode keinen Anforderungshauptteil an.
+
+```
 GET http://{service
 instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
 this bound application}&metadatatype=score
-
-Verwenden Sie diesen API-Aufruf zum Abrufen von Metadaten für die Scoring-Verzweigung eines implementierten IBM SPSS Modeler-Datenstroms. Geben Sie bei dieser Methode keinen Anforderungshauptteil an.
+```
+{: codeblock}
 
 Anforderungsbeispiel:
 
@@ -95,7 +101,7 @@ Anforderungsbeispiel:
 ```
 {: codeblock}
 
-Beispiel für erfolgreiche Antwort auf vorherige Anforderung: 
+Beispiel für erfolgreiche Antwort auf vorherige Anforderung:
 
 ```
     Content-Type: application/json;charset=UTF-8
@@ -143,11 +149,14 @@ Antwort für fehlgeschlagene Scoring-Anforderung:
 ```
 {: codeblock}
 
-WADL-ZUSAMMENFASSUNG (WEB APPLICATION DESCRIPTION LANGUAGE) DIESES SERVICE ABRUFEN
+## WADL-Zusammenfassung (Web Application Description Language) dieses Service abrufen
 
+Verwenden Sie den folgenden API-Aufruf zum Abrufen der WADL für diesen Service.
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-Verwenden Sie diesen API-Aufruf zum Abrufen der WADL für diesen Service.
+```
+{: codeblock}
 
 Anforderungsbeispiel:
 

@@ -2,19 +2,9 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-21"
+lastupdated: "2017-09-07"
 
 ---
-<!-- Copyright info and last updated date at top of file: REQUIRED
-    The copyright and lastupdated info is YAML content that must occur at the top of the MD file, before attributes are listed.
-    It must be --- surrounded by 3 dashes ---
-    The value "years" can contain just one year or a two years separated by a comma. (years: 2014, 2016)
-    The value "lastupdated" must be followed by a machine date in quotes in the following format: "YYYY-MM-DD"
-    The value for "years" must be indented 2 spaces under "copyright", followed by "lastupdated" which should start on its own non-indented line.
-
--->
-
-<!-- Common attributes used in the template are defined as follows: -->
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
@@ -33,21 +23,24 @@ lastupdated: "2017-06-21"
 
 ### 自訂模型的開發和持續性
 
-1. 使用 Data Science Experience 可建立自訂模型。註冊之後，請登入並完成下列步驟。
+使用 Data Science Experience 可建立自訂模型。註冊之後，請登入並完成下列步驟。
 
-2. 您第一次登入時，系統會要求您建立組織和空間。請按一下**繼續**並接受預設值。
+1. 建立組織和空間。您第一次登入時，系統會要求您提供，所以請按一下**繼續**並接受預設值。
 
-3. 建立組織之後，移至**我的專案**，然後按一下**建立專案**。
+2. 建立組織之後，移至**專案**，然後按一下**新建專案**。
 
-4. 指定專案的名稱和說明，然後按一下**建立**。您指定的專案名稱也會用來做為「目標容器」的名稱。
+3. 指定專案的名稱和說明，然後按一下**建立**。您指定的專案名稱也會用來做為「目標容器」的名稱。
 
-5. 建立專案之後，您可以新增記事本，並開始開發自己的模型，也可以上傳下列其中一個範例記事本：
+4. 建立專案之後，您可以：
+   *  **新增記事本**，並開始開發自己的模型，也可以上傳下列其中一個範例記事本：
 
-   *  [Developing Spark MLlib models with Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
+    *  [Developing Spark MLlib models with Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
 
-   *  [Developing Spark MLlib models with Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
+    *  [Developing Spark MLlib models with Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
 
-   *  [Developing scikit-learn models with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+    *  [Developing scikit-learn models with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+
+   * **新增模型**並開始使用模型精靈來開發自己的模型
 
 
 

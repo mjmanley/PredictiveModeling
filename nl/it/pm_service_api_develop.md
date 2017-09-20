@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,20 +15,25 @@ lastupdated: "2017-06-23"
 # Sviluppo di applicazioni che si avvalgono di modelli SPSS distribuiti
 
 
-*  Calcolo del punteggio con un modello predittivo distribuito
+*  [Calcolo del punteggio con un modello predittivo distribuito](#scoring-with-a-deployed-predictive-model)
 
-*  Richiamo dei metadati per un modello predittivo distribuito
+*  [Richiamo dei metadati per un modello predittivo distribuito](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  Richiamo del riepilogo WADL (Web Application Description Language) di questo servizio
+*  [Richiamo del riepilogo WADL (Web Application Description Language)
+   di questo servizio](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-CALCOLO DEL PUNTEGGIO CON UN MODELLO PREDITTIVO DISTRIBUITO
+## Calcolo del punteggio con un modello predittivo distribuito
 
+Utilizza la seguente chiamata API per inserire i dati di input che verranno utilizzati dal modello distribuito
+per generare e distribuire l'analisi predittiva nei risultati
+del calcolo del punteggio.
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-Utilizza questa chiamata API per inserire i dati di input che devono essere utilizzati dal modello distribuito per generare e
-                restituire l'analisi predittiva nei risultati di punteggio.
+```
+{: codeblock}
 
 Esempio di
 richiesta:
@@ -77,14 +82,17 @@ Risposta quando la richiesta di calcolo di punteggio non riesce:
 ```
 {: codeblock}
 
-RICHIAMO DEI METADATI PER UN MODELLO PREDITTIVO DISTRIBUITO
-
-GET http://{service
-instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
-this bound application}&metadatatype=score
+## Richiamo dei metadati per un modello predittivo distribuito
 
 Utilizza questa chiamata API per richiamare i metadati per il ramo di calcolo del punteggio
         di un flusso IBM SPSS Modeler distribuito. Non fornire un corpo della richiesta con questo metodo.
+
+```
+GET http://{service
+instance}/pm/v1/metadata/{contextId}?accesskey={access_key per
+questa applicazione associata}&metadatatype=score
+```
+{: codeblock}
 
 Esempio di
 richiesta:
@@ -147,12 +155,14 @@ Risposta quando una richiesta di calcolo del punteggio non riesce:
 ```
 {: codeblock}
 
-RICHIAMO DEL RIEPILOGO WADL (WEB APPLICATION DESCRIPTION LANGUAGE) DI QUESTO
-SERVIZIO
+## Richiamo del riepilogo WADL (web application description language) di questo servizio
 
+Utilizza la seguente chiamata API per richiamare il WADL per questo servizio.
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-Utilizza questa API per richiamare il WADL per questo servizio.
+```
+{: codeblock}
 
 Esempio di
 richiesta:

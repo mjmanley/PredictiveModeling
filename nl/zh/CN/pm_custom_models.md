@@ -2,19 +2,9 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-21"
+lastupdated: "2017-09-07"
 
 ---
-<!-- Copyright info and last updated date at top of file: REQUIRED
-    The copyright and lastupdated info is YAML content that must occur at the top of the MD file, before attributes are listed.
-    It must be --- surrounded by 3 dashes ---
-    The value "years" can contain just one year or a two years separated by a comma. (years: 2014, 2016)
-    The value "lastupdated" must be followed by a machine date in quotes in the following format: "YYYY-MM-DD"
-    The value for "years" must be indented 2 spaces under "copyright", followed by "lastupdated" which should start on its own non-indented line.
-
--->
-
-<!-- Common attributes used in the template are defined as follows: -->
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
@@ -33,22 +23,25 @@ lastupdated: "2017-06-21"
 
 ### 开发和持久存储定制模型
 
-1. 使用 Data Science
+使用 Data Science
 Experience 创建定制模型。注册后，登录并完成以下步骤。
 
-2. 第一次登录时，系统将要求您创建组织和空间。单击**继续**并接受缺省值。
+1. 创建组织和空间。第一次登录时，系统将要求您创建组织和空间，因此请单击**继续**并接受缺省值。
 
-3. 在创建组织后，转至**我的项目**，然后单击**创建项目**。
+2. 在创建组织后，转至**项目**，然后单击**新建项目**。
 
-4. 指定项目的名称和描述，然后单击**创建**。指定的项目名称还将用作“目标容器”的名称。
+3. 指定项目的名称和描述，然后单击**创建**。指定的项目名称还将用作“目标容器”的名称。
 
-5. 创建项目后，您可以添加配置页，并开始开发自己的模型，也可以上传以下某个样本配置页：
+4. 创建项目后，可以执行以下任一操作：
+   *  **添加配置页**，并开始开发您自己的模型，也可以上传以下某个样本配置页：
 
-   *  [使用 Python 开发 Spark MLlib 模型](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
+    *  [使用 Python 开发 Spark MLlib 模型](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
 
-   *  [使用 Scala 开发 Spark MLlib 模型](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
+    *  [使用 Scala 开发 Spark MLlib 模型](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
 
-   *  [使用 Python 开发 scikit-learn 模型](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+    *  [使用 Python 开发 scikit-learn 模型](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+
+   * **添加模型**，并使用模型向导开始开发自己的模型
 
 
 

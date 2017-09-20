@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,10 +12,11 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# ストリーミング・モデルのデプロイ
+# ストリーミング・モデルのデプロイ (<span class='tag--beta'>ベータ</span>)
 
 
-**注**: この機能は、現在はベータ版であり、Spark MLlib でのみ使用可能です。
+**注**: この機能は、現在はベータ版であり、Spark MLlib でのみ使用可能です。参加をご希望の場合は、ご自身を待機リストに追加してください。
+詳しくは、[https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist) を参照してください。
 
 **シナリオ名**: 感情分析。
 
@@ -38,7 +39,8 @@ IBM Watson Machine Learning サービス・インスタンスの「サービス�
 要求の例:
 
 ```
-curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/identity/token```
+curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
+```
 {: codeblock}
 
 出力例:
@@ -48,12 +50,158 @@ curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v2/ide
 ```
 {: codeblock}
 
-以下の端末コマンドを使用して、トークン値を環境変数 access_token に割り当てます。
+以下の端末コマンドを使用して、トークン値を環境変数 token に割り当てます。
 
 ```
-access_token="<token_value>"
+token="<token_value>"
 ```
 {: codeblock}
+
+## 公開モデルの処理
+次のようなインスタンス詳細を取得するには、以下の API 呼び出しを使用します。
+* 公開モデルの `url`
+* デプロイメントの `url`
+* 使用情報
+
+要求の例:
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
+```
+{: codeblock}
+
+出力例:
+
+```
+{
+   "metadata":{
+      "guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+**published_models** の `url` が分かったので、次の API 呼び出しを使用してモデルの詳細を取得します。
+
+要求の例:
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+出力例:
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{
+            "guid":"f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5",
+            "created_at":"2017-07-11T10:51:10.900Z",
+            "modified_at":"2017-07-11T10:51:11.012Z"
+         },
+         "entity":{
+            "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+               "email":""
+            },
+            "name":"Sentiment Prediction",
+            "description":"Predicts comment sentiment about particular topic for marketing company.",
+            "label_col":"sentiment",
+            "training_data_schema":{
+               "type":"struct",
+               "fields":[
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"label",
+                     "nullable":true
+                  }
+               ]
+            },
+            "latest_version":{
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v2/artifacts/models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/versions/0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "guid":"0bb2bfd2-418d-4458-892b-1d9c02e56686",
+               "created_at":"2017-07-11T10:51:11.012Z"
+            },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml.stage1.mybluemix.net/v3/wml_instances/7a0f9c88-3cf6-4433-89ee-92a641f26e89/published_models/f96d7e00-cd2d-40d1-9b9e-730efaa5dbe5/deployments"
+            },
+            "input_data_schema":{
+               "type":"struct",
+               "fields":[
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"integer",
+                     "name":"id",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{
+
+                     },
+                     "type":"string",
+                     "name":"text",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+**deployments** `url` は次のステップでバッチ・デプロイメントを作成するために必要なのでメモしておいてください。
+
 
 ## IBM Message Hub を使用するストリーミング・デプロイメントの作成
 
@@ -69,24 +217,18 @@ REST API 呼び出しを使用して予測モデルのストリーミング・�
 
    ```
 spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)```
-{: codeblock}
+   {: codeblock}
 
    Microsoft Windows または Linux オペレーティング・システムでは、以下のように `base64` コマンドで `--wrap=0` パラメーターを使用して、base64 デコードを実行する必要があります。
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
    ```
-{: codeblock}
+   {: codeblock}
 
 *  IBM Message Hub のトピックの詳細。モデルの入力 (ツイート)、およびモデルの出力 (予測結果) のストレージとして、使用されます。
 
-*  デプロイメントを作成するには、以下のエンドポイントを使用します。
-   
-   ```
-   /v2/published_models/{published_model_id}/deployments
-   ```
-   
-   オンライン・デプロイメントの作成に必要なエンドポイントは、「WML ダッシュボード」->「モデルの詳細 (Model Details)」->「URL」で入手できます。また、published_model_id 値も IBM Watson Machine Learning ダッシュボードで見つけることができます。「モデル」->「詳細を表示」をクリックし、「ID」フィールドの値をコピーして、Watson Machine Learning インスタンスの VCAP 資格情報から「instance_id」を取得できます。
+*  デプロイメントを作成するには、前のセクションからの **deployments** `url` を使用します。
 
 要求の例:
 
@@ -94,7 +236,7 @@ spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b
 curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -H "X-Spark-Service-Instance: $spark_credentials" \
 -d '{
    "name":"Sentiment Prediction ",
@@ -239,88 +381,12 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 ```
 {: codeblock}
 
-**注**: ダッシュボードを使用してストリーミング・デプロイメントを作成することもできます。以下の 3 つの入力を提供する必要があります。
+**注**: ダッシュボードを使用してストリーミング・デプロイメントを作成することもできます。
 
-
-*  使用するモデルの入力ソースの詳細。入力ソースは、既にアップロードされて、取り込みの準備ができていなければなりません (IBM Message Hub)。
-
-*  出力ソースの詳細。これには結果が書き込まれます。出力ソースは、既に作成済みでなければならず、モデルが入力ソースから受け取ったデータを処理しているときに結果を受信する準備ができている必要があります。
-
-*  Spark サービス資格情報。
-
-フォームの例:
-
-入力:
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "source":{
-      "topic":"sinput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-出力:
-
-```
-{
-   "connection":{
-      "kafka_brokers_sasl":[
-         "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093",
-         "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093"
-      ],
-      "kafka_admin_url":"https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443",
-      "api_key":"Dv5kEVNNsbuJ9RFEKdUhIn2hruipIrsBolge6v1uQmTzEQti",
-      "mqlight_lookup_url":"https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=5448397d-cb22-4698-8a2b-ffb04f43a4cb",
-      "kafka_rest_url":"https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443",
-      "user":"Dv5kEVNNsbuJ9RFE",
-      "password":"KdahIn2hruipIrsBolge6v1uQmTzEQti"
-   },
-   "target":{
-      "topic":"soutput",
-      "type":"kafka"
-   }
-}
-```
-{: codeblock}
-
-Spark サービス資格情報:
-
-```
-{
-      "tenant_id": "s745-299dcf850a6390-35c9a7ecf27a",
-      "tenant_id_full": "ba3dde5a-ee64-4057-9749-299dcf850a63_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",
-      "cluster_master_url": "https://spark.bluemix.net",
-      "instance_id": "ba3dde5a-ee64-4057-9749-299dcf850a63",
-      "tenant_secret": "c0cba7a4-7b19-46e6-9326-44c4f48aaf08",
-      "plan": "ibm.SparkService.PayGoPersonal"
-}
-```
-{: codeblock}
 
 ## デプロイメントの詳細の取得
 
-デプロイメントの結果として返された Location フィールドを使用して、GET 要求でストリーミング・デプロイメントの詳細を確認できます。以下の情報を参照してください。
+デプロイメントの結果として返された **metadata** `url` を使用して、GET 要求でストリーミング・デプロイメントの詳細を確認できます。以下の情報を参照してください。
 
 要求の例:
 
@@ -434,7 +500,7 @@ https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_mod
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "STOPPED"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -466,7 +532,7 @@ X-Global-Transaction-ID: 2590068775
 curl -i \
 -X PATCH \
 -H 'Content-Type: application/json' \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 -d '[{"op": "replace","path": "/status","value": "RUNNING"}]' \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
@@ -497,7 +563,7 @@ X-Global-Transaction-ID: 4242073343
 ```
 curl -i \
 -X DELETE \
--H "Authorization: Bearer $access_token" \
+-H "Authorization: Bearer $token" \
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-06-23"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# IBM SPSS Modeler 모델에 대한 Machine Learning 서비스 API
+# 서비스 API
 
 
 Machine Learning 서비스는 프로그래밍 언어에서

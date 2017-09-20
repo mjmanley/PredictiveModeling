@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -14,7 +14,6 @@ lastupdated: "2017-06-23"
 
 # 部署联机模型
 
-
 **场景名称**：产品系列预测。
 
 **场景描述**：一家卖户外设备的公司想要构建模型，以预测客户对其产品系列的兴趣。
@@ -24,13 +23,13 @@ lastupdated: "2017-06-23"
 
 1. 转至 IBM® Watson™ Machine Learning“仪表板”的“样本”选项卡。
 
-2. 在“样本模型”部分中，找到“产品系列预测”磁贴，并单击“添加模型”按钮 (+)。
+2. 在“样本模型”部分中，找到“产品系列预测”磁贴，并单击“添加模型”图标 (+)。
 
 现在，您将在“模型”选项卡上的可用模型列表中看到样本“产品系列预测”模型。
 
 ## 生成访问令牌
 
-使用 IBM Watson Machine Learning 服务实例的“服务凭证”选项卡上提供的用户和密码来生成访问令牌。
+使用 IBM Watson Machine Learning 服务实例的**服务凭证**选项卡上提供的 `user` 和 `password` 来生成访问令牌。
 
 请求示例：
 
@@ -46,16 +45,151 @@ curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/ide
 ```
 {: codeblock}
 
-## 创建联机部署
+使用以下终端命令将令牌值分配给环境变量令牌：
 
-使用以下 API 调用来创建预测模型的联机部署。此文件可用于对应用程序中的数据进行评分。创建联机部署所需的端点在“WML 仪表板”->“模型详细信息”->“URL”上提供。另请注意，您可以在 IBM Watson Machine Learning 仪表板的“模型详细信息”页面的标识字段中查找“published_model_id”值，且您可以从 Watson Machine Learning 实例的 VCAP 凭证获取“instance_id”。
+```
+token="<token_value>"
+```
+{: codeblock}
+
+## 处理已发布的模型
+使用以下 API 调用来获取实例详细信息，例如：
+* published models `url`
+* deployments `url`
+* usage information
 
 请求示例：
 
 ```
-curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: token" -d '{"name": "Product Line Prediction", "description": "Product Line Prediction Deployment", "type": "online"}' 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments'
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}
 ```
 {: codeblock}
+
+输出示例：
+
+```
+{
+   "metadata":{ 
+"guid":"87452a37-6a8f-4d59-bf88-59c66b5463e4",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}",
+      "created_at":"2017-06-23T08:31:52.026Z",
+      "modified_at":"2017-06-23T08:31:52.026Z"
+   },
+   "entity":{
+      "source":"Bluemix",
+      "published_models":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models"
+      },
+      "usage":{ },
+      "plan_id":"5325f63a-683a-47f0-a04e-97e371385588",
+      "account_id":"b56398ea52f470c3173f4cf3bef5cc7e",
+      "status":"Active",
+      "organization_guid":"3e658178-a60c-48b8-8be9-bf58cc821656",
+      "region":"us-south",
+      "deployments":{
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
+      },
+      "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
+      "plan":"free"
+   }
+}
+```
+{: codeblock}
+
+
+具有 **published_models** `url` 时，请使用以下 API 调用来获取模型的详细信息：
+
+请求示例：
+
+```
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/
+```
+{: codeblock}
+
+输出示例：
+
+```
+{
+   "count":1,
+   "resources":[
+      {
+         "metadata":{ 
+"guid":"7715dfcc-3005-4bc2-8bee-58ebdc9a43f3",
+            "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{publishepublished_model_id}",
+            "created_at":"2017-07-10T12:45:56.623Z",
+            "modified_at":"2017-07-10T12:45:56.710Z"
+         },
+   "entity":{
+      "runtime_environment":"spark-2.0",
+            "author":{
+               "name":"IBM",
+            "email":""
+         },
+            "name":"Product Line Prediction",
+            "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
+            "label_col":"PRODUCT_LINE",
+            "training_data_schema":{ },
+            "latest_version":{ },
+            "model_type":"sparkml-model-2.0",
+            "deployments":{
+               "count":0,
+               "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{publipublished_model_id}/deployments"
+            },
+            "input_data_schema":{
+               "type": "struct",
+    "fields": [
+      {
+        "metadata":{ 
+},
+                     "type":"string",
+                     "name":"GENDER",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"integer",
+                     "name":"AGE",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"string",
+                     "name":"MARITAL_STATUS",
+                     "nullable":true
+                  },
+                  {
+                     "metadata":{ 
+},
+                     "type":"string",
+                     "name":"PROFESSION",
+                     "nullable":true
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+{: codeblock}
+
+
+请记下在下一步中创建联机部署所需的 **deployments** `url`。
+
+
+## 创建联机部署
+
+使用以下 API 调用来创建预测模型的联机部署。
+
+请求示例：
+
+```
+curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" -d '{"name": "Product Line Prediction", "description": "Product Line Prediction Deployment", "type": "online"}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments
+```
+{: codeblock}
+
 
 输出示例：
 
@@ -63,7 +197,7 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
 {  
    "metadata":{  
       "guid":"b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}",
       "created_at":"2017-06-27T13:47:49.534Z",
       "modified_at":"2017-06-27T13:47:58.347Z"
    },
@@ -71,7 +205,7 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
       "runtime_environment":"spark-2.0",
       "name":"Product Line Prediction TMNL",
       "instance_href":"/v2/scoring/online/jobs/b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a/online",
+      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online",
       "description":"Product Line Prediction Deployment",
       "published_model":{  
          "author":{  
@@ -79,7 +213,7 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
             "email":""
          },
          "name":"Product Line Prediction",
-         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}",
          "guid":"1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
          "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
          "created_at":"2017-06-27T11:54:24.170Z"
@@ -99,12 +233,12 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
 
 ## 获取部署详细信息
 
-可以检查状态、评分端点地址 (scoringHref) 以及与部署模型相关的参数。
+可以检查状态、评分端点地址 (`scoring_url`) 以及与部署的模型相关的参数。
 
 请求示例：
 
 ```
-curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: $token" 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}'
+curl -X GET --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer  $token" https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}
 ```
 {: codeblock}
 
@@ -114,7 +248,7 @@ curl -X GET --header "Content-Type: application/json" --header "Accept: applicat
 {  
    "metadata":{  
       "guid":"b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a",
+      "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/1{published_model_id}/deployments/{deployment_id}",
       "created_at":"2017-06-27T13:47:49.534Z",
       "modified_at":"2017-06-27T13:47:58.347Z"
    },
@@ -122,7 +256,7 @@ curl -X GET --header "Content-Type: application/json" --header "Accept: applicat
       "runtime_environment":"spark-2.0",
       "name":"Product Line Prediction TMNL",
       "instance_href":"/v2/scoring/online/jobs/b97072ec-3ef8-4705-a1e7-c264e270e49a",
-      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196/deployments/b97072ec-3ef8-4705-a1e7-c264e270e49a/online",
+      "scoring_url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online",
       "description":"Product Line Prediction Deployment",
       "published_model":{  
          "author":{  
@@ -130,7 +264,7 @@ curl -X GET --header "Content-Type: application/json" --header "Accept: applicat
             "email":""
          },
          "name":"Product Line Prediction",
-         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/21208fa4-f5b8-4fb7-b162-878e455e4be2/published_models/1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
+         "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}",
          "guid":"1ab15cdb-4f9e-4d35-8077-c0f6fff10196",
          "description":"Predicts clients' interests in terms of sport product lines for chain stores in Europe.",
          "created_at":"2017-06-27T11:54:24.170Z"
@@ -150,7 +284,7 @@ curl -X GET --header "Content-Type: application/json" --header "Accept: applicat
 
 ## 发出评分请求
 
-评分端点 (scoringHref) 已创建，所以现在可以通过发出评分请求来生成预测。在此场景中，客户记录会传递到预测模型，并返回运动产品预测。
+评分端点 (`scoring_url`) 已创建，所以现在可以通过发出评分请求来生成预测。在此场景中，客户记录会传递到预测模型，并返回运动产品预测。
 
 样本记录头：
 
@@ -171,7 +305,7 @@ M,45,Married,Retired
 请求示例：
 
 ```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: token' -d '{"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}' 'https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}//published_models/{published_model_id}/deployments/{deployment_id}/online'
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $token" -d '{"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online
 ```
 {: codeblock}
 
@@ -193,7 +327,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
       "prediction",
       "predictedLabel"
    ],
-   "records":[
+   "values":[
       [
          "M",
          23,
@@ -262,3 +396,12 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 {: codeblock}
 
 例如，您可以看到 55 岁的管理人员对 Mountaineering Equipment 感兴趣，而 23 岁的学生则对 Personal Accessories 感兴趣。
+
+**注**：对于 scikit-learn 和 XGBoost 模型，只有 `values` 字段在评分有效内容中是必需的。
+
+请求示例：
+
+```
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer  $token" -d '{"values": [[0.0,1.0],[4.0,15.0]]}' https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/deployments/{deployment_id}/online
+```
+{: codeblock}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -39,7 +39,7 @@ Anforderungsbeispiel:
 ```
 {: codeblock}
 
-Beispiel für erfolgreiche Antwort auf vorherige Anforderung: 
+Beispiel für erfolgreiche Antwort auf vorherige Anforderung:
 
 ```
     Content-Type: application/json;charset=UTF-8

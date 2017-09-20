@@ -2,19 +2,9 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-21"
+lastupdated: "2017-09-07"
 
 ---
-<!-- Copyright info and last updated date at top of file: REQUIRED
-    The copyright and lastupdated info is YAML content that must occur at the top of the MD file, before attributes are listed.
-    It must be --- surrounded by 3 dashes ---
-    The value "years" can contain just one year or a two years separated by a comma. (years: 2014, 2016)
-    The value "lastupdated" must be followed by a machine date in quotes in the following format: "YYYY-MM-DD"
-    The value for "years" must be indented 2 spaces under "copyright", followed by "lastupdated" which should start on its own non-indented line.
-
--->
-
-<!-- Common attributes used in the template are defined as follows: -->
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
@@ -36,25 +26,28 @@ lastupdated: "2017-06-21"
 
 ### 사용자 정의 모델의 개발 및 지속성
 
-1. Data Science Experience를 사용하여 사용자 정의 모델을 작성합니다. 등록한 이후에 로그인하여 다음 단계를 완료하십시오. 
+Data Science Experience를 사용하여 사용자 정의 모델을 작성합니다. 등록한 이후에 로그인하여 다음 단계를 완료하십시오. 
 
-2. 처음으로 로그인하는 경우 조직 및 영역을 작성하도록 프롬프트가 표시됩니다. **계속**을 클릭하고
-기본값을 허용하십시오. 
+1. 조직과 영역을 작성하십시오. 처음 로그인하는 경우 해당 사항을 작성하도록
+   요청되므로 **계속**을 클릭하여 기본값을 승인하십시오.
 
-3. 조직이 작성되고 나면, **내 프로젝트**로 이동하여
-**프로젝트 작성**을 클릭하십시오. 
+2. 조직이 작성되고 나면, **프로젝트**로 이동하여
+**새 프로젝트**를 클릭하십시오. 
 
-4. 프로젝트에 이름 및 설명을 지정한 후 **작성**을 클릭하십시오. 사용자가 지정한
+3. 프로젝트에 이름 및 설명을 지정한 후 **작성**을 클릭하십시오. 사용자가 지정한
 프로젝트 이름도 대상 컨테이너 이름으로 사용됩니다. 
 
-5. 프로젝트가 작성되고 나면, 노트북을 추가하고 고유 모델을 개발하거나
+4. 프로젝트가 작성되고 나면 다음을 수행할 수 있습니다.
+   *  **노트북을 추가**하고 고유 모델을 개발하거나
 다음 샘플 노트북 중 하나를 업로드할 수 있습니다. 
 
-   *  [Python으로 Spark MLlib 모델 개발](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
+    *  [Python으로 Spark MLlib 모델 개발](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
 
-   *  [Scala로 Spark MLlib 모델 개발](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
+    *  [Scala로 Spark MLlib 모델 개발](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
 
-   *  [Python으로 scikit-learn 모델 개발](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+    *  [Python으로 scikit-learn 모델 개발](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+
+   * 모델 마법사를 사용하여 **모델 추가** 및 고유 모델 개발 시작
 
 
 

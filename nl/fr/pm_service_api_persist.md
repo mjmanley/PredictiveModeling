@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -45,12 +45,12 @@ Avant de commencer, si vous vous intéressez tout d'abord au développement de m
 
 ### Génération du jeton d'accès
 
-Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning. 
+Générez un jeton d'accès à partir de l'ID et du mot de passe utilisateur affichés dans l'onglet Données d'identification pour le service de l'instance de service IBM Watson Machine Learning.
 
 Exemple de requête :
 
 ```
-curl --basic --user nom_utilisateur:mot_de_passe https://ibm-watson-ml.mybluemix.net/v2/identity/token
+curl --basic --user nom_utilisateur:mot_de_passe https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
@@ -81,7 +81,7 @@ curl -i \
 -X POST \
 -H 'Content-Type: application/json' \
 -H "Authorization: Bearer $access_token" \
--d '{
+-d '{ 
   "name": "exemple de pipeline",
   "description": "exemple de description",
   "author": {

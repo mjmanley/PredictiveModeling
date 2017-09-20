@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2017-06-23"
 
 IBM Watson Machine Learning désigne une offre Bluemix de service complet qui facilite la coopération entre développeurs et spécialistes des données afin d'intégrer des analyses prédictives dans leurs applications.
 
-Machine Learning  vous permet de développer des applications qui adoptent des décisions plus intelligentes, résolvent des problèmes plus épineux et améliorent les retombées pour l'utilisateur. 
+Machine Learning  vous permet de développer des applications qui adoptent des décisions plus intelligentes, résolvent des problèmes plus épineux et améliorent les retombées pour l'utilisateur.
 
 Le service Machine Learning est un ensemble d'API REST pouvant être appelé depuis n'importe quel langage de programmation.
 

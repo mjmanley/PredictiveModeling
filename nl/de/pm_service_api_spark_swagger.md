@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -16,4 +16,4 @@ lastupdated: "2017-06-23"
 
 
 Umfassende Details zur Machine Learning-REST-API für Spark- und Python-Modelle finden Sie
-in der folgenden [Swagger-Darstellung](http://watson-ml-api.mybluemix.net/). 
+in der folgenden [Swagger-Darstellung](http://watson-ml-api.mybluemix.net/).

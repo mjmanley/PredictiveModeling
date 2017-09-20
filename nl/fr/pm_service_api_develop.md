@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-06-23"
+lastupdated: "2017-09-07"
 
 ---
 
@@ -15,18 +15,21 @@ lastupdated: "2017-06-23"
 # Développement d'applications d'optimisation des modèles SPSS déployés
 
 
-*  Evaluation par score avec un modèle prédictif déployé
+*  [Evaluation par score avec un modèle prédictif déployé](#scoring-with-a-deployed-predictive-model)
 
-*  Extraction des métadonnées d'un modèle prédictif déployé
+*  [Extraction des métadonnées d'un modèle prédictif déployé](#retrieving-metadata-for-a-deployed-predictive-model)
 
-*  Extraction du récapitulatif WADL (Web Application Description Language) de ce service
+*  [Extraction du récapitulatif WADL (Web Application Description Language) de ce service](#retrieving-the-web-application-description-language-wadl-summary-of-this-service)
 
-SCORING A L'AIDE UN MODÈLE PRÉDICTIF DÉPLOYÉ
+## Evaluation par score avec un modèle prédictif déployé
 
+Utilisez l'appel API suivant pour publier les données d'entrée à utiliser par le modèle déployé pour générer et renvoyer les analyses prédictives dans les résultats du score.
+
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key pour cette application liée}
-
-Cet appel API permet de poster des données d'entrée devant être utilisées par le modèle déployé pour générer et renvoyer les analyses prédictives dans les résultats du score.
+```
+{: codeblock}
 
 Exemple de requête :
 
@@ -74,14 +77,17 @@ Réponse en cas d'échec de la requête de score :
 ```
 {: codeblock}
 
-EXTRACTION DES MÉTADONNÉES D'UN MODÈLE PRÉDICTIF DÉPLOYÉ
-
-GET http://{service
-instance}/pm/v1/metadata/{contextId}?accesskey={access_key pour
-cette application liée} &metadatatype=score
+## Extraction des métadonnées d'un modèle prédictif déployé
 
 Cet appel API permet d'extraire les métadonnées de la branche d'évaluation d'un flux IBM SPSS
         Modeler déployé. Vous ne devez pas indiquer de corps de demande avec cette méthode.
+
+```
+GET http://{service
+instance}/pm/v1/metadata/{contextId}?accesskey={access_key for
+this bound application}&metadatatype=score
+```
+{: codeblock}
 
 Exemple de requête :
 
@@ -104,8 +110,8 @@ Exemple de réponse réussie à la requête précédente :
     [
       {
         flag: true
-        message:
-          "Métadonnées d'entrée de scoring du modèle :
+        message: 
+          "Model Score Input Metadata: 
           <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
           <metadata xmlns="http://spss.ibm.com/meta/internal">
           <table xsi:type="nodeImpl" tag="id574QKQ8NL6E" name="baskrule_input.csv" 
@@ -113,8 +119,8 @@ Exemple de réponse réussie à la requête précédente :
             <field measurementLevel="CATEGORICAL" storageType="STRING" name="gender"/>
             <field measurementLevel="CONTINUOUS" storageType="LONG" name="income"/>
           </table>
-          </metadata>
-          Métadonnées de sortie de scoring du modèle :
+          </metadata> 
+          Model Score Output Metadata:
           <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
           <metadata xmlns="http://spss.ibm.com/meta/internal">
           <table xsi:type="nodeImpl" tag="id32CPAJBGJFG" name="Flat File" 
@@ -130,7 +136,7 @@ Exemple de réponse réussie à la requête précédente :
 ```
 {: codeblock}
 
-Réponse en cas d'échec de la requête de scoring :
+Réponse en cas d'échec de la demande d'évaluation :
 
 ```
     Content-Type: application/json
@@ -143,11 +149,14 @@ Réponse en cas d'échec de la requête de scoring :
 ```
 {: codeblock}
 
-EXTRACTION DU RÉCAPITULATIF WADL (WEB APPLICATION DESCRIPTION LANGUAGE) DE CE SERVICE
+## Extraction du récapitulatif WADL (web application description language) de ce service
 
+Utilisez l'appel API suivant pour extraire le récapitulatif WADL de ce service.
+
+```
 OPTIONS http://{PA Bluemix load balancer URL}/pm/v1/wadl
-
-Cet appel API permet d'extraire le récapitulatif WADL de ce service.
+```
+{: codeblock}
 
 Exemple de requête :
 
