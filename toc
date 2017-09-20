@@ -16,6 +16,7 @@ Machine Learning
             pm_service_api_spark_swagger.md
             pm_custom_models.md
             pm_service_api_spark_online.md
+            pm_service_api_spark_scoring.md
             pm_service_api_spark_building.md
             pm_service_api_spark_batch.md
             pm_service_api_spark_streaming.md
