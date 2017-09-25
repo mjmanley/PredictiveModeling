@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-08"
+lastupdated: "2017-09-25"
 
 ---
 
@@ -25,6 +25,8 @@ predicts customer churn. A data scientist develops a predictive
 model and shares it with you (the developer). Your task is to
 deploy the model and generate predictive analytics by making
 score requests against the deployed model.
+
+**Note: You can also play with sample python [notebook](https://apsportal.ibm.com/analytics/notebooks/5e4963d9-faea-455d-a7db-ff6302d1d8f5/view?access_token=5d23d36be72dea35ebbde9b4b5f4a16d0053ee898f1ab2ab73cf1301ce9322be)that creates sample model and predicts customer churn.
 
 ## Using the sample model
 

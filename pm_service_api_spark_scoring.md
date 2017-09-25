@@ -27,7 +27,11 @@ Hint: In the examples below, it's assumed that you have "scoring_url" from your 
 Example record to be used in scoring:
 {"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}
 
+### [BASH](#bash) |  [PYTHON](#python) | [SCALA](#scala) | [JAVA](#java) | [JAVASCRIPT](#javascript)
+
+<a name="bash">
 ## Bash
+</a>
 ```
 curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
@@ -50,7 +54,9 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 ```
 {: codeblock}
 
+<a name="bash">
 ## Python
+</a>
 
 ```
 import urllib3, requests, json
@@ -76,7 +82,9 @@ response_scoring = requests.post(scoring_url, json=payload_scoring, headers=head
 ```
 {: codeblock}
 
+<a name="scala">
 ## Scala
+</a>
 
 ```
 import scalaj.http.{Http, HttpOptions}
@@ -108,7 +116,9 @@ val response_scoring = Http(scoring_url).postData(payload_scoring).header("Conte
 ```
 {: codeblock}
 
+<a name="java">
 ## Java
+</a>
 
 ```
 import java.io.*;
@@ -221,7 +231,9 @@ public class HttpClientTest {
 ```
 {: codeblock}
 
+<a name="javascript">
 ## JavaScript
+</a>
 
 ```
 var wml_credentials = new Map();

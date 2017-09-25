@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-08"
+lastupdated: "2017-09-25"
 
 ---
 {:new_window: target="_blank"}
@@ -22,8 +22,8 @@ lastupdated: "2017-09-08"
 Our client is running one of the most
 famous chain stores in Europe. They would like us to figure out
 their clients' interests in terms of their product line such as
-Personal Accessories, Camping Equipment, and Outdoor Protection.
-A Data Scientist develops a predictive model and shares it with
+personal accessories, camping equipment, and outdoor protection.
+A data scientist develops a predictive model and shares it with
 you (the developer). Your task is to deploy the model and
 generate predictive analytics by making score requests against
 the deployed model.

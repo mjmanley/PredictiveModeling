@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-08"
+lastupdated: "2017-09-25"
 
 ---
 
@@ -27,6 +27,8 @@ NEGATIVE. A Data Scientist prepares a predictive model and shares
 it with you (the developer). Your task is to deploy the model and
 generate predictive analytics by making score requests against
 the deployed model.
+
+**Note: You can also play with sample python [notebook](https://apsportal.ibm.com/analytics/notebooks/913a7daa-cf39-414d-9017-3a7840a53c59/view?access_token=f1ebc10873a226f248f744b26ee7f71d53c81d5752b9d940e23a33518a3e115d)that creates sample model and classifies tweets.
 
 See this document for more information.
 
