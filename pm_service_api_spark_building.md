@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,9 +14,9 @@ lastupdated: "2017-09-25"
 
 # Building predictive analytics applications
 
-
 This section describes the process for deploying and using a
-sample application.
+sample Node.js application using the {{site.data.keyword.pm_full}} service.
+{: shortdesc}
 
 **Scenario name**: Product line prediction.
 
@@ -29,9 +29,9 @@ you (the developer). Your task is to prepare and deploy the
 Node.js application that recommends sport product lines by making
 score requests against the deployed model.
 
-1. Log on to Bluemix and create an instance of Machine Learning.
+1. Log on to {{site.data.keyword.Bluemix_short}} and create an instance of {{site.data.keyword.pm_full}}.
 
-2. Launch the Machine Learning Dashboard.
+2. Launch the {{site.data.keyword.pm_full}} Dashboard.
 
 3. Go to the Samples tab.
 
@@ -42,7 +42,7 @@ score requests against the deployed model.
 
    **Note**: If you want to use your own Data Science Experience
    project and models instead of the samples, you must persist a
-   custom model in the Machine Learning repository. You can do
+   custom model in the {{site.data.keyword.pm_short}} repository. You can do
    this by either using the REST API or client libraries. For
    details, see Development and persistence of the custom model.
 
@@ -66,19 +66,19 @@ score requests against the deployed model.
    https://github.com/pmservice/product-line-prediction.
 
    To automatically deploy sample application code to your
-   Bluemix space, go to the Samples tab, and in the Sample
+   {{site.data.keyword.Bluemix_short}} space, go to the Samples tab, and in the Sample
    Applications section, select the Product Line Prediction
    application and deploy it by clicking the (+) button.
    Authenticate on the DeployToBluemix form if prompted.
 
-   You should now see the sample application on the Bluemix
+   You should now see the sample application on the {{site.data.keyword.Bluemix_short}}
    Dashboard in the All Apps section.
 
 10. Click the application to view its details. Here you can
     modify application details such as the number of instances,
     memory, etc.
 
-11. Now you can bind your application with the Machine Learning
+11. Now you can bind your application with the {{site.data.keyword.pm_short}}
     instance. On the Connections tab, click Connect existing.
     After restaging, your application is connected to the service
     instance.
@@ -88,3 +88,18 @@ score requests against the deployed model.
 13. In the application, select your Product Line Prediction
     deployment. You are now ready to play with sample records and
     prediction results.
+    
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

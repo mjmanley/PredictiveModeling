@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -13,6 +13,11 @@ lastupdated: "2017-09-25"
 {:pre: .pre}
 
 # Deploying batch models <span class='tag--beta'>Beta</span>
+
+Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
+generate predictive analytics by making score requests against
+the deployed model.
+{: shortdesc}
 
 **Note**: This functionality is currently in beta and only available
 for use with Spark MLlib. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
@@ -30,7 +35,7 @@ score requests against the deployed model.
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
+1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. In the Sample Models section, find the Customer Satisfaction
@@ -68,6 +73,7 @@ token="<token_value>"
 {: codeblock}
 
 ## Working with published models
+
 Use the following API call to get your instance details, such as:
 * published models `url`
 * deployments `url`
@@ -498,9 +504,7 @@ Output example:
 ```
 {: codeblock}
 
-
 Please note **deployments** `url` that is needed to create batch deployment in next step.
-
 
 ## Creating a batch deployment with Object Storage
 
@@ -675,7 +679,6 @@ Output example:
 **Note**: You can also use the Dashboard to create a batch
 deployment.
 
-
 ## Obtaining deployment details
 
 You can check the status, and parameters related to the deployment model using **metadata** `url` (see above output example).
@@ -829,3 +832,18 @@ X-Xss-Protection: 1; mode=block
 X-Global-Transaction-ID: 1600446575
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

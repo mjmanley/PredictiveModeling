@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -12,22 +12,18 @@ lastupdated: "2017-09-25"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Getting started with Machine Learning
+# Getting started with IBM Watson Machine Learning
 
-
-IBM Watson™ Machine Learning is a full-service Bluemix offering
+{{site.data.keyword.pm_full}} is a full-service Bluemix offering
 that makes it easy for developers and data scientists to work
 together to integrate predictive analytics with their
-applications.
+applications. {{site.data.keyword.pm_short}} allows you to develop applications that make smarter decision, solve tough problems, and improve user outcomes.
+{: shortdesc}
 
-Machine Learning allows you to develop applications that make
-smarter decision, solve tough problems, and improve user
-outcomes.
-
-The Machine Learning service is a set of REST APIs that can be
+The {{site.data.keyword.pm_short}} service is a set of REST APIs that can be
 called from any programming language.
 
-The focus of the Machine Learning service is deployment, but note
+The focus of the {{site.data.keyword.pm_short}} service is deployment, but note
 that IBM SPSS Modeler or Data Science Experience is required for
 authoring and working with models and pipelines. Both SPSS
 Modeler and Data Science Experience (leveraging Apache Spark)

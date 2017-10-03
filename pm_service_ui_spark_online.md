@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,6 +14,10 @@ lastupdated: "2017-09-25"
 
 # Deploying online models
 
+Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
+generate predictive analytics by making score requests against
+the deployed model.
+{: shortdesc}
 
 **Scenario name**: Product line prediction.
 
@@ -26,7 +30,7 @@ score requests against the deployed model.
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
+1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. In the Sample Models section, find the Product Line Prediction
@@ -38,7 +42,7 @@ list of available models on the Models tab.
 
 ## Creating the online deployment
 
-1. Go to the Models tab of the IBM® Watson™ Machine Learning
+1. Go to the Models tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. From ACTIONS menu select Create Deployment.
@@ -55,7 +59,7 @@ Now you'll see the online deployment in the list of available deployments on the
 You can check the status, scoring endpoint address (`Scoring Endpoint`),
 and parameters related to the deployed model.
 
-1. Go to the Deployments tab of the IBM® Watson™ Machine Learning
+1. Go to the Deployments tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. From ACTIONS menu select View Details.
@@ -182,3 +186,14 @@ Output example:
 We can see, for example, that a 55-year-old executive is
 interested in Mountaineering Equipment, while a 23-year-old
 student is interested in Personal Accessories.
+
+## Learn more
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

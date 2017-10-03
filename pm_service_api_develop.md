@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2017-09-25"
 
 # Developing applications that leverage deployed SPSS models
 
+You can develop {{site.data.keyword.pm_full}} applications by leveraging {{site.data.keyword.IBM}} SPSS models.  
+{: shortdesc}
 
 *  [Scoring with a deployed predictive model](#scoring-with-a-deployed-predictive-model)
 
@@ -213,3 +215,18 @@ Response when the WADL request fails:
         } 
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

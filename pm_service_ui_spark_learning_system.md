@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,7 +14,8 @@ lastupdated: "2017-09-25"
 
 # Continuous learning system <span class='tag--beta'>Beta</span>
 
-The IBM® Watson™ Machine Learning continuous learning system provides automated monitoring of model performance, retraining, and redeployment to ensure prediction quality.
+The {{site.data.keyword.pm_full}} continuous learning system provides automated monitoring of model performance, retraining, and redeployment to ensure prediction quality.
+{: shortdesc}
 
 **Scenario name**: Best drug for heart treatment selection.
 
@@ -22,7 +23,7 @@ The IBM® Watson™ Machine Learning continuous learning system provides automat
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
+1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. In the Sample Models section, find the Heart Drug Selection
@@ -33,7 +34,7 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
 
 ## Set continuous learning system for published model
 
-1.  Go to the Models tab of the IBM® Watson™ Machine Learning Dashboard.
+1.  Go to the Models tab of the {{site.data.keyword.pm_full}} Dashboard.
 
 2.  From the **Actions** menu, click **View Details**.
 
@@ -41,7 +42,7 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
 
 4.  You must provide the following inputs:
 
-    **Feedback Connection**: Db2 Warehouse on Cloud details, which will be used as input (feedback data) for the model evaluation and retraining.
+    **Feedback Connection**: {{site.data.keyword.dashdbshort}} details, which will be used as input (feedback data) for the model evaluation and retraining.
     
     ```
     {
@@ -59,11 +60,11 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
     ```
     {: codeblock}
 
-    Use the following instructions to prepare the  `DRUG_FEEDBACK_DATA` table in Db2 Warehouse on Cloud.
-    - Create a [Db2 Warehouse on Cloud Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
-    - Create the **DRUG_FEEDBACK_DATA** table in **Db2 Warehouse on Cloud**.
+    Use the following instructions to prepare the  `DRUG_FEEDBACK_DATA` table in {{site.data.keyword.dashdbshort}}.
+    - Create a [{{site.data.keyword.dashdbshort}} Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
+    - Create the **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort_notm}}**.
       + Download  [drug_feedback_data.csv](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/drug-selection/data/drug_feedback_data.csv) file from git repository.
-      + Click the **Open the console** to get started with **Db2 Warehouse on Cloud** icon.
+      + Click the **Open the console** to get started with **{{site.data.keyword.dashdbshort_notm}}** icon.
       + Select the **Load Data** and **Desktop** load type.
       + **Drag and drop** previously downloaded file and press **Next**.
       + Select **Schema** to import data and click **New Table**.
@@ -117,3 +118,18 @@ Within iteration published model will be evaluated. If the evaluated accuracy is
 3. To check iteration result go either to Evaluation Events table or Chart view. You can find there information about model quality calculated based on feedback data (monitoring), retrained model quality (new model version created and evaluated).
 
 4. To see the list of automatically trained models and their quality go to Version History located at bottom of Overview tab (model View Details -> Overview).
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

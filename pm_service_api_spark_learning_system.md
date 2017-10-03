@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,8 +14,8 @@ lastupdated: "2017-09-25"
 
 # Continuous learning system <span class='tag--beta'>Beta</span>
 
-Continuous learning system provides automated monitoring of model performance, retraining and redeployment to ensure right predictions quality.
-
+The {{site.data.keyword.pm_full}} service includes a continuous learning system. Continuous learning systems provide automated monitoring of model performance, retraining, and redeployment to ensure right predictions quality.
+{: shortdesc}
 
 **Scenario name**: Best drug for heart treatment selection.
 
@@ -27,7 +27,7 @@ shares it with you (the developer). Your task is to deploy the model, set learni
 
 ## Using the sample model
 
-1. Go to the **Samples** tab of the IBM® Watson™ Machine Learning Dashboard.
+1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}} Dashboard.
 
 2. In the **Sample Models** section, find the Heart Drug Selection tile and click the **Add model** icon (+).
 
@@ -35,7 +35,7 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
 
 ## Generating the access token
 
-Generate an access token using the user and password available from the Service Credentials tab of the IBM Watson Machine Learning service instance.
+Generate an access token using the user and password available from the Service Credentials tab of the {{site.data.keyword.pm_full}} service instance.
 
 Request example:
 
@@ -311,7 +311,7 @@ In this subsection you will learn how to configure continuous learning system fo
 
 ### Prepare Authorization header
 
-To prepare Authorization header that combines Watson Machine Learning token and Spark instance credentials provide the following details:
+To prepare Authorization header that combines {{site.data.keyword.pm_full}} token and Spark instance credentials provide the following details:
 
 *  The access token created in the previous step
 *  Spark service credentials, which can be found on the Service Credentials tab of the Bluemix Spark service dashboard. Before making the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
@@ -337,10 +337,10 @@ To prepare Authorization header that combines Watson Machine Learning token and 
 
 Learning System requires connection to training data (data used in model training) as well as feedback data (data that will be used to evaluate trained model). Use below instruction to prepare  **DRUG_FEEDBACK_DATA** table in **Db2 Warehouse on Cloud**.
 
-- Create a [Db2 Warehouse on Cloud Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
-- Create the **DRUG_FEEDBACK_DATA** table in **Db2 Warehouse on Cloud**.
+- Create a [{{site.data.keyword.dashdbshort}} Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
+- Create the **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort}}**.
   + Download  [drug_feedback_data.csv](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/drug-selection/data/drug_feedback_data.csv) file from git repository.
-  + Click the **Open the console** to get started with **Db2 Warehouse on Cloud** icon.
+  + Click the **Open the console** to get started with **{{site.data.keyword.dashdbshort_notm}}** icon.
   + Select the **Load Data** and **Desktop** load type.
   + **Drag and drop** previously downloaded file and press **Next**.
   + Select **Schema** to import data and click **New Table**.
@@ -408,7 +408,6 @@ curl -v -X PUT \
         }' \
     https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/learning_configuration
 ```
-
 {: codeblock}
 
 Output example:
@@ -557,3 +556,18 @@ Output example:
 }
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

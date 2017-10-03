@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -13,6 +13,10 @@ lastupdated: "2017-09-25"
 {:pre: .pre}
 
 # Deploying streaming models <span class='tag--beta'>Beta</span>
+
+You can use the {{site.data.keyword.pm_full}} service to deploy the model and
+generate predictive analytics by making score requests against the deployed streaming model.
+{: shortdesc}
 
 **Note**: This functionality is currently in beta and only available
 for use with Spark MLlib. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
@@ -31,7 +35,7 @@ See this [document](https://github.com/pmservice/tweet-sentiment-prediction) for
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
+1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 2. In the Sample Models section, find the Sentiment Prediction
    tile and click the Add model button (+).
@@ -42,7 +46,7 @@ of available models on the Models tab.
 
 ## Creating a streaming deployment with IBM Message Hub
 
-1.  Go to the Models tab of the IBM® Watson™ Machine Learning Dashboard.
+1.  Go to the Models tab of the {{site.data.keyword.pm_full}} Dashboard.
 2.  From ACTIONS menu select Create Deployment.
 3.  In Create Deployment form provide Name, Description and Stream Type.
 4.  You must provide the following inputs:
@@ -126,7 +130,7 @@ The prediction result is sent to defined MessageHub topic (Output connection).
 
 You can check the status, and parameters related to the deployed model.
 
-1. Go to the Deployments tab of the IBM® Watson™ Machine Learning
+1. Go to the **Deployments** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 2. From **Actions** menu, click **View Details**.
 
@@ -135,6 +139,21 @@ You can check the status, and parameters related to the deployed model.
 You can delete the deployment if it's no longer needed using a
 query such as the following sample.
 
-1. Go to the Deployments tab of the IBM® Watson™ Machine Learning
+1. Go to the **Deployments** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
-2. From ACTIONS menu select Delete.
+2. From the **Actions** menu click **Delete**.
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

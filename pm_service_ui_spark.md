@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,13 +14,13 @@ lastupdated: "2017-09-25"
 
 # Service Dashboard
 
-
-The Machine Learning service on top of [REST APIs](https://watson-ml-api.mybluemix.net/) provides Administration Dashboard.
+The {{site.data.keyword.pm_short}} service on top of [REST APIs](https://watson-ml-api.mybluemix.net/) provides Administration Dashboard.
 Manage models in the administration dashboard, and use the dashboard to create online, batch, or streaming deployments integrated with your applications.
+{: shortdesc}
 
 Manage the Data Science Experience files (Spark and Python models)
-that are available on an instance of the Machine Learning service
-through the Watson Machine Learning Dashboard:
+that are available on an instance of the {{site.data.keyword.pm_short}} service
+through the {{site.data.keyword.pm_full}} Dashboard:
 
 *  Work with samples (models, notebooks and applications)
 *  Display model details
@@ -35,6 +35,8 @@ through the Watson Machine Learning Dashboard:
 *  Monitor model performance
 
 **Note**: Working with multiple dashboard instances opened in separate tabs of the same browser is not supported.
+
+## Learn more
 
 See the following sections for Dashboard examples of:
 

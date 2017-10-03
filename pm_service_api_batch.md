@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 {:new_window: target="_blank"}
@@ -13,41 +13,19 @@ lastupdated: "2017-09-25"
 
 # Machine Learning service batch job API for IBM SPSS Modeler models
 
-
-*  [Deleting jobs](#deleting-jobs)
-
-*  [Checking the status of a job](#checking-the-status-of-a-job)
-
-*  [Resubmit a job](#resubmit-a-job)
-
-*  [Submit a job against an uploaded Modeler stream file](#submit-a-job-against-an-uploaded-modeler-stream-file)
-
-*  [Upload a stream file to use in your jobs](#upload-a-stream-file-to-use-in-your-jobs)
-
-*  [Job types](#job-types)
-
-*  [Job status](#job-status)
-
-*  [Job API details](#job-api-details)
-
-*  [Job definition JSON](#job-definition-json)
-
-*  [Batch job API details](#batch-job-api-details)
-
-The batch job API for the Machine Learning service supports the
+The batch job API for the {{site.data.keyword.pm_full}} service supports the
 long-running tasks related to model training, model evaluation,
 and batch scoring. This API manages two asset types: the SPSS
 Modeler stream files used in the batch jobs, and the job
-definitions submitted. For each Modeler stream file uploaded,
+definitions submitted. 
+{: shortdesc}
+
+For each Modeler stream file uploaded,
 there may be many jobs of many types submitted. If a job has the
 potential to update the Modeler stream file contents, the
 modified file will be included in the job result attachments. In
 a model evaluation job type, all evaluation files generated will
 be in the job result's attachments.
-
-For an example of a batch job adoption, please refer to the
-following notebook: [From SPSS stream to batch scoring with
-Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37).
 
 **Note**: The data that is shown in the dashboard is only related to real-time predictions, including the data from the upload feature.
 
@@ -116,17 +94,14 @@ This request returns immediately, indicating success if the job
 definition was placed in the execution queue. There is no test of
 the ability to successfully execute the Modeler stream as
 configured in your job definition. The job will be executed by
-one of the Machine Learning job servers in the cloud, and you may
+one of the {{site.data.keyword.pm_short}} job servers in the cloud, and you may
 monitor its status. If performing model training and indicating
 that you want an auto refresh, the job will replace the original
 Modeler stream file upon successful execution of the job.
 
-For more information about the job definition JSON, see [Job
-definition JSON](#job-definition-json).
-
 ## Upload a stream file to use in your jobs
 
-**Note**: The Machine Learning dashboard is only for real-time
+**Note**: The {{site.data.keyword.pm_short}} dashboard is only for real-time
 scoring. You cannot use it for running jobs (batch scoring).
 
 To make a Modeler stream file accessible for jobs, use the `PUT` command:
@@ -266,7 +241,7 @@ Access key returned as credentials in provision or bind:
 ```
 {: codeblock}
 
-User-specified `job ID`. Must be unique to a Machine Learning
+User-specified `job ID`. Must be unique to a {{site.data.keyword.pm_short}}
 service instance:
 
 ```
@@ -592,7 +567,7 @@ to use in your jobs. Note that `/pm/v1/file` is used.
 Note that the ID should be the same as the `file ID` used in the
 `PUT` API. The name is not required, but for model training and
 auto refresh the job result will be saved using the name defined
-here. If name isn't defined, the Machine Learning service will
+here. If name isn't defined, the {{site.data.keyword.pm_short}} service will
 generate the result according to predefined naming rules.
 
 ### Job settings
@@ -688,30 +663,6 @@ the insertMode attribute:
 **Refresh** – existing rows from the table are deleted before
    inserting new rows
    
-Bulk loading can be used to improve insert performance. 
-Support for bulk-loading can be enabled using bulkLoading attribute:
-
-**Off** - bulk loading is disabled
-
-**ODBC** - bulk loading via ODBC driver
-
-
-```
-"exports": [
-     {
-          "odbc": {
-               "dbRef”; “db1”,
-               "table": "DRUGSCORES",
-               “insertMode”:”Append”
-          },
-          "node": "ExportScores",
-          "attributes": [],
-          "bulkLoading": "Off"
-     }
-],
-```
-{: codeblock}
-
 The table is the database table name to write the job results to.
 The node is the terminal node name for the stream. Similar to the
 Source node settings, node identifies the original Output node in
@@ -997,3 +948,12 @@ Other error. JSON of exception returned:
 @ApiResponse(code = 500)
 ```
 {: codeblock}
+
+## Learn more
+
+For an example of a batch job adoption, please refer to the
+following notebook: [From SPSS stream to batch scoring with
+Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37).
+
+For more information about the job definition JSON, see [Job
+definition JSON](#job-definition-json).

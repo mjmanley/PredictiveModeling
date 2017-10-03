@@ -14,24 +14,31 @@ lastupdated: "2017-09-18"
 
 # Scoring online models
 
+Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
+generate predictive analytics by making score requests against
+the deployed online model.
+{: shortdesc}
+
 **Scenario name**: Product line prediction.
 
 **Scenario description**: A company that sells outdoor equipment has
 built and deployed a model that predicts client interest in their
 product line. Your task is to make score requests against the deployed model.
 
-**Note: For model deployment instructions, please refer to [Deploying online models](pm_service_api_spark_online.html)
+For information about deploying a model, see [Deploying online models](pm_service_api_spark_online.html).
 
-Hint: In the examples below, it's assumed that you have "scoring_url" from your online deployment details.
+In the following examples, it's assumed that you have the `scoring_url` value from your online deployment details.
 
 Example record to be used in scoring:
 {"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}
 
-### [BASH](#bash) |  [PYTHON](#python) | [SCALA](#scala) | [JAVA](#java) | [JAVASCRIPT](#javascript)
+### Runtime examples
 
-<a name="bash">
+[BASH](#bash) |  [PYTHON](#python) | [SCALA](#scala) | [JAVA](#java) | [JAVASCRIPT](#javascript)
+
+
 ## Bash
-</a>
+
 ```
 curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
@@ -54,9 +61,8 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 ```
 {: codeblock}
 
-<a name="bash">
+
 ## Python
-</a>
 
 ```
 import urllib3, requests, json
@@ -82,9 +88,7 @@ response_scoring = requests.post(scoring_url, json=payload_scoring, headers=head
 ```
 {: codeblock}
 
-<a name="scala">
 ## Scala
-</a>
 
 ```
 import scalaj.http.{Http, HttpOptions}
@@ -116,9 +120,7 @@ val response_scoring = Http(scoring_url).postData(payload_scoring).header("Conte
 ```
 {: codeblock}
 
-<a name="java">
 ## Java
-</a>
 
 ```
 import java.io.*;
@@ -231,9 +233,7 @@ public class HttpClientTest {
 ```
 {: codeblock}
 
-<a name="javascript">
 ## JavaScript
-</a>
 
 ```
 var wml_credentials = new Map();
@@ -295,3 +295,18 @@ apiGet(wml_credentials.get("url"),
     });
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

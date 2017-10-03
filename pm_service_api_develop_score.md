@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,14 +14,15 @@ lastupdated: "2017-09-25"
 
 # Scoring with a deployed predictive model
 
+You can use the {{site.data.keyword.pm_full}} service to post the input data to use by the deployed model through the use of an API call. You can use this method to generate and return the predictive analytics in the score results.
+{: shortdesc}
 
+```
 POST http://{PA Bluemix load balancer
 URL}/pm/v1/score/{contextId}?accesskey={access_key for this bound
 application}
-
-Use this API call to post the input data to use by the deployed
-model to generate and return the predictive analytics in the
-score results.
+```
+{: codeblock}
 
 Request example:
 
@@ -68,3 +69,18 @@ Response when scoring request fails:
         }  
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

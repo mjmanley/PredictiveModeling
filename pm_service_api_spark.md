@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,16 +14,16 @@ lastupdated: "2017-09-25"
 
 # Service API
 
-
-The Machine Learning service is a set of REST APIs called from
+The {{site.data.keyword.pm_short}} service is a set of REST APIs called from
 any programming language, permitting integration of Data Science
 Experience developed analytics in your applications. Bind your
-Bluemix applications to the Machine Learning service instance and
+{{site.data.keyword.Bluemix_short}} applications to the {{site.data.keyword.pm_short}} service instance and
 generate the predictive analytics that your applications need to
 deliver higher value to your users. Manage models in the
 [administration dashboard](pm_service_ui_spark.html), and use the dashboard to create online,
 batch, or streaming deployments integrated with your
 applications.
+{: shortdesc}
 
 Develop applications against the Data Science Experience files
 (Spark and Python models) that are deployed on a service instance
@@ -32,7 +32,7 @@ through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 *  Retrieve the metadata for a given predictive model
 *  Deploy models and manage deployed models
     *  Online deployment (scoring)
-    *  Batch deployment (supporting Db2 Warehouse on Cloud)
+    *  Batch deployment (supporting {{site.data.keyword.dashdbshort}})
     *  Streaming deployment (supporting IBM MessageHub)
 *  Retrieve the metadata for a given deployment
 *  Generate predictive analytics by making score requests against
@@ -41,5 +41,20 @@ through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 See the following sections for examples of REST API use:
 
 *  [Online deployment and scoring](pm_service_api_spark_online.html)
-*  [Batch deployment with Db2 Warehouse on Cloud](pm_service_api_spark_batch.html)
+*  [Batch deployment with {{site.data.keyword.dashdbshort}}](pm_service_api_spark_batch.html)
 *  [Streaming deployment with MessageHub](pm_service_api_spark_streaming.html)
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

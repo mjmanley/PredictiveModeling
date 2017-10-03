@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,22 +14,10 @@ lastupdated: "2017-09-25"
 
 # Persisting models
 
+Use the {{site.data.keyword.pm_full}} service to provide model versioning and keep the machine learning process well organized. You can do this by using the versioning, metadata, and access token capabilities of the {{site.data.keyword.pm_short}} service.
+{: shortdesc}
 
-*  [Model persistence and version control](#model-persistence-and-version-control)
-
-   *  [Generating the access token](#generating-the-access-token)
-
-   *  [Creating pipeline metadata](#creating-pipeline-metadata)
-
-   *  [Creating pipeline version](#creating-pipeline-version)
-
-   *  [Uploading pipeline content](#uploading-pipeline-content)
-
-   *  [Creating pipeline model metadata](#creating-pipeline-model-metadata)
-
-   *  [Creating pipeline model version](#creating-pipeline-model-version)
-
-   *  [Uploading pipeline model content](#uploading-pipeline-model-content)
+## Model persistence and version control
 
 Data scientists are continuously striving to improve their models
 as part of their research and development. They may add new
@@ -39,19 +27,18 @@ keeping track of changes can quickly become a problem. Here we
 will illustrate ways to help a data scientists by providing model
 versioning and keeping the whole process well organized.
 
-Before beginning, if you are first interested in model
-development, refer to the following notebooks:
-
-*  [Developing SparkML models with Python](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c14353512ef14d)
-
-*  [Developing SparkML models with Scala](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c1435351309e93)
-
-## Model persistence and version control
+*  [Generating the access token](#generating-the-access-token)
+*  [Creating pipeline metadata](#creating-pipeline-metadata)
+*  [Creating pipeline version](#creating-pipeline-version)
+*  [Uploading pipeline content](#uploading-pipeline-content)
+*  [Creating pipeline model metadata](#creating-pipeline-model-metadata)
+*  [Creating pipeline model version](#creating-pipeline-model-version)
+*  [Uploading pipeline model content](#uploading-pipeline-model-content)
 
 ### Generating the access token
 
 Generate an access token using the user and password available on
-the Service Credentials tab of the IBM® Watson™ Machine Learning
+the Service Credentials tab of the {{site.data.keyword.pm_full}}
 service instance.
 
 Request example:
@@ -373,3 +360,11 @@ Example response:
 {"ok":"true"}
 ```
 {: codeblock}
+
+## Learn more
+
+To learn more about model development, refer to the following notebooks:
+
+*  [Developing SparkML models with Python](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c14353512ef14d)
+
+*  [Developing SparkML models with Scala](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c1435351309e93)

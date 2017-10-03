@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,6 +14,10 @@ lastupdated: "2017-09-25"
 
 # Deploying streaming models <span class='tag--beta'>Beta</span>
 
+Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
+generate predictive analytics by making score requests against
+the deployed model.
+{: shortdesc}
 
 **Note**: This functionality is currently in beta and only available
 for use with Spark MLlib. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
@@ -34,7 +38,7 @@ See this document for more information.
 
 ## Using the sample model
 
-1. Go to the Samples tab of the IBM® Watson™ Machine Learning
+1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
 2. In the Sample Models section, find the Sentiment Prediction
@@ -609,3 +613,18 @@ X-Xss-Protection: 1; mode=block
 X-Global-Transaction-ID: 2025130991
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).
