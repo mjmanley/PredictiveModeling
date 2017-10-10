@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 {:new_window: target="_blank"}
@@ -16,17 +16,17 @@ lastupdated: "2017-09-25"
 
 # Troubleshooting
 
-Here are the answers to common troubleshooting questions about using IBM Watson Machine Learning.
+Here are the answers to common troubleshooting questions about using {{site.data.keyword.pm_full}}.
 {: shortdesc}
 
-## Getting help and support for Watson Machine Learning
+## Getting help and support for Machine Learning
 {: #gettinghelp}
 
-If you have problems or questions when using Watson Machine Learning, you can get help by searching for information or by asking questions through a forum. You can also open a support ticket.
+If you have problems or questions when using {{site.data.keyword.pm_short}} , you can get help by searching for information or by asking questions through a forum. You can also open a support ticket.
 
-When using the forums to ask a question, tag your question so that it is seen by the machine learning development teams.
+When using the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.pm_short}} development teams.
 
-If you have technical questions about machine learning, post your question on <a href="http://stackoverflow.com/search?q=machine-learning+ibm-bluemix" target="_blank">Stack Overflow <img src="../icons/launch-glyph.svg" alt="External link icon"></a> and tag your question with "ibm-bluemix" and "machine-learning".
+If you have technical questions about {{site.data.keyword.pm_short}}, post your question on <a href="http://stackoverflow.com/search?q=machine-learning+ibm-bluemix" target="_blank">Stack Overflow <img src="../icons/launch-glyph.svg" alt="External link icon"></a> and tag your question with "ibm-bluemix" and "machine-learning".
 
 For questions about the service and getting started instructions, use the <a href="https://developer.ibm.com/answers/topics/machine-learning/?smartspace=bluemix" target="_blank">IBM developerWorks dW Answers <img src="../icons/launch-glyph.svg" alt="External link icon"></a> forum. Include the  "machine-learning" and "bluemix" tags.
 See [Getting help](https://console.bluemix.net/docs/support/index.html#getting-help) for more details about using the forums.
@@ -249,7 +249,7 @@ The patch payload contains more than one operation or the patch operation is dif
 Use only one operation in the patch payload which is `replace` operation
 {: tsResolve}
        
-## The given payload is missing required fields: [${fields.mkString(\",\")}] or the values of the fields are corrupted.
+## The given payload is missing required fields: FIELD or the values of the fields are corrupted.
 {: #ts_invalid_request_payload}
  
 There is no possibility to process action which is related to access to the underlying data set.
@@ -261,7 +261,7 @@ The access to the data set is not properly defined.
 Correct the access definition for the data set.
 {: tsResolve}
        
-## Provided evaluation method: $method is not supported. Supported values: [${supported.mkString(\",\")}].
+## Provided evaluation method: METHOD is not supported. Supported values: VALUE.
 {: #ts_evaluation_method_not_supported}
  
 There is no possibility to create learning configuration.
@@ -562,7 +562,7 @@ The following message displays when you try to score online: **Authorization fai
 This message displays when the token that is used for scoring has expired.
 {: tsCauses}
 
-Re-generate the token for this Watson Machine Learning instance and then retry. If you still see this issue contact IBM Support.
+Re-generate the token for this {{site.data.keyword.pm_full}} instance and then retry. If you still see this issue contact IBM Support.
 {: tsResolve}
 
 ## Unknown deployment identification:404

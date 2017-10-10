@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,13 +14,13 @@ lastupdated: "2017-09-25"
 
 # Using the service
 
-Note the following important information regarding the Machine
-Learning service.
+To make use of the {{site.data.keyword.pm_short}} service in your application, you must bind the service to the {{site.data.keyword.Bluemix_notm}} application and insert the necessary credentials to run the applicaiton into the `VCAP_SERVICES` environmental variable. 
+{: shortdesc}
 
 ## Steps to bind the service with Bluemix application
 
 You can download Node.js [sample code](https://github.com/pmservice/product-line-prediction/blob/master/README.md) to try the Machine
-Learning service. Complete the following steps to create your Bluemix application and bind the Machine Learning service. These examples use Node.js because it is a popular runtime. Others can be used such as iOS, Ruby, Perl, or Java.
+Learning service. Complete the following steps to create your Bluemix application and bind the {{site.data.keyword.pm_short}} service. These examples use Node.js because it is a popular runtime. Others can be used such as iOS, Ruby, Perl, or Java.
 
 Note that you can also perform steps 1-3 using the Bluemix Graphical Interface instead of the Cloud Foundry tool (cf).
 
@@ -38,7 +38,7 @@ Note that you can also perform steps 1-3 using the Bluemix Graphical Interface i
    ```
    {: codeblock}
 
-   This command creates one Machine Learning service instance
+   This command creates one {{site.data.keyword.pm_short}} service instance
    with the Free plan named `my_wml_free` in your Bluemix space.
 
 2. Use the `cf create-service-key` command to create service
@@ -52,11 +52,11 @@ Note that you can also perform steps 1-3 using the Bluemix Graphical Interface i
    For example:
 
    ```
-   cf create-service-key "IBM Watson Machine Learning - my instance" Credentials-1
+   cf create-service-key "IBM {{site.data.keyword.pm_full}} - my instance" Credentials-1
    ```
    {: codeblock}
 
-   This command creates Machine Learning service credentials.
+   This command creates {{site.data.keyword.pm_short}} service credentials.
 
 3. Use the cf bind-service command to bind the service instance
    `my_wml_free` to your application.
@@ -73,14 +73,14 @@ Note that you can also perform steps 1-3 using the Bluemix Graphical Interface i
    ```
    {: codeblock}
 
-   This command binds the Machine Learning service instance
+   This command binds the {{site.data.keyword.pm_short}} service instance
    `my_wml_free` to the Bluemix application `my_app1`.
 
 
 
-## Machine Learning credentials
+## IBM Watson Machine Learning credentials
 
-After you bind the Machine Learning service instance to your Bluemix application, the Machine Learning credentials are added to the `VCAP_SERVICES` environment variable:
+After you bind the {{site.data.keyword.pm_short}} service instance to your {{site.data.keyword.Bluemix}} application, the {{site.data.keyword.pm_short}} credentials are added to the `VCAP_SERVICES` environment variable:
 
 ```
     {
@@ -106,10 +106,10 @@ After you bind the Machine Learning service instance to your Bluemix application
    The `VCAP_SERVICES` environment variable includes the following
    information:
 
-   * `plan` - the Machine Learning plan that is used in the service provisioning.
-   * `url` - the address of the Machine Learning service instance.
+   * `plan` - the {{site.data.keyword.pm_short}} plan that is used in the service provisioning.
+   * `url` - the address of the {{site.data.keyword.pm_short}} service instance.
    * `access_key` - for SPSS Modeler streams only.
-   * `instance_id` - Machine Learning instance unique identifier.
+   * `instance_id` - {{site.data.keyword.pm_short}} instance unique identifier.
    * `username`, `password` - basic authorization needed to generate an access token to pass in all requests to this service instance. For example, you can generate an access token using a curl like this:
 
 Request example:
@@ -137,3 +137,18 @@ Request example:
     }
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

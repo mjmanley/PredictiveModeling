@@ -12,6 +12,8 @@ lastupdated: "2017-09-18"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
+
+
 # Scoring online models
 
 Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
@@ -32,12 +34,12 @@ In the following examples, it's assumed that you have the `scoring_url` value fr
 Example record to be used in scoring:
 {"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}
 
-### Runtime examples
+## Runtime examples
 
-[BASH](#bash) |  [PYTHON](#python) | [SCALA](#scala) | [JAVA](#java) | [JAVASCRIPT](#javascript)
+[Bash](#bash) |  [Python](#python) | [Scala](#scala) | [Java](#java) | [JavaScript](#javascript)
 
 
-## Bash
+### Bash
 
 ```
 curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
@@ -62,7 +64,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 {: codeblock}
 
 
-## Python
+### Python
 
 ```
 import urllib3, requests, json
@@ -88,7 +90,7 @@ response_scoring = requests.post(scoring_url, json=payload_scoring, headers=head
 ```
 {: codeblock}
 
-## Scala
+### Scala
 
 ```
 import scalaj.http.{Http, HttpOptions}
@@ -120,7 +122,7 @@ val response_scoring = Http(scoring_url).postData(payload_scoring).header("Conte
 ```
 {: codeblock}
 
-## Java
+### Java
 
 ```
 import java.io.*;
@@ -233,7 +235,7 @@ public class HttpClientTest {
 ```
 {: codeblock}
 
-## JavaScript
+### JavaScript
 
 ```
 var wml_credentials = new Map();

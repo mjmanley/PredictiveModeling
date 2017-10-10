@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2017-09-25"
 The modeling methods available on the SPSS Modeler modeling
 palette enable you to derive new information from your data and
 to develop predictive models. Each method has certain strengths
-and is best suited for particular types of problems.
+and is best suited for particular types of machine learning problems.
 {: .shortdesc}
 
 For details
@@ -34,7 +34,8 @@ your applications.
 
 
 ## Steps to bind the service with Bluemix application
-Complete the following steps to create your Bluemix application and bind it to the Machine Learning service.
+
+Complete the following steps to create your Bluemix application and bind it to the {{site.data.keyword.pm_short}} service.
 
 1. Download Node.js sample application code from [github repository](https://github.com/pmservice/customer-satisfaction-prediction).
 
@@ -53,7 +54,7 @@ Complete the following steps to create your Bluemix application and bind it to t
    ```
    {: codeblock}
 
-   This command creates one Machine Learning service instance
+   This command creates one {{site.data.keyword.pm_short}} service instance
    with Free plan named my_pm_free in your Bluemix space.
 
 3. Use the `cf create-service-key` command to create service
@@ -71,7 +72,7 @@ Complete the following steps to create your Bluemix application and bind it to t
    ```
    {: codeblock}
 
-   This command creates Machine Learning service credentials.
+   This command creates {{site.data.keyword.pm_short}} service credentials.
 
 4. Use the cf bind-service command to bind the service instance
    my_pm_free to your application.
@@ -88,13 +89,13 @@ Complete the following steps to create your Bluemix application and bind it to t
    ```
    {: codeblock}
 
-   This command binds the Machine Learning service instance
+   This command binds the {{site.data.keyword.pm_short}} service instance
    `my_pm_free` to the Bluemix application my_app1.
 
-5. Machine Learning credentials:
+5. {{site.data.keyword.pm_short}} credentials:
 
-   After you bind the Machine Learning service instance to your
-   Bluemix application, the Machine Learning credentials are
+   After you bind the {{site.data.keyword.pm_short}} service instance to your
+   Bluemix application, the {{site.data.keyword.pm_short}} credentials are
    added to the `VCAP_SERVICES` environment variable:
 
 ```
@@ -118,10 +119,10 @@ Complete the following steps to create your Bluemix application and bind it to t
    <dl>
 
    <dt>plan</dt>
-   <dd>The Machine Learning plan that is used in the service provisioning.</dd>
+   <dd>The {{site.data.keyword.pm_short}} plan that is used in the service provisioning.</dd>
 
    <dt>url</dt>
-   <dd>The address of the Machine Learning service instance.</dd>
+   <dd>The address of the {{site.data.keyword.pm_short}} service instance.</dd>
 
    <dt>access_key</dt>
    <dd>The query parameter accessKey to pass in all requests
@@ -147,3 +148,18 @@ Get https://ibm-watson-ml.mybluemix.net/pm/v1/model/sales_model2?accesskey=XXXXX
     }
 ```
 {: codeblock}
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

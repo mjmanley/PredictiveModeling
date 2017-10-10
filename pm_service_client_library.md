@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-05"
+lastupdated: "2017-10-02"
 
 ---
 
@@ -14,27 +14,28 @@ lastupdated: "2017-09-05"
 
 # Machine Learning client libraries
 
-Client libraries wrappers for REST APIs of the {{site.data.keyword.pm_short}} service are developed in Python and Scala. We provide [sample notebooks](toc.html/#Sample notebooks) presenting model persistence to {{site.data.keyword.pm_full}} repository using client libraries.
-{: shortdesc}
+## Common API client library ``watson-machine-learning-client`` <span class='tag--beta'>Beta</span>
+Client library to use the IBM Watson Machine Learning services in Python and available in pip as ``watson-machine-learning-client``.
+The following [sample notebook](https://apsportal.ibm.com/analytics/notebooks/1fed143e-1877-42bd-b927-7d366e73745b/view?access_token=4b39718f9e1f1de55e6e67e8dcbb5f0cac848f390d73478d0dea9c1a8af24550) shows:
+* model persistence,
+* online deployment,
+* and scoring using common API client.
 
-The documentation for libraries are available for both Scala and Python programmig languages:
+The documentation for common API client library is available here:
+* [Python common API client documentation](http://wml-api-pyclient.mybluemix.net/).
 
-- [Scala Repository documentation](https://watson-ml-staging-libs.mybluemix.net/repository-scala/)
-- [Python Repository Module documentation](https://watson-ml-staging-libs.mybluemix.net/repository-python/)
+### Restrictions:
 
-Currently those libraries can be used in [Data Science Experience](https://datascience.ibm.com).
+* The common API client is in **beta** stage now.
+* Xgboost, scikit-learn and pyspark must be installed as prerequisites.
 
-## Learn more
 
-Ready to get started? To create an instance of a service or bind
-an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+## Repository API client library ``repository``
+Client libraries wrappers for Repository REST APIs of Machine Learning service are developed in Python and Scala.
+We provide [sample notebooks](toc.html/#Sample notebooks) presenting model persistence to Watson Machine Learning repository using repository client libraries.
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+The documentation for repository libraries are available here:
+* [Scala Repository Module documentation](https://watson-ml-staging-libs.mybluemix.net/repository-scala/)
+* [Python Repository Module documentation](https://watson-ml-staging-libs.mybluemix.net/repository-python/)
 
-For details about SPSS Modeler and the modeling algorithms it
-provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
-
-For details about IBM Data Science Experience and the modeling
-algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).
+Note: Repository libraries are available on [Data Science Experience](https://datascience.ibm.com) only.

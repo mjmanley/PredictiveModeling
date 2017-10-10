@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-09-25"
+lastupdated: "2017-10-02"
 
 ---
 {:new_window: target="_blank"}
@@ -12,6 +12,11 @@ lastupdated: "2017-09-25"
 {:pre: .pre}
 
 # Development and persistence of the custom model
+
+Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
+generate predictive analytics by making score requests against
+the deployed model.
+{: shortdesc}
 
 ## Working with custom models
 
@@ -42,19 +47,12 @@ Use Data Science Experience to create custom models. After signing up, sign in a
    **Create**. The project name you specified will also be used as
    your Target Container's name.
 
-4. After the project is created, you can either:
-   *  **add notebooks** and start developing your own models, or you can upload one of the
-   following sample notebooks:
-
-    *  [Developing Spark MLlib models with Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
-
-    *  [Developing Spark MLlib models with Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
-
-    *  [Developing scikit-learn models with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
-
-   * **add models** and start developing your own models using model wizard
-
-
+4. After the project is created, you can perform one of the following tasks:
+   *  **add notebooks** and start developing your own models or upload one of the following sample notebooks:
+        *  [Developing Spark MLlib models with Python](https://apsportal.ibm.com/analytics/notebooks/89492fd6-a641-4819-9176-3d9381561df9/view?access_token=d80bef1a172d1d83d3721b101886337158457281774186f181a2e6a5b57f5ec7)
+        *  [Developing Spark MLlib models with Scala](https://apsportal.ibm.com/analytics/notebooks/c8652d2c-bfc9-4354-8168-f1c9f7f8dfc2/view?access_token=02a83fea8450a452c8de76af98dae078459d0f56810ddef4f4c62d5bc4fc72cf)
+        *  [Developing scikit-learn models with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
+   * **add models** and start developing your own models using model wizard.
 
 ### Deployment and scoring of the custom model
 
@@ -63,7 +61,20 @@ and scoring models, or see the scoring section of the notebooks
 linked to previously.
 
 *  [Deploying online models](pm_service_api_spark_online.html)
-
 *  [Deploying batch models](pm_service_api_spark_batch.html)
-
 *  [Deploying streaming models](pm_service_api_spark_streaming.html)
+
+## Learn more
+
+Ready to get started? To create an instance of a service or bind
+an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
+[Using the service with SPSS models](using_pm_service.html).
+
+If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+API for SPSS models](pm_service_api_spss.html).
+
+For details about SPSS Modeler and the modeling algorithms it
+provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
+
+For details about IBM Data Science Experience and the modeling
+algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).
