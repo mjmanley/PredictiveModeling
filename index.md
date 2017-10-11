@@ -42,12 +42,11 @@ To use {{site.data.keyword.pm_full}}, from the {{site.data.keyword.Bluemix_short
 
 ## Using Machine Learning with Data Science Experience
 
-{{site.data.keyword.pm_full}} is integrated with IBM Data Science Experience. You can use Machine Learning API client libraries in Data Science Experience notebooks; you must have a Machine Learning instance to use the Model Builder, and Flow Editor.  
-
+{{site.data.keyword.pm_full}} is integrated with IBM Data Science Experience. You can use Machine Learning API client libraries in Data Science Experience notebooks; you must have a Machine Learning instance to use the Model Builder, and Flow Editor.
 
 ## Using Machine Learning with SPSS Modeler
 
-{{site.data.keyword.pm_full}}
+{{site.data.keyword.pm_full}} is integrated with IBM SPSS Modeler. You can use Machine Learning API client libraries to .  
 
 ## About
 
