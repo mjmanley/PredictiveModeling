@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 {:new_window: target="_blank"}
@@ -15,7 +15,7 @@ lastupdated: "2017-10-02"
 
 The batch job API for the {{site.data.keyword.pm_full}} service supports the
 long-running tasks related to model training, model evaluation,
-and batch scoring. This API manages two asset types: the SPSS
+and batch scoring. This API manages two asset types: the IBM® SPSS®
 Modeler stream files used in the batch jobs, and the job
 definitions submitted. 
 {: shortdesc}
@@ -627,8 +627,7 @@ in the Modeler stream as identified by the source node name.
                "dbRef”; “db2”,
                "table": "DRUG1N",
           },
-          "node": "ScoreInput",
-          "attributes": []
+          "node": "ScoreInput"
      }
 ],
 ```
@@ -734,8 +733,7 @@ The following formats are supported: HTML, JPG, PNG, RTF, SAV, TAB, and XML.
                                    "dbRef”; “db”,
                                    "table": "DRUG1N",
                          },
-                         "node": "ScoreInput",
-                         "attributes": []
+                         "node": "ScoreInput"
                     }
           ],
           "parameterOverride": [
@@ -755,12 +753,12 @@ The following formats are supported: HTML, JPG, PNG, RTF, SAV, TAB, and XML.
 
 ## Batch job API details
 
-The following sections provide batch job SPSS Modeler file
+The following sections provide batch job IBM® SPSS® Modeler file
 management API details.
 
 `PUT /v1/file/{id}`
 
-Description: Uploads an SPSS Modeler stream file for use in batch
+Description: Uploads an IBM® SPSS® Modeler stream file for use in batch
 jobs.
 
 **Note**: If there is a file already stored under the specified ID,
@@ -899,7 +897,7 @@ Other error. JSON of exception returned:
 
 `GET /v1/file/{id}`
 
-Description: Retrieves the SPSS Modeler stream file stored for
+Description: Retrieves the IBM® SPSS® Modeler stream file stored for
 use in the batch job processing under the specified ID.
 
 Content Types:
@@ -927,7 +925,7 @@ User-specified ID for the file when uploaded:
 
 Responses:
 
-Success. Returns the SPSS Modeler file:
+Success. Returns the IBM® SPSS® Modeler file:
 
 ```
 @ApiResponse(code = 200)

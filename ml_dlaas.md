@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 {:new_window: target="_blank"}
@@ -10,10 +10,12 @@ lastupdated: "2017-10-02"
 {:screen: .screen}
 {:codeblock: .codeblock}
 {:pre: .pre}
-# IntroductionUse {{site.data.keyword.pm_full}} to perform deep learning analysis. You can leverage algorithms to solve complex semantic problems through the use of the deep learning framework and APIs. 
+# Introduction to deep learningUse {{site.data.keyword.pm_full}} to perform deep learning experiments. You can leverage algorithms to solve complex semantic problems through the use of the deep learning framework and APIs. 
 {: shortdesc}
 
-In {{site.data.keyword.pm_full}}, you work with deep learning by calling API commands.
+In {{site.data.keyword.pm_full}}, you work with deep learning by calling API commands. The following process flow shows how deep learning experments work within the context of the Watson Machine Learning environment when you use the REST API:
+
+![deep learning process flow](images/ml_dlaas_api_calls.png)
 
 Deep learning is supported by [frameworks](ml_dlaas_supported_framework.html).
 

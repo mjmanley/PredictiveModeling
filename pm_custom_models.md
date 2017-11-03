@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 {:new_window: target="_blank"}
@@ -35,9 +35,11 @@ the deployed model.
 
 ### Development and persistence of the custom model
 
-Use Data Science Experience to create custom models. After signing up, sign in and complete the following steps.
+#### Using Data Science Experience
 
-1. Create an organization and a space. The first time you sign in, you'll be asked for it, 
+Use [Data Science Experience](https://console.bluemix.net/catalog/services/data-science-experience) to create custom models. After signing up, sign in and complete the following steps.
+
+1. Create an organization and a space. The first time you sign in, you'll be asked for it,
    so click **Continue** and accept the default values.
 
 2. After the organization is created, go to **Projects** and click
@@ -54,6 +56,15 @@ Use Data Science Experience to create custom models. After signing up, sign in a
         *  [Developing scikit-learn models with Python](https://apsportal.ibm.com/analytics/notebooks/5215a61a-16d7-4fa2-b060-e3e243ceebe3/view?access_token=70f48c95c5571a614ce97484d3f168b1d9b6aeebce015187d3d77ce6038f025e)
    * **add models** and start developing your own models using model wizard.
 
+
+#### Using local environment
+
+You can also use environment of your choice to develop model and later publish, deploy and score using Watson Machine Learning  [common API client library]() available on pypi.
+For more information about client library please refer to this sample [notebook](https://dataplatform.ibm.com/analytics/notebooks/1fed143e-1877-42bd-b927-7d366e73745b/view?access_token=4b39718f9e1f1de55e6e67e8dcbb5f0cac848f390d73478d0dea9c1a8af24550&cm_mc_uid=30670837705115063231884&cm_mc_sid_50200000=1509364125) and [documentation](pm_service_client_library.html).
+
+**Note:** Please note that common API client library is in ***beta*** stage now.
+
+
 ### Deployment and scoring of the custom model
 
 See the following sections for instructions regarding deploying
@@ -64,16 +75,18 @@ linked to previously.
 *  [Deploying batch models](pm_service_api_spark_batch.html)
 *  [Deploying streaming models](pm_service_api_spark_streaming.html)
 
+
+
 ## Learn more
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

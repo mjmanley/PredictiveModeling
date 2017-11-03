@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -14,18 +14,18 @@ lastupdated: "2017-10-02"
 
 # Using the service
 
-The modeling methods available on the SPSS Modeler modeling
+The modeling methods available on the IBM® SPSS® Modeler modeling
 palette enable you to derive new information from your data and
 to develop predictive models. Each method has certain strengths
 and is best suited for particular types of machine learning problems.
 {: .shortdesc}
 
 For details
-about SPSS Modeler and the modeling algorithms it provides, see
+about IBM® SPSS® Modeler and the modeling algorithms it provides, see
 [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-After the input and output requirements of your Bluemix
-application and SPSS Modeler scoring branch design are
+After the input and output requirements of your {{site.data.keyword.Bluemix_notm}}
+application and IBM® SPSS® Modeler scoring branch design are
 implemented, your Data Analyst can change any internal aspect of
 the scoring branch. The Data Analyst can even change the model
 algorithm(s) used in a refresh operation, ensuring your ability
@@ -33,9 +33,9 @@ to fine-tune your predictive analytics without needing to rewrite
 your applications.
 
 
-## Steps to bind the service with Bluemix application
+## Steps to bind the service with {{site.data.keyword.Bluemix_notm}} application
 
-Complete the following steps to create your Bluemix application and bind it to the {{site.data.keyword.pm_short}} service.
+Complete the following steps to create your {{site.data.keyword.Bluemix_notm}} application and bind it to the {{site.data.keyword.pm_short}} service.
 
 1. Download Node.js sample application code from [github repository](https://github.com/pmservice/customer-satisfaction-prediction).
 
@@ -55,7 +55,7 @@ Complete the following steps to create your Bluemix application and bind it to t
    {: codeblock}
 
    This command creates one {{site.data.keyword.pm_short}} service instance
-   with Free plan named my_pm_free in your Bluemix space.
+   with Free plan named my_pm_free in your {{site.data.keyword.Bluemix_notm}} space.
 
 3. Use the `cf create-service-key` command to create service
    credentials:
@@ -90,12 +90,12 @@ Complete the following steps to create your Bluemix application and bind it to t
    {: codeblock}
 
    This command binds the {{site.data.keyword.pm_short}} service instance
-   `my_pm_free` to the Bluemix application my_app1.
+   `my_pm_free` to the {{site.data.keyword.Bluemix_notm}} application my_app1.
 
 5. {{site.data.keyword.pm_short}} credentials:
 
    After you bind the {{site.data.keyword.pm_short}} service instance to your
-   Bluemix application, the {{site.data.keyword.pm_short}} credentials are
+   {{site.data.keyword.Bluemix_notm}} application, the {{site.data.keyword.pm_short}} credentials are
    added to the `VCAP_SERVICES` environment variable:
 
 ```
@@ -153,12 +153,12 @@ Get https://ibm-watson-ml.mybluemix.net/pm/v1/model/sales_model2?accesskey=XXXXX
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

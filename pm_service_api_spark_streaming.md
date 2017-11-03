@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -12,15 +12,13 @@ lastupdated: "2017-10-02"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Deploying streaming models <span class='tag--beta'>Beta</span>
+# Deploying streaming models
 
 Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
 generate predictive analytics by making score requests against
 the deployed model.
 {: shortdesc}
 
-**Note**: This functionality is currently in beta and only available
-for use with Spark MLlib. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 **Scenario name**: Sentiment Analysis.
 
@@ -32,9 +30,17 @@ it with you (the developer). Your task is to deploy the model and
 generate predictive analytics by making score requests against
 the deployed model.
 
-**Note: You can also play with sample python [notebook](https://apsportal.ibm.com/analytics/notebooks/913a7daa-cf39-414d-9017-3a7840a53c59/view?access_token=f1ebc10873a226f248f744b26ee7f71d53c81d5752b9d940e23a33518a3e115d)that creates sample model and classifies tweets.
+**Note:** You can also play with sample python [notebook](https://apsportal.ibm.com/analytics/notebooks/913a7daa-cf39-414d-9017-3a7840a53c59/view?access_token=f1ebc10873a226f248f744b26ee7f71d53c81d5752b9d940e23a33518a3e115d) that creates sample model and classifies tweets.
 
 See this document for more information.
+
+
+## Prerequisites
+To work with this example you will need:
+* [Message Hub](https://console.bluemix.net/catalog/services/message-hub) topics details which will be used as input (tweet text) for the model and storage for the model output (prediction results). Make sure that two topics are created: input with tweet text and output topic.
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
+
 
 ## Using the sample model
 
@@ -229,21 +235,21 @@ predictive model, provide the following details:
 *  The access token created in the previous step
 
 *  Spark service credentials, which can be found on the Service
-   Credentials tab of the Bluemix Spark service dashboard. Before
+   Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before
    making the deployment request, Spark credentials must be
    decoded as base64 and passed in the header of a curl request
    as X-Spark-Service-Instance.
 
    Depending on the operating system that you are using, you must issue one of the following terminal commands to perform base64 decoding and assign it to the environment variable.
 
-   On the macOS operating system, use the following command:
+   On the **macOS** operating system, use the following command:
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
    {: codeblock}
 
-   On the Microsoft Windows or Linux operating systems, you must use the `--wrap=0` parameter with the `base64` command to perform base64 decoding:
+   On the **Microsoft Windows** or **Linux** operating systems, you must use the `--wrap=0` parameter with the `base64` command to perform base64 decoding:
 
    ```
    spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
@@ -618,12 +624,12 @@ X-Global-Transaction-ID: 2025130991
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -25,14 +25,13 @@ batch, or streaming deployments integrated with your
 applications.
 {: shortdesc}
 
-Develop applications against the Data Science Experience files
-(Spark and Python models) that are deployed on a service instance
+Develop applications against Spark, Python and IBM® SPSS® models that are deployed on a service instance
 through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 
 *  Retrieve the metadata for a given predictive model
 *  Deploy models and manage deployed models
     *  Online deployment (scoring)
-    *  Batch deployment (supporting {{site.data.keyword.dashdbshort}})
+    *  Batch deployment (supporting Object Storage and {{site.data.keyword.dashdbshort}})
     *  Streaming deployment (supporting IBM MessageHub)
 *  Retrieve the metadata for a given deployment
 *  Generate predictive analytics by making score requests against
@@ -48,12 +47,12 @@ See the following sections for examples of REST API use:
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

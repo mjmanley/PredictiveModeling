@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-10-02"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Continuous learning system <span class='tag--beta'>Beta</span>
+# Continuous learning system
 
 The {{site.data.keyword.pm_full}} service includes a continuous learning system. Continuous learning systems provide automated monitoring of model performance, retraining, and redeployment to ensure right predictions quality.
 {: shortdesc}
@@ -20,15 +20,23 @@ The {{site.data.keyword.pm_full}} service includes a continuous learning system.
 **Scenario name**: Best drug for heart treatment selection.
 
 **Scenario description**: A biomedical company that produces heart drugs
-wants to deploy a model that select the best drug for heart treatment. When new evidence emerges on drug effectiveness model update should be considered. A data scientist prepared a predictive model and
+wants to deploy a model that selects the best drug for heart treatment. When new evidence emerges on drug effectiveness model update should be considered. A data scientist prepared a predictive model and
 shares it with you (the developer). Your task is to deploy the model, set learning configuration and execute learning iteration to evaluate, retrain and redeploy the model.
 
-**Note**: You can also play with sample python  [notebook](https://apsportal.ibm.com/analytics/notebooks/a97cde0b-5bb8-436a-ae82-83e96adc45e0/view?access_token=6baf4c722e452836f7b505205bc96d9a24b9333ee9b5c39453f6d7751987f798) that creates sample model, configures learning system and finally runs learning iteration.
+**Note**: You can also play with sample python  [notebook](https://dataplatform.ibm.com/analytics/notebooks/57bd0753-ccee-42bd-9d11-099a981e4fbe/view?access_token=40b77775b209dab516811a695ba1d5dbcab2dfb260c910daf3d985c9d4570325) that creates sample model, configures learning system and finally runs learning iteration.
+
+
+## Prerequisites
+
+To work with this example you will need the following services:
+
+* [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud) instance details, which will be used as feedback datastore (detailed information about feedback datastore are placed in below section **Prepare feedback dataset**).
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
 
 ## Using the sample model
 
 1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}} Dashboard.
-
 2. In the **Sample Models** section, find the Heart Drug Selection tile and click the **Add model** icon (+).
 
 Now you'll see the sample Heart Drug Selection model in the list of available models on the Models tab.
@@ -91,17 +99,19 @@ Output example:
       "usage":{
          "expiration_date":"2017-09-01T00:00:00.000Z",
          "computation_time":{
+            "limit":18000,
             "current":4
          },
          "model_count":{
-            "limit":1000,
+            "limit":200,
             "current":2
          },
          "prediction_count":{
+            "limit":5000,
             "current":16
          },
          "deployment_count":{
-            "limit":1000,
+            "limit":5,
             "current":1
          }
       },
@@ -157,7 +167,8 @@ Output example:
          "entity":{  
             "runtime_environment":"spark-2.0",
             "author":{  
-
+               "name":"IBM",
+               "email":""
             },
             "name":"Best Heart Drug Selection",
             "label_col":"DRUG",
@@ -314,41 +325,41 @@ In this subsection you will learn how to configure continuous learning system fo
 To prepare Authorization header that combines {{site.data.keyword.pm_full}} token and Spark instance credentials provide the following details:
 
 *  The access token created in the previous step
-*  Spark service credentials, which can be found on the Service Credentials tab of the Bluemix Spark service dashboard. Before making the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
+*  Spark service credentials, which can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before making the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
 
    Depending on the operating system that you are using, you must issue one of the following terminal commands to perform base64 encoding and assign it to the environment variable.
 
-   On the macOS operating system, use the following command:
+   On the **macOS** operating system, use the following command:
 
    ```
-   spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
-   ```
-   {: codeblock}
-
-   On the Microsoft Windows or Linux operating systems, you must use the `--wrap=0` parameter with the `base64` command to perform base64 encoding:
-
-   ```
-   spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net","instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
+   spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net", "instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64)
    ```
    {: codeblock}
 
+   On the **Microsoft Windows** or **Linux** operating systems, you must use the `--wrap=0` parameter with the `base64` command to perform base64 encoding:
+
+   ```
+   spark_credentials=$(echo '{"credentials": {"tenant_id": "s068-ade10277b64956-05b1d10fv12b","tenant_id_full": "00fd89e6-8cf2-4712-a068-ade10277b649_41f37bf2-1b95-4c65-a156-05b1d10fb12b","cluster_master_url": "https://spark.bluemix.net", "instance_id": "00fd89e6-8cf2-4712-a068-ade10277b649","tenant_secret": "c74c37cf-482a-4da4-836e-f32ca26ccbb9","plan": "ibm.SparkService.PayGoPersonal"},"version": "2.0"}' | base64 --wrap=0)
+   ```
+   {: codeblock}
 
 ### Prepare feedback dataset
 
-Learning System requires connection to training data (data used in model training) as well as feedback data (data that will be used to evaluate trained model). Use below instruction to prepare  **DRUG_FEEDBACK_DATA** table in **Db2 Warehouse on Cloud**.
+Learning System requires connection to training data (data used in model training) as well as feedback data. Feedback datastore is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is currently supported as a feedback datastore. Feedback table is managed, modified and used by Watson Machine Learning service.
+Use below instruction to prepare  **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort}}**.
 
-- Create a [{{site.data.keyword.dashdbshort}} Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
-- Create the **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort}}**.
-  + Download  [drug_feedback_data.csv](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/drug-selection/data/drug_feedback_data.csv) file from git repository.
-  + Click the **Open the console** to get started with **{{site.data.keyword.dashdbshort_notm}}** icon.
-  + Select the **Load Data** and **Desktop** load type.
-  + **Drag and drop** previously downloaded file and press **Next**.
-  + Select **Schema** to import data and click **New Table**.
-  + In the **new table** field type a name and click **Next**.
-  + For the **field separator** use a semicolon (;).
-  + Click **Next** to create table with uploaded data.
+1. Create a [{{site.data.keyword.dashdbshort}} Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
+2. Create the `DRUG_FEEDBACK_DATA` table in **{{site.data.keyword.dashdbshort}}**.
+   1. From the GitHub repository, download the [drug_feedback_data.csv](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/drug-selection/data/drug_feedback_data.csv) file.
+   2. To get started with **{{site.data.keyword.dashdbshort_notm}}**, click the **Open the console** icon.
+   3. Select the **Load Data** and **Desktop** load type.
+   4. **Drag and drop** previously downloaded file and press **Next**.
+   5. To import data, click **Schema** and then click **New Table**.
+   6. In the **new table** field type a name and click **Next**.
+   7. For the **field separator** use a semicolon (;).
+   8. Click **Next** to create table with uploaded data.
 
-**Note**: You can add new feedback records to feedback database using this [REST API endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback)
+**Note**: You can add new feedback records to feedback database using this [REST API endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback). For more details please refer to [Feedback data store section](#feedback-data-store).
 
 ### Prepare the configuration payload
 
@@ -357,15 +368,13 @@ In order to specify learning configuration, you need to use the following endpoi
 ```
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/learning_configuration
 ```
-   {: codeblock}
-
+{: codeblock}
 
 Define values of the following fields to finalize payload:
-
+* `feedback_data_reference` - connection and source of feedback datastore
 * `min_feedback_data_size` - this is minimal number of records in feedback dataset to start continuous learning system iteration
 * `auto_retrain` [never, always, conditionally] - this parameter specifies when retraining process should be triggered. [conditionally] will trigger retraining process when model quality is below specified threshold.
 * `auto_redeploy` [never, always, conditionally] - this parameter specifies when retrained model should be deployed. [conditionally] will trigger model redeployment when newly trained model quality is better than currently deployed one.
-
 
 Request example:
 
@@ -375,35 +384,30 @@ curl -v -X PUT \
     -H "Authorization: Bearer $token" \
     -H "X-Spark-Service-Instance: $spark_credentials" \
     -d '{
-          "definition": {
-            "method": "binary",
-            "metrics": [
-              {
-                "name": "areaUnderROC",
-                "threshold": 0.8
-              }
-            ]
-          },
-          "feedback_data_ref": {
+         "definition": {
+           "method": "multiclass",
+           "metrics": [
+             {
+               "name": "accuracy",
+               "threshold": 0.8
+             }
+           ]
+         },
+         "feedback_data_reference": {
            "connection": {
             "db": "BLUDB",
             "host": "awh-yp-small02.services.dal.bluemix.net",
-            "username": "dash102204",
-            "password": "NweTlYwPY6cu"
+            "username": "***",
+            "password": "***"
            },
            "source": {
             "tablename": "DRUG_FEEDBACK_DATA",
             "type": "dashdb"
            }
           },
-          "min_feedback_data_size": 100,
+          "min_feedback_data_size": 10,
           "auto_retrain": "conditionally",
-          "auto_redeploy": "conditionally",
-          "schedule": {
-            "expression": "0/15 * * * * ? *",
-            "start": "2017-02-01T10:11:12Z",
-            "until": "2017-06-01T10:11:12Z"
-          },
+          "auto_redeploy": "never",
           "last_training_record": 0
         }' \
     https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/learning_configuration
@@ -411,48 +415,56 @@ curl -v -X PUT \
 {: codeblock}
 
 Output example:
+
 ```
 {
-   "min_feedback_data_size":100,
    "auto_retrain":"conditionally",
-   "schedule":{
-      "expression":"0/15 * * * * ? *",
-      "start":"2017-02-01T10:11:12Z",
-      "until":"2017-06-01T10:11:12Z"
+   "auto_redeploy":"never",
+      "evaluation_definition": {
+    "method": "multiclass",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "threshold": 0.8
+      }
+    ]
    },
-   "definition":{
-      "method":"binary",
-      "metrics":[
-         {
-            "name":"areaUnderROC",
-            "threshold":0.8
-         }
-      ]
-   },
-   "spark_service":{
-      "credentials":{
-         "tenant_id":"s971-2eeb9ffe2a3090-35c9a7ecf27a",
-         "cluster_master_url":"https://spark.bluemix.net",
-         "tenant_id_full":"55f1492d-b385-4fdd-b971-2eeb9ffe2a30_4c55eb1c-d6fe-4f0a-9390-35c9a7ecf27a",
-         "tenant_secret":"5e7fc568-e94e-4689-b623-fe62e9ceedd2",
-         "instance_id":"55f1492d-b385-4fdd-b971-2eeb9ffe2a30",
-         "plan":"ibm.SparkService.PayGoPersonal"
-      },
-      "version":"2.0"
-   },
-   "feedback_data_ref":{
+   "feedback_data_reference":{
       "connection":{
          "db":"BLUDB",
          "host":"awh-yp-small02.services.dal.bluemix.net",
-         "username":"dash102204",
-         "password":"NweTlYwPY6cu"
+         "username":"***",
+         "password":"***"
       },
       "source":{
          "tablename":"DRUG_FEEDBACK_DATA",
          "type":"dashdb"
       }
    },
-   "auto_redeploy":"conditionally"
+   "min_feedback_data_size":10,
+   "spark_service":{
+      "credentials":{
+         "tenant_id":"***",
+         "cluster_master_url":"https://spark.bluemix.net",
+         "tenant_id_full":"***",
+         "tenant_secret":"***",
+         "instance_id":"***",
+         "plan":"ibm.SparkService.PayGoPersonal"
+      },
+      "version":"2.0"
+   },
+   "training_data_reference": {
+   "connection": {
+     "db": "BLUDB",
+     "host": "dashdb-entry-yp-dal09-08.services.dal.bluemix.net",
+     "password": "***",
+     "username": "***"
+   },
+   "source": {
+     "tablename": "DRUG_TRAIN_DATA_UPDATED",
+     "type": "dashdb"
+    }
+   }
 }
 ```
 {: codeblock}
@@ -490,37 +502,41 @@ Output example:
 
 ```
 {
-   "count":1,
-   "resources":[
-      {
-         "metadata":{
-            "guid":"4091f245-0f0b-42c6-aec9-6ab68185c47f",
-            "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/87452a37-6a8f-4d59-bf88-59c66b5463e4/published_models/9894c3d5-e923-4544-9a7c-2fdb3e4d0908/learning_iterations/4091f245-0f0b-42c6-aec9-6ab68185c47f",
-            "created_at":"2017-07-07T11:18:46.742Z",
-            "modified_at":"2017-07-07T11:18:48.100Z"
-         },
-         "entity":{
-            "stage":"StartingKernel",
-            "published_model":{
-               "url":"https://ibm-watson-ml-dev.stage1.mybluemix.net/v3/wml_instances/87452a37-6a8f-4d59-bf88-59c66b5463e4/published_models/9894c3d5-e923-4544-9a7c-2fdb3e4d0908",
-               "guid":"9894c3d5-e923-4544-9a7c-2fdb3e4d0908"
-            },
-            "status":"RUNNING",
-            "kernel_id":"db56fc3b-a200-4455-aa70-392aa8ae98b3",
-            "spark_service":{
-               "credentials":{
-                  "tenant_id":"s702-faa29053b44952-01f17dcd4c8c",
-                  "cluster_master_url":"https://spark.stage1.bluemix.net",
-                  "tenant_id_full":"81d716eb-3c8c-40ef-9702-faa29053b449_a2485898-8ed5-43df-8352-01f17dcd4c8c",
-                  "tenant_secret":"9f18945c-8e4b-4d2b-8104-f429b27a896d",
-                  "instance_id":"81d716eb-3c8c-40ef-9702-faa29053b449",
-                  "plan":"ibm.SparkService.PayGoPersonal"
-               },
-               "version":"2.0"
-            }
-         }
+  "count": 1,
+  "resources": [
+    {
+      "entity": {
+        "status": {
+          "state": "INITIALIZED"
+        },
+        "model_version": {
+          "url": "https://ibm-watson-ml-svt.stage1.mybluemix.net/v2/artifacts/models/71dc688a-ebda-4174-9574-e8805059e08f/versions/de0df5a6-32c6-408b-bf94-d7b0e3a7fc2d",
+          "created_at": "2017-10-30T15:45:12.926Z",
+          "guid": "de0df5a6-32c6-408b-bf94-d7b0e3a7fc2d"
+        },
+        "spark_service": {
+          "credentials": {
+            "tenant_id_full": "***",
+            "tenant_secret": "***",
+            "tenant_id": "***",
+            "instance_id": "***",
+            "plan": "ibm.SparkService.PayGoPersonal",
+            "cluster_master_url": "https://spark.bluemix.net"
+          },
+          "version": "2.0"
+        },
+        "published_model": {
+          "url": "https://ibm-watson-ml.mybluemix.net/v3/wml_instances/ff558a0e-af34-40e9-9f13-2d51b1a4c8bb/published_models/71dc688a-ebda-4174-9574-e8805059e08f",
+          "guid": "71dc688a-ebda-4174-9574-e8805059e08f"
+        }
       },
-   ]
+      "metadata": {
+        "url": "https://ibm-watson-ml.mybluemix.net/v3/wml_instances/ff558a0e-af34-40e9-9f13-2d51b1a4c8bb/published_models/71dc688a-ebda-4174-9574-e8805059e08f/learning_iterations/a308838b-445f-45b8-9fbf-1c3dd1b392c1",
+        "created_at": "2017-10-30T15:54:30.657Z",
+        "guid": "a308838b-445f-45b8-9fbf-1c3dd1b392c1"
+      }
+    }
+  ]
 }
 ```
 {: codeblock}
@@ -540,20 +556,95 @@ Output example:
 {
   "count": 1,
   "resources": [
-    {
-      "phase": "training",
+      {
+      "phase": "setup",
       "values": [
         {
-          "name": "areaUnderROC",
-          "value": 0.94,
+          "name": "accuracy",
+          "value": 0.870968,
+          "threshold": 0.8
+        }
+      ],
+      "timestamp": "2017-08-07T10:11:02.000Z",
+      ""model_version_url": "https://ibm-watson-ml.mybluemix.net/v2/artifacts/models/361d0edb-c5c9-4b8c-b353-d968e7dc0b8d/versions/8dfe9548-57ec-4768-8d3e-6c1e7e5cdfc3"
+    },
+      {
+      "phase": "monitoring",
+      "values": [
+        {
+          "name": "accuracy",
+          "value": 0.75,
           "threshold": 0.8
         }
       ],
       "timestamp": "2017-08-08T10:11:12.000Z",
-      "artifactVersionHref": "https://ibm-watson-ml.mybluemix.net/v3/artifacts/models/361d0edb-c5c9-4b8c-b353-d968e7dc0b8d/versions/8dfe9548-57ec-4768-8d3e-6c1e7e5cdfc3"
+      ""model_version_url": "https://ibm-watson-ml.mybluemix.net/v2/artifacts/models/361d0edb-c5c9-4b8c-b353-d968e7dc0b8d/versions/8dfe9548-57ec-4768-8d3e-6c1e7e5cdfc3"
+    },
+    {
+      "phase": "setup",
+      "values": [
+        {
+          "name": "accuracy",
+          "value": 0.870968,
+          "threshold": 0.8
+        }
+      ],
+      "timestamp": "2017-08-08T10:11:12.000Z",
+      ""model_version_url": "https://ibm-watson-ml.mybluemix.net/v2/artifacts/models/361d0edb-c5c9-4b8c-b353-d968e7dc0b8d/versions/e390cd8a-e043-4da6-b3e8-1d2d02d971fb"
+    },    
+    {
+      "phase": "training",
+      "values": [
+        {
+          "name": "accuracy",
+          "value": 0.88281694,
+          "threshold": 0.8
+        }
+      ],
+      "timestamp": "2017-08-08T10:11:22.000Z",
+      ""model_version_url": "https://ibm-watson-ml.mybluemix.net/v2/artifacts/models/361d0edb-c5c9-4b8c-b353-d968e7dc0b8d/versions/e390cd8a-e043-4da6-b3e8-1d2d02d971fb"
     }
   ]
 }
+```
+{: codeblock}
+
+
+## Feedback data store
+
+You can use [feedback endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback) to send new records (records that were not used in training process) to feedback store defined in learning configuration. Feedback datastore is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is currently supported as a feedback datastore. If the feedback table does not exist, the service will create it. If the table already exists, the schema is verified to match that of the training table and an extra column named `_training` is appended to the table (that column is used to mark records consumed in retraining process).
+
+**Note:** Feedback table is managed, modified and used by Watson Machine Learning  service.
+
+You can send new feedback record to feedback datastore by issuing the following request:
+
+Request example:
+
+```
+curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "Authorization: Bearer $token" \
+-d '{
+   "fields":[
+      "AGE",
+      "SEX",
+      "BP",
+      "CHOLESTEROL",
+      "NA",
+      "K",
+      "DRUG"
+   ],
+   "values":[
+      [
+         16,
+         "M",
+         "HIGH",
+         "NORMAL",
+         0.58301000000000003,
+         0.033884999999999998,
+         "drugY"
+      ]
+   ]
+}' \
+https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/feedback
 ```
 {: codeblock}
 
@@ -561,12 +652,12 @@ Output example:
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

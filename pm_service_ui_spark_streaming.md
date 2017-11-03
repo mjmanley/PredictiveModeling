@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -12,14 +12,11 @@ lastupdated: "2017-10-02"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Deploying streaming models <span class='tag--beta'>Beta</span>
+# Deploying streaming models
 
 You can use the {{site.data.keyword.pm_full}} service to deploy the model and
 generate predictive analytics by making score requests against the deployed streaming model.
 {: shortdesc}
-
-**Note**: This functionality is currently in beta and only available
-for use with Spark MLlib. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
 
 **Scenario name**: Sentiment Analysis.
 
@@ -32,6 +29,12 @@ generate predictive analytics by making score requests against
 the deployed model.
 
 See this [document](https://github.com/pmservice/tweet-sentiment-prediction) for more information.
+
+## Prerequisites
+To work with this example you will need:
+* [Message Hub](https://console.bluemix.net/catalog/services/message-hub) topics details which will be used as input (tweet text) for the model and storage for the model output (prediction results). Make sure that two topics are created: input with tweet text and output topic.
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
 
 ## Using the sample model
 
@@ -105,7 +108,7 @@ of available models on the Models tab.
     ```
     {: codeblock}
 
-    **Spark Connection**: Spark service Credentials can be found on the Service Credentials tab of the Bluemix Spark service dashboard.
+    **Spark Connection**: Spark service Credentials can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard.
 
      ```
 {
@@ -147,12 +150,12 @@ query such as the following sample.
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling

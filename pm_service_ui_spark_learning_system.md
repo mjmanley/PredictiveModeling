@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-10-02"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-10-02"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Continuous learning system <span class='tag--beta'>Beta</span>
+# Continuous learning system
 
 The {{site.data.keyword.pm_full}} continuous learning system provides automated monitoring of model performance, retraining, and redeployment to ensure prediction quality.
 {: shortdesc}
@@ -20,6 +20,14 @@ The {{site.data.keyword.pm_full}} continuous learning system provides automated 
 **Scenario name**: Best drug for heart treatment selection.
 
 **Scenario description**: A biomedical company that produces heart drugs wants to deploy a model that selects the best drug for heart treatment. When new evidence emerges on drug effectiveness a model update should be considered. A data scientist prepares a predictive model and shares it with you (the developer). Your task is to deploy the model, set learning configuration, and execute learning iteration to evaluate, retrain, and redeploy the model.
+
+
+## Prerequisites
+To work with this example you will need:
+* [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud) instance details, which will be used as feedback datastore (detailed information how to set up feedback datastore for this example are placed below).
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
+
 
 ## Using the sample model
 
@@ -43,7 +51,7 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
 4.  You must provide the following inputs:
 
     **Feedback Connection**: {{site.data.keyword.dashdbshort}} details, which will be used as input (feedback data) for the model evaluation and retraining.
-    
+
     ```
     {
         "connection": {
@@ -81,7 +89,7 @@ Now you'll see the sample Heart Drug Selection model in the list of available mo
     ```
     {: codeblock}
 
-    **Spark Connection**: Spark service Credentials can be found on the Service Credentials tab of the Bluemix Spark service dashboard.
+    **Spark Connection**: Spark service Credentials can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard.
 
     ```
 {
@@ -119,16 +127,25 @@ Within iteration published model will be evaluated. If the evaluated accuracy is
 
 4. To see the list of automatically trained models and their quality go to Version History located at bottom of Overview tab (model View Details -> Overview).
 
+
+## Feedback data store
+
+You can use [feedback endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback) to send new records to feedback store defined in learning configuration. {{site.data.keyword.dashdbshort}} is currently supported as a feedback datastore. If the feedback table does not exist, the service will create it. If the table already exists, the schema is verified to match that of the training table and an extra column named `_training` is appended to the table (that column is used to mark records consumed in retraining process).
+For more detailed information and examples of feedback datastore refer to [API documentation](pm_service_api_spark_learning_system.html).
+
+**Note:** Feedback table is managed, modified and used by Watson Machine Learning  service.
+
+
 ## Learn more
 
 Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
-[Using the service with SPSS models](using_pm_service.html).
+[Using the service with IBM® SPSS® models](using_pm_service.html).
 
 If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
-API for SPSS models](pm_service_api_spss.html).
+API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about SPSS Modeler and the modeling algorithms it
+For details about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
 For details about IBM Data Science Experience and the modeling
