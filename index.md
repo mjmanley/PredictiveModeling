@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -13,7 +13,7 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Getting started with Machine Learning
+# Getting started
 {: #WMLgettingstarted}
 
 <!--  How to use WML with DSX

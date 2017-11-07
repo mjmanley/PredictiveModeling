@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Service API
+# REST API
 
 The {{site.data.keyword.pm_short}} service is a set of REST APIs called from
 any programming language, permitting integration of IBM® SPSS®

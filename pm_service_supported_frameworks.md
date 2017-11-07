@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Supported machine learning frameworks
+# Supported frameworks
 
 The {{site.data.keyword.pm_full}} service supports the following frameworks for model development and validation as a part of model life cycle management.
 {: shortdesc}
@@ -21,7 +21,7 @@ The {{site.data.keyword.pm_full}} service supports the following frameworks for 
 
 There is support for Spark MLlib for the {{site.data.keyword.pm_full}} Online, Batch (beta), Stream (beta) Deployment and Scoring service. Only specific versions and runtime environments are supported.
 
-### Capabilities:
+### Capabilities
 * Deployment types:
   * Online
   * Batch with Object Storage, DB2 Warehouse on Cloud, and DB2 on Cloud
@@ -31,7 +31,7 @@ There is support for Spark MLlib for the {{site.data.keyword.pm_full}} Online, B
 ### Supported Versions
 *  Spark 2.0
 
-### Restrictions:
+### Restrictions
 
   *  Only classification and regression models are supported.
   *  Models that contain references to custom transformers, user defined functions, and classes are not supported.
@@ -41,7 +41,7 @@ There is support for Spark MLlib for the {{site.data.keyword.pm_full}} Online, B
 
 There is support for scikit-learn for the {{site.data.keyword.pm_full}} Online Deployment and Scoring service. Only specific versions and runtime environments are supported.
 
-### Capabilities:
+### Capabilities
 * Deployment types:
   * Online
 
@@ -73,7 +73,7 @@ There are some restrictions, which may include some or all of the following limi
 ## XGBoost
 There is support for XGBoost for the {{site.data.keyword.pm_full}} Online Deployment and Scoring service. Only specific versions and runtime environments are supported.
 
-### Capabilities:
+### Capabilities
 * Deployment types:
   * Online
 
@@ -106,7 +106,7 @@ There are some restrictions, which may include some or all of the following limi
 
 There is support for IBM® SPSS® Modeler streams for the {{site.data.keyword.pm_full}} Online, Batch Deployment and Scoring service. Only specific versions and runtime environments are supported.
 
-### Capabilities:
+### Capabilities
 * Deployment types:
   * Online
   * Batch

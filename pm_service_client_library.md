@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -12,13 +12,17 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Service API client libraries
+# Client libraries
 
 ## Common API client library <span class='tag--beta'>Beta</span>
 
 To use the IBM Watson Machine Learning service with the Python programming language, you can use PyPI to install the `watson-machine-learning-client` client library.
 
-For a more detailed look at how this is done, you can look at the following [sample notebook](https://apsportal.ibm.com/analytics/notebooks/1fed143e-1877-42bd-b927-7d366e73745b/view?access_token=4b39718f9e1f1de55e6e67e8dcbb5f0cac848f390d73478d0dea9c1a8af24550), which demonstrates the following techniques:
+For more details how this is done, you can look at the following sample notebooks:
+* [spark MLlib notebook](https://apsportal.ibm.com/analytics/notebooks/1fed143e-1877-42bd-b927-7d366e73745b/view?access_token=4b39718f9e1f1de55e6e67e8dcbb5f0cac848f390d73478d0dea9c1a8af24550)
+*  [scikit-learn notebook ](https://dataplatform.ibm.com/analytics/notebooks/15b46bd5-dde2-4d59-9d7d-51cc0b860c8b/view?access_token=d8711ad6ae84b3a9c60d43966f961f66adc2c5b89fec18f24c85e40774080e9a),
+
+that demonstrates the following techniques:
 
 * model persistence
 * online deployment
@@ -30,6 +34,7 @@ The documentation for the common API client library is available [here](http://w
 
 * The common API client is in **beta** stage now.
 * Before you can use the common API client, you must install XGboost, scikit-learn and pyspark.
+* Python 3 is only supported.
 
 
 

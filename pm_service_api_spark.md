@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Service API
+# REST API
 
 The {{site.data.keyword.pm_short}} service is a set of REST APIs called from
 any programming language, permitting integration of Data Science
@@ -31,17 +31,20 @@ through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 *  Retrieve the metadata for a given predictive model
 *  Deploy models and manage deployed models
     *  Online deployment (scoring)
-    *  Batch deployment (supporting Object Storage and {{site.data.keyword.dashdbshort}})
-    *  Streaming deployment (supporting IBM MessageHub)
+    *  Batch deployment (supporting IBM Cloud Object Storage and {{site.data.keyword.dashdbshort}})
+    *  Stream deployment (supporting IBM Cloud Message Hub)
 *  Retrieve the metadata for a given deployment
+*  Monitor and retrain deployed models using continuous learning system
 *  Generate predictive analytics by making score requests against
    deployed models
 
 See the following sections for examples of REST API use:
 
-*  [Online deployment and scoring](pm_service_api_spark_online.html)
-*  [Batch deployment with {{site.data.keyword.dashdbshort}}](pm_service_api_spark_batch.html)
-*  [Streaming deployment with MessageHub](pm_service_api_spark_streaming.html)
+*  [Deploying online models](pm_service_api_spark_online.html)
+*  [Scoring online models](pm_service_api_develop_score.html)
+*  [Deploying batch models](pm_service_api_spark_batch.html)
+*  [Deploying stream models](pm_service_api_spark_streaming.html)
+*  [Continuous learning system](pm_service_api_spark_learning_system.html)
 
 ## Learn more
 

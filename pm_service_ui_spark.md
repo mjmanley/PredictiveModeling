@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-11-03"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Service Dashboard
+# Dashboard
 
 The {{site.data.keyword.pm_short}} service on top of [REST APIs](https://watson-ml-api.mybluemix.net/) provides Administration Dashboard.
 Manage models in the administration dashboard, and use the dashboard to create online, batch, or streaming deployments integrated with your applications.

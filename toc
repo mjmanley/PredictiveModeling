@@ -12,7 +12,6 @@ Machine Learning
 
     {: .topicgroup}
     Spark and Python models
-        using_pm_service_dsx.md
         pm_service_api_spark.md
             pm_service_api_spark_swagger.md
             pm_custom_models.md
@@ -37,6 +36,7 @@ Machine Learning
             pm_service_api_manage.md
             pm_service_api_develop.md
             pm_service_api_batch.md
+        pm_service_api_new_spss_online.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -73,8 +73,7 @@ Machine Learning
     [Machine Learning API client libraries](pm_service_client_library.html)
     ml_troubleshooting.md
     wml_quota_policy.md
-    pm_app_runtime.md
-    [Current support for IBM SPSS Modeler nodes](https://www.ibm.com/support/knowledgecenter/SSWLVY_3.0.1/analytic_server_user-guide_ddita/analytic_server/ae_modeler_integration_supported_nodes.html)
+    [Supported SPSS Modeler nodes](https://www.ibm.com/support/knowledgecenter/SSWLVY_3.0.1/analytic_server_user-guide_ddita/analytic_server/ae_modeler_integration_supported_nodes.html)
 
     {: .topicgroup}
     Related tools
