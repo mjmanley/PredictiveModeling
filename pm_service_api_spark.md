@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,9 +14,9 @@ lastupdated: "2017-11-07"
 
 # REST API
 
-The {{site.data.keyword.pm_short}} service is a set of REST APIs called from
-any programming language, permitting integration of Data Science
-Experience developed analytics in your applications. Bind your
+The {{site.data.keyword.pm_short}} service is a set of REST APIs that you can call from
+any programming language and that permit the integration of Data Science
+Experience analytics in your applications. Bind your
 {{site.data.keyword.Bluemix_short}} applications to the {{site.data.keyword.pm_short}} service instance and
 generate the predictive analytics that your applications need to
 deliver higher value to your users. Manage models in the
@@ -25,7 +25,7 @@ batch, or streaming deployments integrated with your
 applications.
 {: shortdesc}
 
-Develop applications against Spark, Python and IBM® SPSS® models that are deployed on a service instance
+Develop applications against Spark, Python, and IBM® SPSS® models that are deployed on a service instance
 through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
 
 *  Retrieve the metadata for a given predictive model
@@ -34,11 +34,11 @@ through the powerful [REST APIs](https://watson-ml-api.mybluemix.net/):
     *  Batch deployment (supporting IBM Cloud Object Storage and {{site.data.keyword.dashdbshort}})
     *  Stream deployment (supporting IBM Cloud Message Hub)
 *  Retrieve the metadata for a given deployment
-*  Monitor and retrain deployed models using continuous learning system
+*  Monitor and retrain deployed models by using the continuous learning system
 *  Generate predictive analytics by making score requests against
    deployed models
 
-See the following sections for examples of REST API use:
+For more information, see the following examples of REST API use:
 
 *  [Deploying online models](pm_service_api_spark_online.html)
 *  [Scoring online models](pm_service_api_develop_score.html)
@@ -52,11 +52,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

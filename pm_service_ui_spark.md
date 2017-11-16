@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,7 +14,7 @@ lastupdated: "2017-11-07"
 
 # Dashboard
 
-The {{site.data.keyword.pm_short}} service on top of [REST APIs](https://watson-ml-api.mybluemix.net/) provides Administration Dashboard.
+The {{site.data.keyword.pm_short}} service when used with [REST APIs](https://watson-ml-api.mybluemix.net/) provides Administration Dashboard.
 Manage models in the administration dashboard, and use the dashboard to create online, batch, or streaming deployments integrated with your applications.
 {: shortdesc}
 
@@ -22,12 +22,12 @@ Manage the Data Science Experience files (Spark and Python models)
 that are available on an instance of the {{site.data.keyword.pm_short}} service
 through the {{site.data.keyword.pm_full}} Dashboard:
 
-*  Work with samples (models, notebooks and applications)
+*  Work with samples (models, notebooks, and applications)
 *  Display model details
 *  Deploy a model as:
    *  Online deployment
    *  Batch deployment (supporting IBM Object Storage and {{site.data.keyword.dashdbshort}})
-   *  Stream deployment (supporting IBM MessageHub)
+   *  Stream deployment (supporting IBM Message Hub)
 *  Get deployment details
 *  Delete a deployment
 *  Delete model
@@ -39,7 +39,7 @@ through the {{site.data.keyword.pm_full}} Dashboard:
 
 ## Learn more
 
-See the following sections for Dashboard examples of:
+See the following sections for Dashboard examples:
 
 *  [Online deployment](pm_service_ui_spark_online.html)
 *  [Batch deployment with Object Storage (beta)](pm_service_ui_spark_batch.html)

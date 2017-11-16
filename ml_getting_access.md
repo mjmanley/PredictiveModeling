@@ -10,56 +10,54 @@ lastupdated: "2017-11-06"
 {:screen: .screen}
 {:codeblock: .codeblock}
 {:pre: .pre}
-# Setting up your environment
 
-To use IBM Watson Machine Learning you must be able to create the proper machine learning environment and retrieve the credentials that are specific to that environment.
-You can create {{site.data.keyword.Bluemix_notm}} instance either by using [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#getting-started) or through {{site.data.keyword.Bluemix_notm}} graphical interface (Dashboard).
+# Setting up your environment
 
+To use {{site.data.keyword.pm_full}}, you must be able to create the proper machine learning environment and retrieve the credentials that are specific to that environment. You can create the {{site.data.keyword.Bluemix_full}} instance either by using the [Cloud Foundry command line interface](https://github.com/cloudfoundry/cli#getting-started) or through the graphical user interface in the {{site.data.keyword.Bluemix_full}} Dashboard.
+{: shortdesc}
 
-## Graphical interface
-### Creating {{site.data.keyword.Bluemix_notm}} instances
+## Using IBM Cloud Dashboard
 
-To use IBM Watson Machine Learning you must [create an instance](https://console.bluemix.net/catalog/services/machine-learning) of it in your IBM Cloud dashboard.
+To use {{site.data.keyword.pm_full}}, you must [create an instance](https://console.bluemix.net/catalog/services/machine-learning) of it in your {{site.data.keyword.Bluemix_notm}} Dashboard.
 
-Depending on your scenario you may also need:
+Depending on your scenario, you may also need the following resources:
+
 - Object Storage (batch deployment)
-- DB2 Warehouse on Cloud (batch deployment)
+- Db2 Warehouse on Cloud (batch deployment)
 - Apache Spark (batch, stream deployment and continuous learning system)
 - Message Hub (stream deployment)
 
-If you want to work with Dasboard watch this video to see how to create the {{site.data.keyword.Bluemix_notm}} instances and view the credentials. Then follow the steps below the video to set up your own environment. See the <a href="#retrieving-your-credentials">Retrieving your credentials</a> section below for the steps to view your credentials.
+To see how to work with the Dashboard to create the {{site.data.keyword.Bluemix_notm}} instances and view credentials, watch the following video, which supplements the written steps, which follow the video.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fm8gqguFD9g?rel=0" frameborder="0" allowfullscreen></iframe>
 
-To create Watson Machine Learning instance, you must perform the following steps:
+## Creating {{site.data.keyword.Bluemix_notm}} instances
 
-1. Open Watson Machine Learning [service page](https://console.bluemix.net/catalog/services/machine-learning)
-2. Sign up or log in to create service instance.
-3. Enter a descriptive name for your instance, choose a space, and select your data plan (find plan comparison and pricing details on this page).
+To create the {{site.data.keyword.pm_full}} instance, you must perform the following steps:
+
+1. Open the {{site.data.keyword.pm_full}} [service page](https://console.bluemix.net/catalog/services/machine-learning)
+2. Sign up or log in to create the service instance.
+3. Enter a descriptive name for your instance, choose a space, and select your data plan.
 4. Click **Create Instance**.
 
 Your instance opens.
 
-### Retrieving your credentials
+## Retrieving your credentials
 
-To use your Bluemix instance you need service instance credentials. You can create and access your credentials either through [CF CLI](using_pm_service.html) or {{site.data.keyword.Bluemix_notm}} Dashboard. Please also note that after you bind the Machine Learning service instance to your IBM® Cloud application, the Machine Learning credentials are added to the VCAP_SERVICES environment variable (refer to [using the service](using_pm_service.html) with application for more details).
+To use your {{site.data.keyword.Bluemix_notm}} (previously known as Bluemix) instance, you need service instance credentials. You can create and access your credentials either through the [CF CLI](using_pm_service.html) or the {{site.data.keyword.Bluemix_notm}} Dashboard. After you bind the {{site.data.keyword.pm_short}} service instance to your {{site.data.keyword.Bluemix_notm}} application, the {{site.data.keyword.pm_short}} credentials are added to the `VCAP_SERVICES` environment variable. For more information, see [using the service with application](using_pm_service.html).
 
-To retrieve Watson Machine Learning instance credentials, you must perform the following steps:
+To retrieve {{site.data.keyword.pm_full}} instance credentials, you must perform the following steps:
 
 1. [Log in to {{site.data.keyword.Bluemix_notm}}](https://console.ng.bluemix.net/?cm_sp=dw-bluemix-_-clouddataservices-_-devcenter).
-2. Scroll to the **Services** section and click the service name whose credentials you want to retrieve.
+2. From the **Services** section, click the service name whose credentials you want to retrieve.
 3. In the navigation pane, click **Service credentials**.
 4. In the list of credentials, click **View credentials**.
-5. If no credentials exist for this service, you can create them by clicking **Create credentials**.
+5. If no credentials exist for this service, create them by clicking **Create credentials**.
 6. To copy the credentials, click the copy icon.
 
+To use the {{site.data.keyword.pm_short}} service in your application, you must bind the service to the {{site.data.keyword.Bluemix_notm}} application and the necessary credentials to run the application are inserted into the `VCAP_SERVICES` environmental variable. For more information, see [Cloud Foundry command line interface](#cloud-foundry-command-line-interface).
 
-To make use of the {{site.data.keyword.pm_short}} service in your application, you must bind the service to the {{site.data.keyword.Bluemix_notm}} application and the necessary credentials to run the applicaiton are inserted into the `VCAP_SERVICES` environmental variable. For more details refer to <a href="#Cloud-Foundry-CLI">Cloud Foundry CLI</a> section.
-{: shortdesc}
-
-
-
-## Cloud Foundry CLI
+## Using Cloud Foundry CLI (command line interface)
 
 ### Steps to bind the service with {{site.data.keyword.Bluemix_notm}} application
 
@@ -71,19 +69,17 @@ You can also perform steps 1 - 3 by using the {{site.data.keyword.Bluemix_notm}}
 1. Use the `cf create-service` command to create a service instance:
 
    ```
-   cf create-service pm-20 Free {local naming}
+   cf create-service pm-20 lite {local naming}
    ```
    {: codeblock}
 
-   For example:
+   For example, the following command creates one {{site.data.keyword.pm_short}} service instance
+   with the lite plan named `my_wml_lite` in your {{site.data.keyword.Bluemix_notm}} space:
 
    ```
-   cf create-service pm-20 Free my_wml_free
+   cf create-service pm-20 lite my_wml_lite
    ```
    {: codeblock}
-
-   This command creates one {{site.data.keyword.pm_short}} service instance
-   with the Free plan named `my_wml_free` in your {{site.data.keyword.Bluemix_notm}} space.
 
 2. Use the `cf create-service-key` command to create service
    credentials:
@@ -93,36 +89,30 @@ You can also perform steps 1 - 3 by using the {{site.data.keyword.Bluemix_notm}}
    ```
    {: codeblock}
 
-   For example:
+   For example, the following command creates {{site.data.keyword.pm_short}} service credentials:
 
    ```
    cf create-service-key "IBM {{site.data.keyword.pm_full}} - my instance" Credentials-1
    ```
    {: codeblock}
 
-   This command creates {{site.data.keyword.pm_short}} service credentials.
-
-3. Use the cf bind-service command to bind the service instance
-   `my_wml_free` to your application.
+3. Use the `cf bind-service` command to bind the service instance
+   `my_wml_lite` to your application.
 
    ```
-   cf bind-service {AppName} my_wml_free
+   cf bind-service {AppName} my_wml_lite
    ```
    {: codeblock}
 
-   For example:
+   For example, the following command binds the {{site.data.keyword.pm_short}} service instance
+   `my_wml_lite` to the {{site.data.keyword.Bluemix_notm}} application `my_app1`:
 
    ```
-   cf bind-service my_app1 my_wml_free
+   cf bind-service my_app1 my_wml_lite
    ```
    {: codeblock}
 
-   This command binds the {{site.data.keyword.pm_short}} service instance
-   `my_wml_free` to the {{site.data.keyword.Bluemix_notm}} application `my_app1`.
-
-
-
-### Accessing credentials through `VCAP_SERVICES`variable
+### Accessing credentials through the `VCAP_SERVICES` variable
 
 After you bind the {{site.data.keyword.pm_short}} service instance to your {{site.data.keyword.Bluemix}} application, the {{site.data.keyword.pm_short}} credentials are added to the `VCAP_SERVICES` environment variable:
 
@@ -139,7 +129,7 @@ After you bind the {{site.data.keyword.pm_short}} service instance to your {{sit
            "instance_id": "**********"
          },
            "label": "pm-20-dev",
-           "plan": "Free",
+           "plan": "lite",
            "name": "IBM Watson Machine Learning”
        }
      ]
@@ -150,11 +140,17 @@ After you bind the {{site.data.keyword.pm_short}} service instance to your {{sit
    The `VCAP_SERVICES` environment variable includes the following
    information:
 
-   * `plan` - the {{site.data.keyword.pm_short}} plan that is used in the service provisioning.
-   * `url` - the address of the {{site.data.keyword.pm_short}} service instance.
-   * `access_key` - for IBM® SPSS® Modeler streams only.
-   * `instance_id` - {{site.data.keyword.pm_short}} instance unique identifier.
-   * `username`, `password` - basic authorization needed to generate an access token to pass in all requests to this service instance. For example, you can generate an access token using a curl like this:
+<dl>
+<dt>plan</dt>
+<dd>the {{site.data.keyword.pm_short}} plan that is used in the service provisioning.</dd>
+<dt>url</dt><dd>the address of the {{site.data.keyword.pm_short}} service instance.
+<dt>access_key</dt><dd>for IBM® SPSS® Modeler streams only.</dd>
+<dt>instance_id</dt><dd>{{site.data.keyword.pm_short}} instance unique identifier.</dd>
+<dt>username</dt><dd>the user name, which is part of the basic authorization that is needed to generate an access token to pass in all requests to this service instance.</dd>
+<dt>password</dt><dd>the password, which is part of the basic authorization that is needed to generate an access token to pass in all requests to this service instance. </dd>
+</dl>
+
+For example, you can generate an access token by using the following `curl` command:
 
 Request example:
 
@@ -168,7 +164,7 @@ Request example:
 {: codeblock}
 
    The following Node.js code is an example of how to obtain the
-   username and password from the `VCAP_SERVICES` environment
+   `username` and `password` values from the `VCAP_SERVICES` environment
    variable:
 
 ```

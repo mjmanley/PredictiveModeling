@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -30,31 +30,29 @@ deploy the model and generate predictive analytics by making
 score requests against the deployed model.
 
 ## Prerequisites
-To work with this example you will need:
-* [Object Storage](https://console.bluemix.net/catalog/services/object-storage) instance details, which will be used as input (customer data to score) for the model and storage for the model output. The sample input data csv file can be download from [here](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/customer-satisfaction-prediction/data/scoreInput.csv). You should push input file to your Object Storage instance.
-* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
+To work with this example, you need the following services:
+
+* [Object Storage](https://console.bluemix.net/catalog/services/object-storage) instance details, which are used as input (customer data to score) for the model and storage for the model output. Download the sample input data .csv file from [here](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/customer-satisfaction-prediction/data/scoreInput.csv). You should add the input file to your Object Storage instance.
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use [this link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
 
 
 ## Using the sample model
 
 1.  Go to the Samples tab of the {{site.data.keyword.pm_full}} Dashboard.
+2.  In the Sample Models section, find the Customer Satisfaction Prediction tile and click the Add model icon (+).
 
-2.  In the Sample Models section, find the Customer Satisfaction Prediction tile and click the Add model button (+).
-
-Now you'll see the sample Customer Satisfaction Prediction model
+The  sample Customer Satisfaction Prediction model appears
 in the list of available models on the Models tab.
 
 ## Creating a batch deployment with Object Storage
 
 1.  Go to the Models tab of the {{site.data.keyword.pm_full}} Dashboard.
-
 2.  From the **Actions** menu, click **Create Deployment**.
-
-3.  In Create Deployment form provide Name, Description and Batch Type.
-
+3.  In Create Deployment form provide Name, Description, and Batch Type.
 4.  You must provide the following inputs:
 
-    **Input Connection**: Object Storage details, which will be used as input (customer data to score) for the model and storage for the model output (results.csv in this case, which is automatically created).
+    **Input Connection**: Object Storage details, which are used as input (customer data to score) for the model and storage for the model output (results.csv in this case, which is automatically created).
 
     ```
        {
@@ -100,7 +98,7 @@ in the list of available models on the Models tab.
     ```
     {: codeblock}
 
-    **Spark Connection**: Spark service Credentials can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_short}} Spark service dashboard.
+    **Spark Connection**: Spark service credentials can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_short}} Spark service dashboard.
 
     ```
 {
@@ -151,13 +149,11 @@ Fiber optic, Month-to-month, 1, 79.35, 1
 
 ## Obtaining deployment details
 
-You can check the status, and parameters related to the deployed model.
+You can check the status and parameters related to the deployed model.
 
 1. Go to the Deployments tab of the {{site.data.keyword.pm_full}}
    Dashboard.
-
-2. From ACTIONS menu select View Details.
-
+2. From the **Actions** menu, click **View Details**.
 
 ## Deleting a batch deployment
 
@@ -167,7 +163,7 @@ query such as the following sample.
 1. Go to the Deployments tab of the {{site.data.keyword.pm_full}}
    Dashboard.
 
-2. From ACTIONS menu select Delete.
+2. From the **Actions** menu, click **Delete**.
 
 ## Learn more
 
@@ -175,11 +171,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

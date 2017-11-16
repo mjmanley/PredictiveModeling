@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,9 +14,7 @@ lastupdated: "2017-11-07"
 
 # Deploying online models
 
-Using the {{site.data.keyword.pm_full}} service, you can deploy a model and
-generate predictive analytics by making score requests against
-the deployed model.
+To deploy a model and generate predictive analytics by making score requests against the deployed model, use the {{site.data.keyword.pm_full}} service. The following scenario provides with an example of how to do this.
 {: shortdesc}
 
 **Scenario name**: Product line prediction.
@@ -30,49 +28,40 @@ score requests against the deployed model.
 
 ## Using the sample model
 
-1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
+2. In the **Sample Models** section, find the **Product Line Prediction**
+   tile and click the **Add model** icon (+).
 
-2. In the Sample Models section, find the Product Line Prediction
-   tile and click the Add model button (+).
-
-Now you'll see the sample Product Line Prediction model in the
-list of available models on the Models tab.
+The sample **Product Line Prediction** model appears in the
+list of available models on the **Models** tab.
 
 
 ## Creating the online deployment
 
-1. Go to the Models tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Models** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
+2. From the **Actions** menu, click **Create Deployment**.
+3. In the **Create Deployment** form complete the **Name**, **Description**, and **Online Type** fields.
+4. Click **Save**.
 
-2. From ACTIONS menu select Create Deployment.
-
-3. In Create Deployment form provide Name, Description and Online Type.
-
-4. Press Save button.
-
-Now you'll see the online deployment in the list of available deployments on the Deployments tab.
-
+The online deployment appears in the list of available deployments on the **Deployments** tab.
 
 ## Obtaining deployment details
 
 You can check the status, scoring endpoint address (`Scoring Endpoint`),
 and parameters related to the deployed model.
 
-1. Go to the Deployments tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Deployments** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
+2. From the **Actions** menu, click **View Details**.
 
-2. From ACTIONS menu select View Details.
-
-Note that `Scoring Endpoint` value is needed to make scoring requests in next step.
+Note the `Scoring Endpoint` value, which is needed to make scoring requests.
 
 
 ## Making score requests
 
-Since your scoring endpoint has been created (`Scoring Endpoint`), you
-can now generate predictions by making score requests. In this
-scenario, customer records are passed to the predictive model and
-sport product prediction is returned.
+After you create a scoring endpoint, you can generate predictions by making score requests. In the following scenario, customer records are passed to the predictive model and a sport product prediction is returned.
 
 Sample record header:
 
@@ -189,11 +178,11 @@ student is interested in Personal Accessories.
 
 ## Learn more
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM® Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

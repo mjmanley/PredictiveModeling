@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,36 +14,34 @@ lastupdated: "2017-11-07"
 
 # Continuous learning system
 
-The {{site.data.keyword.pm_full}} service includes a continuous learning system. Continuous learning systems provide automated monitoring of model performance, retraining, and redeployment to ensure right predictions quality.
+The {{site.data.keyword.pm_full}} service includes a continuous learning system. Continuous learning systems provide automated monitoring of model performance, retraining, and redeployment to ensure prediction quality.
 {: shortdesc}
 
 **Scenario name**: Best drug for heart treatment selection.
 
 **Scenario description**: A biomedical company that produces heart drugs
-wants to deploy a model that selects the best drug for heart treatment. When new evidence emerges on drug effectiveness model update should be considered. A data scientist prepared a predictive model and
-shares it with you (the developer). Your task is to deploy the model, set learning configuration and execute learning iteration to evaluate, retrain and redeploy the model.
+wants to deploy a model that selects the best drug for heart treatment. When new evidence emerges on drug effectiveness, a model update should be considered. A data scientist prepared a predictive model and
+shares it with you (the developer). Your task is to deploy the model, set learning configuration and execute learning iteration to evaluate, retrain, and redeploy the model.
 
-**Note**: You can also play with sample python  [notebook](https://dataplatform.ibm.com/analytics/notebooks/57bd0753-ccee-42bd-9d11-099a981e4fbe/view?access_token=40b77775b209dab516811a695ba1d5dbcab2dfb260c910daf3d985c9d4570325) that creates sample model, configures learning system and finally runs learning iteration.
-
+**Note**: You can also play with [a sample python notebook](https://dataplatform.ibm.com/analytics/notebooks/57bd0753-ccee-42bd-9d11-099a981e4fbe/view?access_token=40b77775b209dab516811a695ba1d5dbcab2dfb260c910daf3d985c9d4570325) that creates a sample model, configures learning system, and runs the learning iteration.
 
 ## Prerequisites
 
-To work with this example you will need the following services:
+To work with the samples, you must have the following services:
 
-* [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud) instance details, which will be used as feedback datastore (detailed information about feedback datastore are placed in below section **Prepare feedback dataset**).
-* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
-
+* [Db2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud) to store feedback data
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use [this link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
 
 ## Using the sample model
 
 1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}} Dashboard.
 2. In the **Sample Models** section, find the Heart Drug Selection tile and click the **Add model** icon (+).
 
-Now you'll see the sample Heart Drug Selection model in the list of available models on the Models tab.
+The sample **Heart Drug Selection** model appears in the list of available models on the **Models** tab.
 
 ## Generating the access token
 
-Generate an access token using the user and password available from the Service Credentials tab of the {{site.data.keyword.pm_full}} service instance.
+Generate an access token that uses the user and password available from the Service Credentials tab of the {{site.data.keyword.pm_full}} service instance.
 
 Request example:
 
@@ -70,8 +68,8 @@ token="<token_value>"
 
 Use the following API call to get your instance details, such as:
 
-* published models `url`
-* deployments `url`
+* published models `url` address
+* deployments `url` address
 * usage information
 
 Request example:
@@ -141,8 +139,7 @@ Output example:
 ```
 {: codeblock}
 
-
-Having **published_models** `url` use the following API call to get model's details:
+After you obtain the **published_models** `url` address, use the following API call to get model's details:
 
 Request example:
 
@@ -316,16 +313,22 @@ Output example:
 {: codeblock}
 
 
-## Set continuous learning system for published model
+## Set up the continuous learning system for a published model
 
-In this subsection you will learn how to configure continuous learning system for your model.
+To configure continuous learning system for your model, you must perform the following tasks:
 
-### Prepare Authorization header
+1.  [Prepare the authorization header](#prepare-the-authorization-header).
+2.  [Prepare the feedback data set](#prepare-the-feedback-data-set).
+3.  [Prepare the configuration payload](#prepare-the-configuration-payload).
 
-To prepare Authorization header that combines {{site.data.keyword.pm_full}} token and Spark instance credentials provide the following details:
+After you complete preparation of the authorization header, feedback data set, and the configuration payload, you can begin iterating your continuous learning system. For more information, see [Run continuous learning system iteration](#run-continuous-learning-system-iteration).
+
+### Prepare the authorization header
+
+To prepare the authorization header that combines {{site.data.keyword.pm_full}} token and Spark instance credentials, provide the following details:
 
 *  The access token created in the previous step
-*  Spark service credentials, which can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before making the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
+*  Spark service credentials, which can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before you make the deployment request, Spark credentials must be encoded as base64. They are passed in the header of request in X-Spark-Service-Instance field.
 
    Depending on the operating system that you are using, you must issue one of the following terminal commands to perform base64 encoding and assign it to the environment variable.
 
@@ -343,38 +346,45 @@ To prepare Authorization header that combines {{site.data.keyword.pm_full}} toke
    ```
    {: codeblock}
 
-### Prepare feedback dataset
+### Prepare feedback data set
 
-Learning System requires connection to training data (data used in model training) as well as feedback data. Feedback datastore is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is currently supported as a feedback datastore. Feedback table is managed, modified and used by Watson Machine Learning service.
-Use below instruction to prepare  **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort}}**.
+The learning system requires a connection to training data (the data that is used in model training) as well as feedback data. The feedback data store is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is supported as a feedback data store. The feedback table is managed, modified, and used by the {{site.data.keyword.pm_short}} service.
+To prepare the **DRUG_FEEDBACK_DATA** table in **{{site.data.keyword.dashdbshort}}**, you must complete the following steps:
 
 1. Create a [{{site.data.keyword.dashdbshort}} Service](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud/) instance (an entry plan is offered).
 2. Create the `DRUG_FEEDBACK_DATA` table in **{{site.data.keyword.dashdbshort}}**.
    1. From the GitHub repository, download the [drug_feedback_data.csv](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/drug-selection/data/drug_feedback_data.csv) file.
    2. To get started with **{{site.data.keyword.dashdbshort_notm}}**, click the **Open the console** icon.
    3. Select the **Load Data** and **Desktop** load type.
-   4. **Drag and drop** previously downloaded file and press **Next**.
+   4. **Drag** the previously downloaded file and press **Next**.
    5. To import data, click **Schema** and then click **New Table**.
    6. In the **new table** field type a name and click **Next**.
    7. For the **field separator** use a semicolon (;).
    8. Click **Next** to create table with uploaded data.
 
-**Note**: You can add new feedback records to feedback database using this [REST API endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback). For more details please refer to [Feedback data store section](#feedback-data-store).
+**Note**: You can add new feedback records to the feedback database by using this [REST API endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback). For more information, see [Feedback data store section](#feedback-data-store).
 
 ### Prepare the configuration payload
 
-In order to specify learning configuration, you need to use the following endpoint:
+To specify the learning configuration, you must use the following endpoint:
 
 ```
 https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}/published_models/{published_model_id}/learning_configuration
 ```
 {: codeblock}
 
-Define values of the following fields to finalize payload:
-* `feedback_data_reference` - connection and source of feedback datastore
-* `min_feedback_data_size` - this is minimal number of records in feedback dataset to start continuous learning system iteration
-* `auto_retrain` [never, always, conditionally] - this parameter specifies when retraining process should be triggered. [conditionally] will trigger retraining process when model quality is below specified threshold.
-* `auto_redeploy` [never, always, conditionally] - this parameter specifies when retrained model should be deployed. [conditionally] will trigger model redeployment when newly trained model quality is better than currently deployed one.
+To finalize the payload, you must define the values of the following parameters:
+
+<dl><dt>feedback_data_reference</dt>
+<dd>connection and source of feedback data store</dd>
+<dt>min_feedback_data_size</dt>
+<dd>minimal number of records in the feedback data set to start continuous learning system iteration
+</dd>
+<dt>auto_retrain</dt>
+<dd>[never, always, conditionally] specifies when the retraining process triggers. When set to [conditionally], it triggers the retraining process when the model quality is less than specified threshold value.
+</dd>
+<dt>auto_redeploy</dt>
+<dd>[never, always, conditionally] specifies when retrained model should be deployed. When set to [conditionally], it triggers model redeployment when newly trained model quality is better than the quality of the currently deployed one.</dd></dl>
 
 Request example:
 
@@ -469,11 +479,11 @@ Output example:
 ```
 {: codeblock}
 
-**Note**: In this example we use default values for the `auto_retrain` and `auto_redeploy` parameters. More information about these parameters can be found here in the [REST API documentation](http://watson-ml-api.mybluemix.net/#!/Published32Models/put_v3_wml_instances_instance_id_published_models_published_model_id_learning_configuration) for the `learning_configuration` parameter.
+**Note**: The example uses default values for the `auto_retrain` and `auto_redeploy` parameters. For more information about these parameters, see [REST API documentation](http://watson-ml-api.mybluemix.net/#!/Published32Models/put_v3_wml_instances_instance_id_published_models_published_model_id_learning_configuration) for the `learning_configuration` parameter.
 
 ## Run continuous learning system iteration
 
-To start iteration of learning system use REST API method shown below. Within iteration published model will be evaluated. If the evaluated accuracy is below specified threshold model retraining will be triggered. Both data sets: training and feedback are used for retraining and evaluation.
+To start iteration of the learning system, use the following REST API method. During iteration the published model is evaluated. If the evaluated accuracy is less than the specified threshold value, the model retraining triggers. Both the training and feedback data sets are used for retraining and evaluation.
 
 Request example:
 
@@ -609,14 +619,13 @@ Output example:
 ```
 {: codeblock}
 
-
 ## Feedback data store
 
-You can use [feedback endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback) to send new records (records that were not used in training process) to feedback store defined in learning configuration. Feedback datastore is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is currently supported as a feedback datastore. If the feedback table does not exist, the service will create it. If the table already exists, the schema is verified to match that of the training table and an extra column named `_training` is appended to the table (that column is used to mark records consumed in retraining process).
+You can use a [feedback endpoint](http://watson-ml-api.mybluemix.net/#!/Published32Models/post_v3_wml_instances_instance_id_published_models_published_model_id_feedback) to send new records (records that were not used in training process) to feedback store that is defined in the learning configuration. The feedback data store is used to monitor and retrain your model when needed. {{site.data.keyword.dashdbshort}} is supported as a feedback data store. If the feedback table does not exist, the service creates it. If the table exists, the schema is verified to match that of the training table and an extra column named `_training` is appended to the table. The additional column is used to mark records that are consumed in the retraining process.
 
-**Note:** Feedback table is managed, modified and used by Watson Machine Learning  service.
+**Note:** Feedback table is managed, modified, and used by the {{site.data.keyword.pm_short}} service.
 
-You can send new feedback record to feedback datastore by issuing the following request:
+You can send a new feedback record to the feedback data store by issuing the following request:
 
 Request example:
 
@@ -654,11 +663,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

@@ -23,16 +23,19 @@ the deployed online model.
 
 **Scenario name**: Product line prediction.
 
-**Scenario description**: A company that sells outdoor equipment has
-built and deployed a model that predicts client interest in their
+**Scenario description**: A company that sells outdoor equipment
+builds and deploys a model to predict client interest in its
 product line. Your task is to make score requests against the deployed model.
 
-For information about deploying a model, see [Deploying online models](pm_service_api_spark_online.html).
+For more information, see [Deploying online models](pm_service_api_spark_online.html).
 
-In the following examples, it's assumed that you have the `scoring_url` value from your online deployment details.
+The following examples use the `scoring_url` value from the online deployment details.
 
-Example record to be used in scoring:
+Use the following sample record for scoring:
+
+```
 {"fields": ["GENDER","AGE","MARITAL_STATUS","PROFESSION"],"values": [["M",23,"Single","Student"],["M",55,"Single","Executive"]]}
+```
 
 ## Runtime examples
 
@@ -41,19 +44,22 @@ Example record to be used in scoring:
 
 ### Bash
 
-Username and password are from Watson Machine Learning service credentials.
+You must retrieve the `username` and `password` values from your {{site.data.keyword.pm_short}} service credentials.
+
 ```
 curl --basic --user username:password https://ibm-watson-ml.mybluemix.net/v3/identity/token
 ```
 {: codeblock}
 
 Output:
+
 ```
 {"token":"**********"}
 ```
 {: codeblock}
 
 Use the following terminal command to assign your token value to the environment variable token:
+
 ```
 token="<token_value>"
 ```
@@ -305,11 +311,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

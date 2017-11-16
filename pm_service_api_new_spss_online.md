@@ -14,34 +14,28 @@ lastupdated: "2017-11-06"
 
 # REST API (new) <span class='tag--beta'>Beta</span>
 
-To provide single user experience [REST API](http://watson-ml-api.mybluemix.net/) compliant with other supported frameworks is provided. Now, you can use the same API requests for SPSS models as for example: scikit-learn, xgboost or Spark MLlib ones.
-
-**Note**: This functionality is currently in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
-
-
-Using the {{site.data.keyword.pm_full}} service REST API, you can create online deployment and generate predictive analytics by making score requests against the deployed model. You can play with below scenario "Customer satisfaction prediction" to get familiar with new REST API.
+To provide single user experience, the {{site.data.keyword.pm_full}} service provides a [REST API](http://watson-ml-api.mybluemix.net/) that is compliant with other supported frameworks. You can use the same API requests for SPSS® models and for other frameworks, such as scikit-learn, XGboost, or Spark MLlib.
 {: shortdesc}
 
-**Scenario name**: Customer satisfaction prediction.
+**Note**: This feature is in beta. If you're interested in participating, add yourself to the wait list! For more information, see: [https://www.ibm.biz/mlwaitlist](https://www.ibm.biz/mlwaitlist).
+
+Using the {{site.data.keyword.pm_full}} service REST API, you can create online deployment and generate predictive analytics by making score requests against the deployed model. To familiarize yourself with the REST API, use the following customer satisfaction scenario and [sample Jupyter notebook](https://dataplatform.ibm.com/analytics/notebooks/3c2ef65c-7d0e-4ff7-ab11-578ef2a46d66/view?access_token=21517d9a2f59b1ff5e386982b3fa03d7b41cff53a22bd30b5dc7785535b0b80d) that uses `bash` commands to run the scenario.
+
+**Scenario name**: Customer satisfaction prediction
 
 **Scenario description**: A telecommunications company wants to know which customers are at risk of leaving. The presented model predicts customer churn. A data scientist develops a predictive model and shares it with you (the developer). Your task is to deploy the model and generate predictive analytics by making score requests against the deployed model.
 
-**Note:** You can also play with sample [jupyter notebook](https://dataplatform.ibm.com/analytics/notebooks/3c2ef65c-7d0e-4ff7-ab11-578ef2a46d66/view?access_token=21517d9a2f59b1ff5e386982b3fa03d7b41cff53a22bd30b5dc7785535b0b80d) that uses bash commands to run below scenario.
-
 ## Using the sample model
 
-1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
+2. In the **Sample Models** section, find the **Customer Satisfaction Prediction (SPSS MODEL)** tile and click the **Add model** icon (+).
 
-2. In the Sample Models section, find the Customer Satisfaction Prediction (SPSS MODEL) tile and click the Add model button (+).
-
-Now you'll see the sample Customer Satisfaction Prediction model
-in the list of available models on the Models tab.
+The sample Customer Satisfaction Prediction model appears in the list of available models on the **Models** tab.
 
 ## Generating the access token
 
-Generate an access token using the user and password available
-from the Service Credentials tab of the IBM Watson Machine
+Generate an access token by using the user name and password available from the Service Credentials tab of the IBM Watson Machine
 Learning service instance.
 
 Request example:
@@ -68,9 +62,10 @@ token="<token_value>"
 
 ## Working with published models
 
-Use the following API call to get your instance details, such as:
-* published models `url`
-* deployments `url`
+Use the following API call to get your instance details, which include the following values:
+
+* published models `url` value
+* deployments `url` value
 * usage information
 
 Request example:
@@ -105,14 +100,13 @@ Output example:
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
       },
       "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
-      "plan":"free"
+      "plan":"lite"
    }
 }
 ```
 {: codeblock}
 
-
-Having **published_models** `url` use the following API call to get model's details:
+Supply the **published_models** `url` to run the following API call to get the model details:
 
 Request example:
 
@@ -503,13 +497,11 @@ Output example:
 ```
 {: codeblock}
 
-Please note **deployments** `url` that is needed to create online deployment in next step.
-
+Note the **deployments** `url` that is needed to create the online deployment in the following step.
 
 ## Creating the online deployment
 
-Use the following API call to create an online deployment of your
-predictive model.
+Use the following API call to create an online deployment of your predictive model.
 
 Request example:
 
@@ -616,13 +608,12 @@ Output example:
 
 ## Making score requests
 
-Since your scoring endpoint has been created (`scoring_url`), you
-can now generate predictions by making score requests. In this
-scenario, customer records are passed to the predictive model and
+Because your scoring endpoint has been created (`scoring_url`), you
+can now generate predictions by making score requests. In the following scenario, customer records are passed to the predictive model and the
 satisfaction prediction is returned.
 
-
 Sample record header:
+
 ```
 customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleLines,InternetService,OnlineSecurity,OnlineBackup,DeviceProtection,TechSupport,StreamingTV,StreamingMovies,Contract,PaperlessBilling,PaymentMethod,MonthlyCharges,TotalCharges
 ```
@@ -630,6 +621,7 @@ customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleL
 
 
 Sample customer record:
+
 ```
 "3638-WEABW","Female",0,"Yes","No",58,"Yes","Yes","DSL","No","Yes","No","Yes","No","No","Two year","Yes","Credit card (automatic)",59.9,3505.1,"No",2.768
 ```
@@ -666,7 +658,7 @@ Output example:
 ```
 {: codeblock}
 
-We can see, for example, that this telco customer is satisfied.
+From the result, you can see that this customer is satisfied.
 
 ## Learn more
 
@@ -674,11 +666,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM® Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

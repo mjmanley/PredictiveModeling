@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -21,9 +21,9 @@ the deployed model.
 
 **Scenario name**: Customer satisfaction prediction.
 
-**Scenario description**: A Telco Company wants to know which
+**Scenario description**: A telecommunications company wants to know which
 customers are at risk of leaving. The company asks us to provide
-a solution to help answer that question. A Data Scientist
+a solution to help answer that question. A data scientist
 prepares a predictive model and shares it with you (the
 developer). Your task is to deploy the model and generate
 predictive analytics by making score requests against the
@@ -84,8 +84,8 @@ deployed model.
    ```
    {: codeblock}
 
-   Response (this will download the content of the model into an
-   output.str file):
+   Response, which downloads the content of the model into an
+   output.str file:
 
    ```
    > GET /pm/v1/model/context_csp2?accesskey=pcB4lKG1brpgSCEonNoBdzew9kiOOzN8awh1cJ2sHAxf1yyjh50nnrQngWw4DD/tM13eGXGHaJ0voQU+cAi1t/nmJBaSgi+xeMY8Wia68PB227SsqjgA5nvrX+eU9Sbr HTTP/1.1
@@ -321,11 +321,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

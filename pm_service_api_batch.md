@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 {:new_window: target="_blank"}
@@ -16,23 +16,21 @@ lastupdated: "2017-11-07"
 The batch job API for the {{site.data.keyword.pm_full}} service supports the
 long-running tasks related to model training, model evaluation,
 and batch scoring. This API manages two asset types: the IBM® SPSS®
-Modeler stream files used in the batch jobs, and the job
-definitions submitted. 
+Modeler stream files that are used in the batch jobs and the job
+definitions that are submitted. 
 {: shortdesc}
 
-For each Modeler stream file uploaded,
-there may be many jobs of many types submitted. If a job has the
+For each SPSS® Modeler stream file that you upload,
+there might be many jobs of many types that are submitted. If a job has the
 potential to update the Modeler stream file contents, the
-modified file will be included in the job result attachments. In
-a model evaluation job type, all evaluation files generated will
-be in the job result's attachments.
+modified file is included in the job result attachments. In
+a model evaluation job type, all evaluation files that are generated are in the job results attachments.
 
-**Note**: The data that is shown in the dashboard is only related to real-time predictions, including the data from the upload feature.
+**Note**: The data that appears in the dashboard is related only to real-time predictions, such as the data from the upload feature.
 
 ## Deleting jobs
 
-You can delete jobs, which cancels the job if it's currently
-running. Use the `DELETE` command with the `job ID`. You can cancel more than one job at a time by passing multiple IDs.
+You can delete jobs. If a job is running, deleting a job first cancels the job. Use the `DELETE` command with the `job ID`. You can cancel more than one job at a time by passing multiple IDs.
 
 ```
 DELETE https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job ID
@@ -40,14 +38,13 @@ DELETE https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job ID
 ```
 {: codeblock}
 
-The return will indicate how many of the jobs referenced by ID in
-the request were deleted. If this number does not match the list
-passed in the request, you must inspect the status of the
+The return indicates how many of the jobs, which are referenced by ID in the request, are deleted. If this number does not match the list that you passed in the request, you must inspect the status of
 individual jobs.
 
 ## Checking the status of a job
 
 You can get the status of your `job ID` at any point by using the `GET` command:
+
 
 ```
 GET https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job
@@ -55,13 +52,17 @@ ID}/status?accesskey=xxxxxxxxxx
 ```
 {: codeblock}
 
-The JSON returned indicates jobstatus and, if the job completed
-successfully, a dataUrl that you can use to obtain all generated
+The JSON file that is returned indicates the job status and, if the job completed
+successfully, a data Url that you can use to obtain all generated
 file content.
 
 ## Resubmit a job
 
-To resubmit a job, use the `PUT` command with the `job ID`. It must not be in a running state.
+To resubmit a job, use the `PUT` command with the `job ID`. To resubmit a job, the job must not be running.
+
+If the ID you reference does not exist, the following call creates a new job. The return status is 201 versus 200 (indicating which of
+these happened). You must pass the job definition JSON file to be used
+in this execution.
 
 ```
 PUT https://{PA Bluemix load balancer URL}/pm/v1/jobs/{job
@@ -69,13 +70,7 @@ ID}?accesskey=xxxxxxxxxx
 ```
 {: codeblock}
 
-with content_type "application/json" including the new or updated
-job definition JSON in the body of the request.
-
-This call actually creates a new job if the ID referenced does
-not exist, with the 201 versus 200 returns indicating which of
-these happened. You must pass the job definition JSON to be used
-in this execution.
+Resubmit the job with the `content_type` value set to "application/json". You must include the new or updated job definition JSON file in the body of the request.
 
 ## Submit a job against an uploaded modeler stream file
 
@@ -87,16 +82,15 @@ ID}?accesskey=xxxxxxxxxx
 ```
 {: codeblock}
 
-with content_type "application/json" including the job definition
-JSON in the body of the request.
+Submit the job with the `content_type` value set to "application/json". You must include the new or updated job definition JSON file in the body of the request.
 
-This request returns immediately, indicating success if the job
+This request returns immediately and indicates success if the job
 definition was placed in the execution queue. There is no test of
 the ability to successfully execute the Modeler stream as
 configured in your job definition. The job will be executed by
-one of the {{site.data.keyword.pm_short}} job servers in the cloud, and you may
-monitor its status. If performing model training and indicating
-that you want an auto refresh, the job will replace the original
+one of the {{site.data.keyword.pm_short}} job servers in the cloud, and you can
+monitor its status. If you are performing model training and indicating
+that you want an auto refresh, the job replaces the original
 Modeler stream file upon successful execution of the job.
 
 ## Upload a stream file to use in your jobs
@@ -122,7 +116,7 @@ used in your jobs is totally in your control. The `PUT` command of a
 file under the same `file ID` implicitly replaces the current
 copy.
 
-To generate a list of all files uploaded for your jobs, use a `GET` command, but omit the `file ID` parameter. To retrieve a specific file, use a `GET` command with the `file ID` parameter. You may also delete an uploaded file by issuing a `DELETE` command. This causes errors in any pending job execution that references the file.
+To generate a list of all files uploaded for your jobs, use a `GET` command, but omit the `file ID` parameter. To retrieve a specific file, use a `GET` command with the `file ID` parameter. You can also delete an uploaded file by issuing a `DELETE` command. This causes errors in any pending job execution that references the file.
 
 Request example:
 
@@ -193,7 +187,7 @@ branch in this Modeler stream design. Job definition must specify
 Export as well as Source details.
 
 **Run Stream**: Execution is similar to clicking the green "run"
-button in Modeler with the Run this script option selected on the
+icon in Modeler with the Run this script option selected on the
 Execution tab of the stream properties. Usage covers need for
 scripted execution of model training or other job types. All
 dynamic control of the script must be handled by stream
@@ -949,8 +943,7 @@ Other error. JSON of exception returned:
 
 ## Learn more
 
-For an example of a batch job adoption, please refer to the
-following notebook: [From SPSS stream to batch scoring with
+For an example of a batch job adoption in a notebook, see [From SPSS stream to batch scoring with
 Python](https://apsportal.ibm.com/analytics/notebooks/9d7ce38e-9417-4c76-a6b9-5bc8cf40938a/view?access_token=5ca87e3007804e5b2bbbce77c20e99ac3c164d66f2d28dfffb54aa365caaef37).
 
 For more information about the job definition JSON, see [Job

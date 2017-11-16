@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 {:new_window: target="_blank"}
@@ -11,21 +11,29 @@ lastupdated: "2017-11-07"
 {:codeblock: .codeblock}
 {:pre: .pre}
 
-# Working with new deep learning models
+# Create a Training Run
 
-To work with new deep learning models using the {{site.data.keyword.pm_full}} service you first need to create model definition files and data files for training and testing.
+Training runs are the organizing principle for conducting deep learning Experiments in {{site.data.keyword.pm_full}}. A typical Experiment may consist of dozens to hundreds of training runs, but each run is defined individually and consists of two parts: (1) your neural network defined using one of the [supported deep learning frameworks](ml_dlaas_supported_framework.html) plus (2) the configuration for how to run your training including the number of GPUs and location of the Object Store containing your dataset.
 {: shortdesc}
 
-## Creating model definition zip
+<p align="center"><img src="images/experiment_to_training_runs_text.png" alt="relation of experiments to training runs"></p>
 
-Different deep learning frameworks support different languages to define their models. For example, Torch models are defined in LuaJIT whereas Caffe models are defined by using config files written in Protocol Buffer Language. Tensorflow models are defined using python code.  Please consult the documentation for the Deep Learning framework you wish to use in order to prepare the model definition files.
+## Creating a model definition .zip file
 
-The file(s) comprising the model definition should be zipped.  At present, deep learning only supports the zip format for model files, other compression formats like gzip, bzip, tar etc., are not supported. Note that all model definition files has to be in the first level of the zip file and there are no nested directories in the zip file.
+Once you've defined your neural network and associated data handling using one of the [supported deep learning frameworks](ml_dlaas_supported_framework.html), then package these files together using the .zip format. For example, if you're model was written in Torch then package your .lua files; if in Caffe then zip the .prototxt file; or if in Tensorflow/Keras/MXNet then zip your .py files.  Other compression formats like gzip, tar, etc. are not supported. Consult the documentation for the Deep Learning framework you wish to use in order to prepare the model definition files.  
 
-For example, a zip file ```tf-model.zip``` containing the model definition for tensorflow to build a deep learning model to perform handwritten digit recognition might contain the following files:
+<!-- Supposedly this isn't true anymore >> NOTE: All model definition files must be in the first level of the zip file so ensure there are no nested directories in the zip file. -->
+
+For example, a zip file `tf-model.zip` containing the model definition for tensorflow might contain the following:
 
 ```
-$ unzip -l tf-model.zip
+unzip -l tf-model.zip
+```
+{: codeblock}
+
+Sample Output:
+
+```
 Archive:  tf-model.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
@@ -33,23 +41,16 @@ Archive:  tf-model.zip
      5486  09-19-2017 13:49   input_data.py
 ---------                     -------
     12580                     2 files
-
 ```
 {: codeblock}
 
-## Training and test data
+## Upload training data
 
-### Data formatting
+Your training data must be [uploaded to a compatible Object Storage service instance](ml_dlaas_object_store.html). The credentials from that Object Storage instance will be used below in your training configuration below. The object store is also used to store the trained model at the end of your training run.
 
-Different frameworks require train and test datasets in different formats. For example, Caffe requires datasets in LevelDB or LMDB format while Torch requires datasets in Torch proprietary format. We assume that data is already in the format needed by the specific framework. Details on how to convert raw data to framework specific format is beyond the scope of this document - please consult the documentation for the deep learning framework you wish to use for more information.
+## Creating a training configuration file
 
-### Uploading data to the Object Store
-
-Before uploading your model data in object store you first need to create a compatible cloud object store account/service instance either on {{site.data.keyword.Bluemix_notm}} or on SoftLayer and get the service credentials. For more information, see [Object Store for deep learning](ml_dlaas_object_store.html). You can then use these credentials to create a container in the object store and upload your data. The object store is also used to store the trained model.
-
-## Creating a model training definition file
-
-The model training definition file contains different fields describing the model in deep learning, its object store information, its resource requirements, and several arguments (including hyperparameters) required for model execution during training and testing. Below we describe different fields of the model training file for deep learning, continuing our tensorflow handwriting recognition example.
+The model training definition is a YAML formatted file which contains different fields describing the model to be trained, including the deep learning framework to use, the cloud object storage configuration, the resource requirements, and several arguments (including hyperparameters) required for model execution during training and testing. Below we describe the different fields of the model training file for deep learning, continuing our tensorflow handwriting recognition example.
 
 * `model_definition.name`: You can provide any value to name to help identify your training job after it is launched.  However, this does not have to be unique - the service will assign a unique model-id for each launched training job.
 * `model_definition.description`: This is another field that you can use to describe the job.
@@ -62,81 +63,83 @@ The model training definition file contains different fields describing the mode
     - `model_definition.execution.resourceType`: This field specifies the resources that will be allocated for training and should be one of the following values - small (1 GPU), medium (2 GPUs), large (4 GPUs)
 * `training_data`: This section specifies the object store where the data files used to train the model are loaded from.
     - `connection`: The connection variables for the data store.
-    - `source.type`: Type of data store, currently this can only be set to s3_datastore
-    - `source.container`: The container where the training data resides.
+    - `source.type`: Type of data store, currently this can only be set to s3_datastore or bluemix_objectstore.  Use *s3_datastore* if your Object Storage instance is *Cloud Object Storage (control.softlayer.com)* and *bluemix_objectstore* if your Object Storage instance is *Object Storage OpenStack Swift (console.bluemix.net)*.
+    - `source.container`: The bucket where the training data resides.
 * `training_results`: This section specifies the object store where the resulting model files and logs will be stored after training completes.
     - `connection`: The connection variables for the data store. The list of connection variables supported is data store type dependent.
-    - `target.type`: Type of data store, currently this can only be set to s3_datastore
-    - `target.container`: The container where the training data resides.
-
+    - `target.type`: Type of data store, currently this can only be set to s3_datastore or bluemix_objectstore.  Use *s3_datastore* if your Object Storage instance is *Cloud Object Storage (control.softlayer.com)* and *bluemix_objectstore* if your Object Storage instance is *Object Storage OpenStack Swift (console.bluemix.net)*.
+    - `target.container`: The bucket where the training results will be written.
 
 For example, the following model training definition file can be used to define a job to train a tensorflow model:
 
 ```
-{
-  "model_definition": {
-    "framework": {
-      "name": "tensorflow",
-      "version": "1.2-py3"
-    },
-    "name": "tf-mnist",
-    "author": "Ann Other",
-    "description": "Simple MNIST model implemented in TF",
-    "execution": {
-      "command": "python3 convolutional_network.py --trainImagesFile ${DATA_DIR}/train-images-idx3-ubyte.gz --trainLabelsFile ${DATA_DIR}/train-labels-idx1-ubyte.gz --testImagesFile ${DATA_DIR}/t10k-images-idx3-ubyte.gz --testLabelsFile ${DATA_DIR}/t10k-labels-idx1-ubyte.gz --learningRate 0.001 --trainingIters 20000",
-      "resourceType": "small"
-    }
-  },
-  "training_data": [
-    {
-      "connection": {
-        "auth_url": "<url>",
-        "userId": "<username>",
-        "password": "<password>"
-      },
-      "source": {
-        "container": "tf_training_data",
-        "type": "softlayer_objectstore"
-      }
-    }
-  ],
-  "training_results":
-    {
-      "connection": {
-         "auth_url": "<url>",
-         "userId": "<username>",
-         "password": "<password>"
-      },
-      "target": {
-        "container": "tf_training_results",
-        "type": "softlayer_objectstore"
-      }
-    }
-}
-
+model_definition:
+  framework:
+    name: tensorflow
+    version: 1.2-py3
+  name: tf-mnist-showtest1
+  author: WML User <wmluser@ibm.com>
+  description: Simple MNIST model implemented in TF
+  execution:
+    command: python3 convolutional_network.py --trainImagesFile ${DATA_DIR}/train-images-idx3-ubyte.gz
+      --trainLabelsFile ${DATA_DIR}/train-labels-idx1-ubyte.gz --testImagesFile ${DATA_DIR}/t10k-images-idx3-ubyte.gz
+      --testLabelsFile ${DATA_DIR}/t10k-labels-idx1-ubyte.gz --learningRate 0.001
+      --trainingIters 2000000
+    resourceType: small
+training_data:
+- connection:
+    auth_url: <auth-url>
+    userId: <username>
+    password: <password>
+  source:
+    container: mnist-training-data
+    type: s3_datastore
+training_results:
+  connection:
+    auth_url: <auth-url>
+    userId: <username>
+    password: <password>
+  target:
+    container: mnist-training-models
+    type: s3_datastore
 ```
 {: codeblock]
 
-where `convolutional_network.py` is the tensorflow program (that is part of the model definition zip) to execute while the remainder are arguments to the program.  Program arguments `--trainImagesFile train-images-idx3-ubyte.gz`, `--trainLabelsFile train-labels-idx1-ubyte.gz`, `--testImagesFile t10k-images-idx3-ubyte.gz`, `--testLabelsFile t10k-labels-idx1-ubyte.gz` values refer to the dataset paths in the objectstore container `tf_training_data`. Program arguments `--trainingIters 20000` and `--learningRate 0.001` pass the values of hyperparameters.
+where `convolutional_network.py` is the tensorflow program (that is part of the model definition zip) to execute while the remainder are arguments to the program.  Program arguments `--trainImagesFile train-images-idx3-ubyte.gz`, `--trainLabelsFile train-labels-idx1-ubyte.gz`, `--testImagesFile t10k-images-idx3-ubyte.gz`, `--testLabelsFile t10k-labels-idx1-ubyte.gz` values refer to the data set paths in the object store container `tf_training_data`. Program arguments `--trainingIters 20000` and `--learningRate 0.001` pass the values of hyperparameters.
 
-**Note**: Where the user's model training definition and/or model definition files refer to some training data, they shouldn't use absolute paths. They should be specified relative to the environment variable `${DATA_DIR}` as in the command above.
+**Note**: When training configuration or model definition files refers to files uploaded to the Object Storage instance, the references should use relative paths as shown above.
 
-## Submitting the training job
+**Note**: Before training begins, all files within the training data bucket are downloaded to the training environment operated by the service.  To avoid the overhead/delay of transferring unnecessary files, keep files not used for training files in separate buckets.
 
-Once the model definition zip and model training definition file has been prepared, the job can be submitted using the cli command To monitor a particular job use the cli command ```bx ml train <path-to-model-definition-zip> <path-to-model-training-definition-json>``` and if submitted successfully a unique model-id will be returned:
+## Submit a training run
+
+Once the model definition zip and training configuration files have been prepared, the job can be submitted using the cli command `bx ml train <path-to-model-definition-zip> <path-to-model-configuration-yaml>` and if submitted successfully a unique model-id will be returned:
 
 ```
-$ bx ml train tf-model.zip job.json
+bx ml train tf-model.zip job.yaml
+```
+{: codeblock}
+
+Sample Output:
+
+```
 Starting to train ...
 OK
 Model-ID is 'training-DOl4q2LkR'
 ```
-{: codeblock}
 
-To list all training jobs (whether completed or not) use the cli command ```bx ml list trained-models```
+# Monitor a training run
+
+To list all training jobs (whether completed or not) use the cli command `bx ml list trained-models`
 
 ```
-$ bx ml list trained-models
+bx ml list trained-models
+```
+{: codeblock}
+
+Sample Output:
+
+```
 Fetching the list of trained models ...
 SI No   Name                       guid                 status    submitted-at
 1       tf-mnist                   training-DOl4q2LkR   pending   2017-10-26T11:16:51Z
@@ -147,10 +150,18 @@ List all trained-models successful
 ```
 {: codeblock}
 
-To monitor a particular job use the cli command ```bx ml show trained-models <model-id>```:
+**Note**: The service will only retain details of training jobs for 7 days after which time they will be removed and will not appear in this list.
+
+To monitor a particular job use the cli command `bx ml show trained-models <model-id>`:
 
 ```
-$ bx ml show trained-models training-DOl4q2LkR
+bx ml show trained-models training-DOl4q2LkR
+```
+{: codeblock}
+
+Sample Output:
+
+```
 Fetching the trained model details with MODEL-ID 'training-DOl4q2LkR' ...
 ModelId        training-DOl4q2LkR
 url            /v3/models/training-DOl4q2LkR
@@ -159,22 +170,28 @@ State          running
 Submitted_at   2017-10-26T11:10:37Z
 OK
 Show trained-models details successful
+```
+{: codeblock}
 
+**Note**: There is currently a known issue with failed jobs disappearing from the list and show command output, as if the job had been deleted.  This issue will be corrected but in the meantime, if you see a training job disappear, please check the training log files as explained below to find out why the job failed.
+
+When a job has completed successfully (or failed) the trained model files and logs should be written to the Cloud Object Storage bucket specified in the setting `training_results` within the model training definition file, under a folder with the same name as the model id.
+
+## Delete a training run
+
+To delete a training job (this will not remove the trained model and logs that were output to your Object Storage instance but rather remove all history of the training job from the service)
+
+```
+bx ml delete trained-models training-DOl4q2LkR
 ```
 {: codeblock}
 
 
-
-To delete a training job (this will not remove the trained model and logs that were output to the Cloud Object Storage, but rather remove all history of the training job from the service)
+Sample Output:
 
 ```
-$ bx ml delete trained-models training-DOl4q2LkR
 Deleting the trained model 'training-DOl4q2LkR' ...
 OK
 Delete trained-models successful
 ```
 {: codeblock}
-
-## Learn more
-
-Visit 

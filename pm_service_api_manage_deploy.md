@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,8 +14,8 @@ lastupdated: "2017-11-07"
 
 # Deploying or refreshing a predictive model
 
-To deploy or refresh a predictive model using the  service, you use an API call to upload a file that contains the IBM® SPSS®
-Modeler developed scoring branch. It is made available for scoring data in your applications. Each
+To deploy or refresh a predictive model by using the service, you use an API call to upload a file that contains the scoring branch that was developed by using IBM® SPSS®
+Modeler. It is made available for scoring data in your applications. Each
 model file is given a context ID as a convenient alias to use for
 referencing the deployed model in subsequent service calls. If a
 model exists for a context ID, it is replaced by this PUT call as
@@ -76,11 +76,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

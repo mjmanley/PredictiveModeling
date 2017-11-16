@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -19,13 +19,11 @@ Use the {{site.data.keyword.pm_full}} service to provide model versioning and ke
 
 ## Model persistence and version control
 
-Data scientists are continuously striving to improve their models
-as part of their research and development. They may add new
-features to existing models and optimize the model parameters.
-When data scientists develop models in an iterative fashion,
-keeping track of changes can quickly become a problem. Here we
-will illustrate ways to help a data scientists by providing model
-versioning and keeping the whole process well organized.
+As you continuously strive to improve your models
+as part of your research and development efforts, you might add new
+features to existing models or optimize model parameters.
+When you develop models in this kind of iterative fashion,
+keeping track of changes can quickly become a problem. By using the following data model versioning features of {{site.data.keyword.pm_short}}, you can keep the whole process well organized. 
 
 *  [Generating the access token](#generating-the-access-token)
 *  [Creating pipeline metadata](#creating-pipeline-metadata)
@@ -37,7 +35,7 @@ versioning and keeping the whole process well organized.
 
 ### Generating the access token
 
-Generate an access token using the user and password available on
+Generate an access token by using the user and password available on
 the Service Credentials tab of the {{site.data.keyword.pm_full}}
 service instance.
 
@@ -56,22 +54,22 @@ Output example:
 {: codeblock}
 
 Use the following terminal command to assign your token value to
-the environment variable access_token:
+the environment `access_token` variable:
 
 ```
 access_token="<token_value>"
 ```
 {: codeblock}
 
-Next, to save the pipeline and the pipeline model, you'll create
+Save the pipeline and the pipeline model. Create
 the pipeline and pipeline model metadata, create the pipeline and
 pipeline model version, and upload the pipeline and pipeline
-model version. See the following sections for details.
+model version. 
 
 ### Creating pipeline metadata
 
 To create metadata for your pipeline, describe the basic
-properties of your pipeline in a curl request as shown in the
+properties of your pipeline in a `curl` request as shown in the
 following example:
 
 ```
@@ -113,7 +111,7 @@ Example response:
 ### Creating pipeline version
 
 To create a version for your pipeline, specify the
-parentVersionHref for your pipeline in a curl request as shown in
+`parentVersionHref` value for your pipeline in a `curl` request as shown in
 the following example:
 
 ```
@@ -146,7 +144,7 @@ Example response:
 ### Uploading pipeline content
 
 To upload pipeline content, your pipeline must be in binary
-format. To do this, invoke the save method from the SparkML
+format. To do this, invoke the `save` method from the SparkML
 pipeline. You can upload your binary content by providing the ID
 of your pipeline and version in an end point, as shown in the
 following example:
@@ -265,7 +263,7 @@ Example response:
 
 ### Creating pipeline model version
 
-To create a version for your pipeline model, use a curl request
+To create a version for your pipeline model, use a `curl` request
 to specify details such as the location you store your training
 data and the model evaluation method. See the following example:
 
@@ -330,7 +328,7 @@ Example response:
 ### Uploading pipeline model content
 
 To upload pipeline model content, your pipeline model must be in
-binary format. To do this, invoke the save method from the
+binary format. To do this, invoke the `save` method from the
 SparkML pipeline model. You can upload your binary content by
 providing the ID of your pipeline and version in an end point, as
 shown in the following example:
@@ -366,5 +364,4 @@ Example response:
 To learn more about model development, refer to the following notebooks:
 
 *  [Developing SparkML models with Python](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c14353512ef14d)
-
 *  [Developing SparkML models with Scala](https://apsportal.ibm.com/exchange/public/entry/view/d80de77f784fed7915c1435351309e93)

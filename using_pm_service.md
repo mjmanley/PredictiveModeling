@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,9 +14,9 @@ lastupdated: "2017-11-07"
 
 # Using the service
 
-The modeling methods available on the IBM® SPSS® Modeler modeling
-palette enable you to derive new information from your data and
-to develop predictive models. Each method has certain strengths
+By using the modeling methods on the IBM® SPSS® Modeler modeling
+palette you can derive new information from your data and
+develop predictive models. Each method has certain strengths
 and is best suited for particular types of machine learning problems.
 {: .shortdesc}
 
@@ -39,23 +39,23 @@ Complete the following steps to create your {{site.data.keyword.Bluemix_notm}} a
 
 1. Download Node.js sample application code from [github repository](https://github.com/pmservice/customer-satisfaction-prediction).
 
-2. Use the cf create-service command to create a service
+2. Use the `cf create-service` command to create a service
    instance:
 
    ```
-   cf create-service pm-20 Free {local naming}
+   cf create-service pm-20 lite {local naming}
    ```
    {: codeblock}
 
    For example:
 
    ```
-   cf create-service pm-20 Free my_pm_free
+   cf create-service pm-20 lite my_pm_lite
    ```
    {: codeblock}
 
    This command creates one {{site.data.keyword.pm_short}} service instance
-   with Free plan named my_pm_free in your {{site.data.keyword.Bluemix_notm}} space.
+   with lite plan named my_pm_lite in your {{site.data.keyword.Bluemix_notm}} space.
 
 3. Use the `cf create-service-key` command to create service
    credentials:
@@ -75,7 +75,7 @@ Complete the following steps to create your {{site.data.keyword.Bluemix_notm}} a
    This command creates {{site.data.keyword.pm_short}} service credentials.
 
 4. Use the cf bind-service command to bind the service instance
-   my_pm_free to your application.
+   my_pm_lite to your application.
 
    ```
    cf bind-service AppName my_pm_service
@@ -85,12 +85,12 @@ Complete the following steps to create your {{site.data.keyword.Bluemix_notm}} a
    For example:
 
    ```
-   cf bind-service my_app1 my_pm_free
+   cf bind-service my_app1 my_pm_lite
    ```
    {: codeblock}
 
    This command binds the {{site.data.keyword.pm_short}} service instance
-   `my_pm_free` to the {{site.data.keyword.Bluemix_notm}} application my_app1.
+   `my_pm_lite` to the {{site.data.keyword.Bluemix_notm}} application my_app1.
 
 5. {{site.data.keyword.pm_short}} credentials:
 
@@ -103,7 +103,7 @@ Complete the following steps to create your {{site.data.keyword.Bluemix_notm}} a
         "pm-20": {      
             "name": "pm20-1",
             "label": "pm-20",
-            "plan": "Free",
+            "plan": "lite",
             "credentials": {
                 "url": "https://ibm-watson-ml.mybluemix.net",
                 "access_key": "XXXXXXXXXXXXX"
@@ -155,11 +155,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

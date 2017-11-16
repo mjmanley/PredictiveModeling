@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -14,17 +14,14 @@ lastupdated: "2017-11-07"
 
 # Managing the deployed SPSS models
 
-You can use the {{site.data.keyword.pm_full}} service API to upload a file that contains the IBM® SPSS® Modeler developed scoring branch that you would like to deploy. After it is uploaded, it is made available for scoring data in your applications. 
+You can use the {{site.data.keyword.pm_full}} service API to upload a file that contains the IBM® SPSS® Modeler scoring branch to deploy. After it is uploaded, it is made available for scoring data in your applications. 
 {: shortdesc}
 
 Specifically you can perform the following tasks:
 
 *  [Deploying or refreshing a predictive model](#deploying-or-refreshing-a-predictive-model)
-
 *  [Retrieving a list of all currently deployed models](#retrieving-a-list-of-all-currently-deployed-models)
-
 *  [Downloading a copy of a specific deployed model file](#downloading-a-copy-of-a-specific-deployed-model-file)
-
 *  [Deleting a deployed predictive model](#deleting-a-deployed-predictive-model)
 
 ## Deploying or refreshing a predictive model
@@ -32,16 +29,18 @@ Specifically you can perform the following tasks:
 Each
 model file is given a context ID as a convenient alias to use for
 referencing the deployed model in subsequent service calls. If a
-model exists for a context ID, it is replaced by this PUT call as
+model exists for a context ID, it is replaced by the following `PUT` call as
 a means of refreshing the predictive analytics in use by your
 applications.
+
+Request example:
 
 ```
 PUT http://{PA Bluemix load balancer URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound application}
 ```
 {: codeblock}
 
-Request example:
+Request parameters:
 
 ```
     Content-Type: multipart/form-data
@@ -83,15 +82,17 @@ Response when the deployment fails:
 
 ## Retrieving a list of all currently deployed models
 
-Retrieve a summary of all models that are currently deployed on
+Use the following API call to retrieve a summary of all models that are currently deployed on
 this service instance.
+
+Request example:
 
 ```
 GET http://{PA Bluemix load balancer URL}/pm/v1/model?accesskey={access_key for this bound application}
 ```
 {: codeblock}
 
-Request example:
+Request parameters:
 
 ```
     Content-Type: */*
@@ -136,14 +137,19 @@ Response when the request for a deployed model summary fails:
 
 ## Downloading a copy of a specific deployed model file
 
-GET http://{PA Bluemix load balancer
-URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
-application}
-
-Use this API call to download a copy of a specific deployed model
+Use the following API call to download a copy of a specific deployed model
 file.
 
 Request example:
+
+```
+GET http://{PA Bluemix load balancer
+URL}/pm/v1/model/{contextId}?accesskey={access_key for this bound
+application}
+```
+{: codeblock}
+
+Request parameters:
 
 ```
     Content-Type: */*
@@ -180,16 +186,21 @@ Response when the downlaod request fails:
 
 ## Deleting a deployed predictive model
 
-DELETE http://{service
-instance}/pm/v1/model/{contextId}?accesskey={access_key for this
-bound application}
-
-Use this API call to delete the predictive model from the Machine
-Learning service instance. After this call, the predictive model
+Use the following API call to delete the predictive model from the Machine
+Learning service instance. After you run this call, the predictive model
 will no longer be available for download or scoring data in your
 applications.
 
 Request example:
+
+```
+DELETE http://{service
+instance}/pm/v1/model/{contextId}?accesskey={access_key for this
+bound application}
+```
+{: codeblock}
+
+Request parameters:
 
 ```
     Content-Type: */*
@@ -233,11 +244,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

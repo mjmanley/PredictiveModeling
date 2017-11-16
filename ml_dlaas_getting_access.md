@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 {:new_window: target="_blank"}
@@ -10,7 +10,8 @@ lastupdated: "2017-11-07"
 {:screen: .screen}
 {:codeblock: .codeblock}
 {:pre: .pre}
-# Setting up your machine learning environment and retrieving your credentials
+
+# Setting up your machine learning environment and retrieving your credentials
 
 To use IBM Watson Machine Learning you must be able to create the proper machine learning environment and retrieve the credentials that are specific to that environment.
 
@@ -28,9 +29,9 @@ In addition to the required instances, some of our notebooks and tutorials also 
 - Natural Language Understanding
 - Deep learning experiments
 
-### Creating {{site.data.keyword.Bluemix_notm}} instances
+### Creating Bluemix instances
 
-Watch this video to see how to create the {{site.data.keyword.Bluemix_notm}} instances and view the credentials. Then follow the steps below the video to set up your own environment. See the <a href="#retrieving-your-credentials">Retrieving your credentials</a> section below for the steps to view your credentials.
+Watch this video to see how to create the Bluemix instances and view the credentials. Then follow the steps below the video to set up your own environment. See the <a href="#retrieving-your-credentials">Retrieving your credentials</a> section below for the steps to view your credentials.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fm8gqguFD9g?rel=0" frameborder="0" allowfullscreen></iframe>
 
@@ -46,13 +47,13 @@ To create Watson Data Platform instances, you must perform the following steps:
 5. Configure instances and data storage.
 
    Enter a descriptive name for your instance, choose a space, and select your data plan (find plan comparison and pricing details on this page).
-{{site.data.keyword.Bluemix_notm}} automatically populates the Object storage name with your instance name. It’s likely you’ll need data storage for your Spark project, so choose a space and plan here too.
+Bluemix automatically populates the Object storage name with your instance name. It’s likely you’ll need data storage for your Spark project, so choose a space and plan here too.
 
 6. Click **Create Instance**.
 
 Your instance opens.
 
-### Adding existing {{site.data.keyword.Bluemix_notm}} instances to a project in Data Science Experience
+### Adding existing Bluemix instances to a project in Data Science Experience
 
 Watch this video to see how to create a project and set it up to use Watson Machine Learning.
 
@@ -65,19 +66,19 @@ If you already have instances, but have not linked them to a project in Data Sci
 3. Click the **Settings** tab.
 4. To add a service, in the **Associated Services** panel, click **add associated service**, select a service, complete the configuration information, and click **Save**.
 5. To add an access token, perform the following steps:
-   6. In the **Access Tokens** panel, click **create new token**. 
-   7. In the **Name** box, type a name. 
-   8. In the **Access Role For Project** box, select a role, either **Viewer** or **Editor**. 
+   6. In the **Access Tokens** panel, click **create new token**.
+   7. In the **Name** box, type a name.
+   8. In the **Access Role For Project** box, select a role, either **Viewer** or **Editor**.
    9. Click **Add**.
-   
+
 6. To connect to a GitHub repository, in the **Repository URL** type your repository location. If you do not have a personal access token already set up for GitHub access, you must create it now by clicking **Settings**. When you have finished, click **Add**.
 
 
 ## Retrieving your credentials
 
-To use your {{site.data.keyword.Bluemix_notm}} instances, services, and models in notebooks and applications, you must be able to insert your credentials, tokens, and scoring endpoints into the code that is used for processing.
+To use your Bluemix instances, services, and models in notebooks and applications, you must be able to insert your credentials, tokens, and scoring endpoints into the code that is used for processing.
 
-1. [Log in to {{site.data.keyword.Bluemix_notm}}](https://console.ng.bluemix.net/?cm_sp=dw-bluemix-_-clouddataservices-_-devcenter).
+1. [Log in to Bluemix](https://console.ng.bluemix.net/?cm_sp=dw-bluemix-_-clouddataservices-_-devcenter).
 2. Scroll to the **Services** section and click the service name whose credentials you want to retrieve.
 3. In the navigation pane, click **Service credentials**.
 4. In the list of credentials, click **View credentials**.
@@ -85,11 +86,8 @@ To use your {{site.data.keyword.Bluemix_notm}} instances, services, and models i
 6. To copy the credentials, click the copy icon.
 
 Depending on the service, you may have different fields, such as `username` and `password`. You must copy the values as they appear to use them in your code.
-## Learn more
 
-- [Python Flask]()
-- [Natural Language Understanding]()
-- [Deep learning experiments](ml_dlaas_environment.html)
+## Learn more
 
 [A quick deep learning tutorial](https://www.ibm.com/blogs/watson/2016/10/quick-deep-learning-tutorial/)
 

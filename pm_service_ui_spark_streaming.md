@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -22,8 +22,8 @@ generate predictive analytics by making score requests against the deployed stre
 
 **Scenario description**: A marketing agency wants to know the
 sentiment about a particular topic. The agency would like us to
-develop a model that classifies a given statement as POSITIVE or
-NEGATIVE. A Data Scientist prepares a predictive model and shares
+develop a model that classifies a statement as POSITIVE or
+NEGATIVE. A data scientist prepares a predictive model and shares
 it with you (the developer). Your task is to deploy the model and
 generate predictive analytics by making score requests against
 the deployed model.
@@ -31,30 +31,32 @@ the deployed model.
 See this [document](https://github.com/pmservice/tweet-sentiment-prediction) for more information.
 
 ## Prerequisites
-To work with this example you will need:
-* [Message Hub](https://console.bluemix.net/catalog/services/message-hub) topics details which will be used as input (tweet text) for the model and storage for the model output (prediction results). Make sure that two topics are created: input with tweet text and output topic.
-* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
+To work with this example, you need the following resources:
+
+* [Message Hub](https://console.bluemix.net/catalog/services/message-hub) topic details, which are used as input (tweet text) for the model and storage for the model output (prediction results). Make sure that two topics are created: input with tweet text and output topic.
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. Use [this link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
 
 
 ## Using the sample model
 
-1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
-2. In the Sample Models section, find the Sentiment Prediction
-   tile and click the Add model button (+).
+2. In the **Sample Models** section, find the **Sentiment Prediction**
+   tile and click the Add model icon (+).
 
-Now you'll see the sample Sentiment Prediction model in the list
+The Sentiment Prediction sample model appears in the list
 of available models on the Models tab.
 
 
 ## Creating a streaming deployment with IBM Message Hub
 
-1.  Go to the Models tab of the {{site.data.keyword.pm_full}} Dashboard.
-2.  From ACTIONS menu select Create Deployment.
-3.  In Create Deployment form provide Name, Description and Stream Type.
+1.  Go to the **Models** tab of the {{site.data.keyword.pm_full}} Dashboard.
+2.  From the **Actions** menu, click **Create Deployment**.
+3.  In the **Create Deployment** form complete the **Name**, **Description**, and **Stream Type** fields.
 4.  You must provide the following inputs:
 
-    **Input Connection**: IBM Message Hub topics details which are used as input (tweets) for the model and storage for the model output  (prediction results).
+    **Input Connection**: IBM Message Hub topics details, which are used as input (tweets) for the model and storage for the model output  (prediction results).
 
     ```
   {
@@ -135,16 +137,16 @@ You can check the status, and parameters related to the deployed model.
 
 1. Go to the **Deployments** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
-2. From **Actions** menu, click **View Details**.
+2. From the **Actions** menu, click **View Details**.
 
 ## Deleting a streaming deployment
 
-You can delete the deployment if it's no longer needed using a
+You can delete the deployment if it's no longer needed by running a
 query such as the following sample.
 
 1. Go to the **Deployments** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
-2. From the **Actions** menu click **Delete**.
+2. From the **Actions** menu, click **Delete**.
 
 ## Learn more
 
@@ -152,11 +154,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

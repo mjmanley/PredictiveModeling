@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -22,7 +22,7 @@ the deployed model.
 **Scenario name**: Product line prediction.
 
 **Scenario description**: A company that sells outdoor equipment
-wants to build a model that predicts client interest in their
+wants to build a model that predicts client interest in a particular
 product line. A data scientist prepared a predictive model and
 shares it with you (the developer). Your task is to deploy the
 model and generate predictions of customer interest by making
@@ -36,12 +36,12 @@ score requests against the deployed model.
 2. In the Sample Models section, find the Product Line Prediction
    tile and click the Add model icon (+).
 
-Now you'll see the sample Product Line Prediction model in the
+The sample Product Line Prediction model appears in the
 list of available models on the Models tab.
 
 ## Generating the access token
 
-Generate an access token using the `user` and `password` available on
+Generate an access token that uses the `user` and `password` available on
 the **Service Credentials** tab of the {{site.data.keyword.pm_full}} 
 service instance.
 
@@ -69,9 +69,10 @@ token="<token_value>"
 
 ## Working with published models
 
-Use the following API call to get your instance details, such as:
-* published models `url`
-* deployments `url`
+Use the following API call to get your instance details, which include the following values:
+
+* published models `url` value
+* deployments `url` value
 * usage information
 
 Request example:
@@ -106,7 +107,7 @@ Output example:
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
       },
       "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
-      "plan":"free"
+      "plan":"lite"
    }
 }
 ```
@@ -196,7 +197,7 @@ Output example:
 {: codeblock}
 
 
-Please note **deployments** `url` that is needed to create online deployment in next step.
+Note the **deployments** `url` value that you need to create the following online deployment.
 
 
 ## Creating the online deployment
@@ -424,7 +425,7 @@ We can see, for example, that a 55-year-old executive is
 interested in Mountaineering Equipment, while a 23-year-old
 student is interested in Personal Accessories.
 
-**Note**: For scikit-learn and XGBoost models only `values` field is required in scoring payload.
+**Note**: For scikit-learn and XGBoost models only the `values` field is required in the scoring payload.
 
 Request example:
 
@@ -439,11 +440,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).

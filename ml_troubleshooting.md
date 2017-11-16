@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 {:new_window: target="_blank"}
@@ -462,7 +462,7 @@ There is no possibility to invoke REST API which requires Spark credentials
 There is an issue with base-64 decoding or parsing Spark credentials.
 {: tsCauses}
  
-Ensure that the correct Spark credentials were correctly base-64 encoded. For details, please look at documentation.
+Ensure that the correct Spark credentials were correctly base-64 encoded. For more information, see the documentation.
 {: tsResolve}
        
 ## This functionality is forbidden for non beta users.

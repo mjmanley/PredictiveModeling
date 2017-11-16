@@ -2,7 +2,7 @@
 
 copyright:
   years: 2016, 2017
-lastupdated: "2017-11-07"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -32,28 +32,28 @@ score requests against the deployed model.
 **Note:** You can also play with sample python [notebook](https://apsportal.ibm.com/analytics/notebooks/5e4963d9-faea-455d-a7db-ff6302d1d8f5/view?access_token=5d23d36be72dea35ebbde9b4b5f4a16d0053ee898f1ab2ab73cf1301ce9322be) that creates sample model and predicts customer churn.
 
 ## Prerequisites
-To work with this example you will need:
-* [Object Storage](https://console.bluemix.net/catalog/services/object-storage) instance details, which will be used as input (customer data to score) for the model and storage for the model output. The sample input data csv file can be download from [here](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/customer-satisfaction-prediction/data/scoreInput.csv). You should push input file to your Object Storage instance.
-* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use this [link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
+
+To work with this example, you must have the following resources:
+
+* [Object Storage](https://console.bluemix.net/catalog/services/object-storage) instance details, which are used as input (customer data to score) for the model and storage for the model output. The sample input data .csv file can be downloaded from [here](https://raw.githubusercontent.com/pmservice/wml-sample-models/master/spark/customer-satisfaction-prediction/data/scoreInput.csv). You should add the input file to your Object Storage instance.
+* [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark) service instance credentials. You can use [this link](https://console.bluemix.net/catalog/services/apache-spark) to create one.
 
 
 
 ## Using the sample model
 
-1. Go to the Samples tab of the {{site.data.keyword.pm_full}}
+1. Go to the **Samples** tab of the {{site.data.keyword.pm_full}}
    Dashboard.
+2. In the **Sample Models** section, find the **Customer Satisfaction
+   Prediction** tile and click the **Add model** icon (+).
 
-2. In the Sample Models section, find the Customer Satisfaction
-   Prediction tile and click the Add model button (+).
-
-Now you'll see the sample Customer Satisfaction Prediction model
-in the list of available models on the Models tab.
+The sample Customer Satisfaction Prediction model appears 
+in the list of available models on the **Models** tab.
 
 ## Generating the access token
 
-Generate an access token using the user and password available
-from the Service Credentials tab of the IBM Watson Machine
-Learning service instance.
+Generate an access token by using the user and password available
+from the Service Credentials tab of the {{site.data.keyword.pm_full}} service instance.
 
 Request example:
 
@@ -79,9 +79,10 @@ token="<token_value>"
 
 ## Working with published models
 
-Use the following API call to get your instance details, such as:
-* published models `url`
-* deployments `url`
+Use the following API call to get your instance details, which include the following items:
+
+* published models `url` value
+* deployments `url` value
 * usage information
 
 Request example:
@@ -116,14 +117,13 @@ Output example:
          "url":"https://ibm-watson-ml.mybluemix.net/v3/wml_instances/{instance_id}}/deployments"
       },
       "space_guid":"c3ea6205-b895-48ad-bb55-6786bc712c24",
-      "plan":"free"
+      "plan":"lite"
    }
 }
 ```
 {: codeblock}
 
-
-Having **published_models** `url` use the following API call to get model's details:
+By supplying the **published_models** `url` value, you can use the following API call to get the model details:
 
 Request example:
 
@@ -509,7 +509,7 @@ Output example:
 ```
 {: codeblock}
 
-Please note **deployments** `url` that is needed to create batch deployment in next step.
+Note the **deployments** `url` value that you need to create the following batch deployment.
 
 ## Creating a batch deployment with Object Storage
 
@@ -517,12 +517,7 @@ To use a REST API call to create a batch deployment of your
 predictive model, provide the following details:
 
 *  The access token created in the previous step
-
-*  Spark service credentials, which can be found on the Service
-   Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before
-   making the deployment request, Spark credentials must be
-   decoded as base64 and passed in the header of a curL request
-   as X-Spark-Service-Instance.
+*  Spark service credentials, which can be found on the Service Credentials tab of the {{site.data.keyword.Bluemix_notm}} Spark service dashboard. Before you make the deployment request, Spark credentials must be decoded as base64 and passed in the header of a `curL` request as X-Spark-Service-Instance.
 
    Depending on the operating system that you are using, you must issue one of the following terminal commands to perform base64 decoding and assign it to the environment variable.
 
@@ -543,8 +538,7 @@ predictive model, provide the following details:
 *  Object Storage details, which will be used as input (customer
    data to score) for the model and storage for the model output
    (results.csv in this case, which is automatically created).
-
-*  To create a deployment, use the **deployments** `url` from previous section.
+*  To create a deployment, use the **deployments** `url` value from previous section.
 
 
 Request example:
@@ -686,8 +680,7 @@ deployment.
 
 ## Obtaining deployment details
 
-You can check the status, and parameters related to the deployment model using **metadata** `url` (see above output example).
-
+You can check the status and parameters related to the deployment model by using the **metadata** `url` value. 
 Request example:
 
 ```
@@ -779,8 +772,8 @@ Output example:
 ```
 {: codeblock}
 
-The prediction result is saved to a .csv file in IBM Object
-Storage. Following is a sample row.
+The prediction result is saved to a .csv file in the IBM Object
+Storage. Refer to the following sample row for an example of the output.
 
 Input file preview:
 
@@ -811,8 +804,7 @@ Fiber optic, Month-to-month, 1, 79.35, 1
 
 ## Deleting a batch deployment
 
-You can delete the deployment if it's no longer needed using a
-query such as the following sample.
+To delete the deployment use the following query:
 
 Request example:
 
@@ -844,11 +836,11 @@ Ready to get started? To create an instance of a service or bind
 an application, see [Using the service with Spark and Python models](using_pm_service_dsx.html) or
 [Using the service with IBM® SPSS® models](using_pm_service.html).
 
-If you are interested in exploring the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
+For more information about the API, see [Service API for Spark and Python models](pm_service_api_spark.html) or [Service
 API for IBM® SPSS® models](pm_service_api_spss.html).
 
-For details about IBM® SPSS® Modeler and the modeling algorithms it
+For more information about IBM® SPSS® Modeler and the modeling algorithms it
 provides, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SS3RA7).
 
-For details about IBM Data Science Experience and the modeling
+For more information about IBM Data Science Experience and the modeling
 algorithms it provides, see [https://datascience.ibm.com](https://datascience.ibm.com).
